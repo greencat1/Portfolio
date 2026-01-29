@@ -33,6 +33,7 @@ The Certificates directory contains official credentials and statements of accom
 | **Visualization** | Matplotlib, Seaborn |
 | **Machine Learning** | Scikit-learn (Regression, Classification, Clustering) |
 | **NLP** | NLTK (Tokenization, Text Preprocessing) |
+| **Graphs** | NetworkX  |
 | **Workflow** | Jupyter Notebook, Git, GitHub |
 
 ---
