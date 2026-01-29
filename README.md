@@ -11,7 +11,8 @@ A collection of projects and assignments from the Coursera specialization by the
 - Introduction to Data Science in Python  
 - Applied Plotting, Charting & Data Representation  
 - Applied Machine Learning in Python  
-- Applied Text Mining in Python  
+- Applied Text Mining in Python
+- Applied Social Network Analysis in Python
 
 ### 🔹 Data Science Foundations
 Fundamental data science coursework, including:
