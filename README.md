@@ -29,11 +29,12 @@ The Certificates directory contains official credentials and statements of accom
 
 | Category | Tools & Libraries |
 | :--- | :--- |
-| **Programming** | Python (NumPy, Pandas) |
+| **Programming** | Python (NumPy, Pandas, SciPy) |
 | **Visualization** | Matplotlib, Seaborn |
 | **Machine Learning** | Scikit-learn (Regression, Classification, Clustering) |
 | **NLP** | NLTK (Tokenization, Text Preprocessing) |
 | **Graphs** | NetworkX  |
+| **Data Scraping** | BeautifulSoup4, Requests  |
 | **Workflow** | Jupyter Notebook, Git, GitHub |
 
 ---
