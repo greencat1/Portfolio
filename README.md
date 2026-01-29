@@ -20,7 +20,7 @@ Fundamental data science coursework, including:
 - **Capstone project**: Bicycle rental prediction model.
 
 ### 📜 Certificates
-The [Certificates](./Certificates) directory contains official credentials and statements of accomplishment for the completed courses and specializations, verifying the skills acquired throughout this journey.
+The Certificates directory contains official credentials and statements of accomplishment for the completed courses and specializations, verifying the skills acquired throughout this journey.
 
 ---
 
