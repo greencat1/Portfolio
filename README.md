@@ -1,8 +1,6 @@
 # Data Science Portfolio
 
-This repository contains my coursework, projects, and practical assignments related to Data Science and Machine Learning.
-
-The materials are organized by courses and specializations, with a focus on Python, statistics, data analysis, and applied machine learning.
+This repository contains my coursework, projects, and practical assignments related to Data Science and Machine Learning. The materials are organized by courses and specializations, with a focus on Python, statistics, data analysis, and applied machine learning.
 
 ---
 
@@ -10,67 +8,44 @@ The materials are organized by courses and specializations, with a focus on Pyth
 
 ### 🔹 Applied Data Science with Python Specialization
 A collection of projects and assignments from the Coursera specialization by the University of Michigan, covering:
-
 - Introduction to Data Science in Python  
 - Applied Plotting, Charting & Data Representation  
 - Applied Machine Learning in Python  
 - Applied Text Mining in Python  
 
-Each subfolder contains notebooks, code, and explanations related to the corresponding course.
-
----
-
 ### 🔹 Data Science Foundations
 Fundamental data science coursework, including:
+- Algorithms, Flowcharts, and Statistics
+- Python for Data Science & Clustering
+- **Capstone project**: Bicycle rental prediction model.
 
-- What is Data Science
-- Tools for Data Science
-- Algorithms and Flowcharts
-- Python for Data Science
-- Statistics and Clustering
-- Capstone project (bicycle rental prediction)
-
-This section focuses on building a strong foundation in data science concepts and problem-solving.
+### 📜 Certificates
+The [Certificates](./Certificates) directory contains official credentials and statements of accomplishment for the completed courses and specializations, verifying the skills acquired throughout this journey.
 
 ---
 
 ## 🛠 Tools & Technologies
 
-### Programming & Data Analysis
-- Python (data analysis, scripting, machine learning)
-- NumPy (numerical computing)
-- Pandas (data manipulation and analysis)
-
-### Data Visualization
-- Matplotlib (static visualizations)
-- Seaborn (statistical data visualization)
-
-### Machine Learning & NLP
-- Scikit-learn (classification, regression, clustering, model evaluation)
-- NLTK (text preprocessing, tokenization, similarity metrics)
-
-### Development & Workflow
-- Jupyter Notebook (experiments, reports, prototyping)
-- Git (version control)
-- GitHub (project hosting, collaboration, portfolio)
-
-### Data Science Concepts
-- Exploratory Data Analysis (EDA)
-- Feature engineering
-- Model evaluation (AUC, accuracy, precision/recall)
-- Supervised and unsupervised learning
-- Text mining and basic NLP pipelines
+| Category | Tools & Libraries |
+| :--- | :--- |
+| **Programming** | Python (NumPy, Pandas) |
+| **Visualization** | Matplotlib, Seaborn |
+| **Machine Learning** | Scikit-learn (Regression, Classification, Clustering) |
+| **NLP** | NLTK (Tokenization, Text Preprocessing) |
+| **Workflow** | Jupyter Notebook, Git, GitHub |
 
 ---
 
 ## 📌 Notes
-
 - This repository is for educational and portfolio purposes.
-- Course certificates and reference materials are included where applicable.
 - Code quality and structure improve progressively as part of the learning process.
+- All core assignments are documented within their respective folders.
 
 ---
 
-## 📬 Contact
+## 📬 Contact & Connect
 
-If you have questions or would like to discuss the projects, feel free to reach out.
+Feel free to reach out if you have questions or would like to discuss potential collaborations!
+
+* **Email:** [isazontov1@gmail.com](mailto:isazontov1@gmail.com)
+* **Telegram:** [@Hammerschmidt1](https://t.me/Hammerschmidt1)
