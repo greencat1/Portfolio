@@ -1,5 +1,5 @@
 
-### 🔹 More Applied Data Science with Python Specialization
+###  More Applied Data Science with Python Specialization
 Advanced applied data science projects from the Coursera specialization by the University of Michigan, consisting of the following courses:
 - **Data Mining in Python**  
 - **Applied Unsupervised Learning in Python**  
