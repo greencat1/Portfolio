@@ -12,15 +12,15 @@ The portfolio focuses on practical problem-solving, clean analytical workflows, 
 Portfolio/
 │
 ├── Courses/
-│ ├── Applied Data Science with Python
-│ ├── More Applied Data Science with Python
-│ ├── Data Science Foundations
-│ └── Certificates
+│   ├── Applied Data Science with Python/
+│   ├── More Applied Data Science with Python/
+│   ├── Data Science Foundations/
+│   └── Certificates/
 │
 ├── Pet_Projects/
 │
-│
 └── README.md
+
 
 ---
 
