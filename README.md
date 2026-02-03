@@ -10,6 +10,7 @@ The portfolio focuses on **practical problem-solving**, **clean analytical workf
 
 ## 📂 Repository Structure
 
+```text
 Portfolio/  
 ├── Courses/  
 │   ├── Applied Data Science with Python/  
@@ -21,6 +22,7 @@ Portfolio/
 │   ├── 1/  
 │  
 └── README.md  
+```
 
 ---
 
