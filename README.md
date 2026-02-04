@@ -106,7 +106,7 @@ Category | Tools
 Programming | Python  
 Data Libraries | NumPy, Pandas, SciPy  
 Visualization | Matplotlib, Seaborn  
-Machine Learning | Scikit-learn  
+Machine Learning | Scikit-learn, MLXtend 
 NLP | NLTK  
 Graph Analysis | NetworkX  
 Web Scraping | BeautifulSoup4, Requests  
