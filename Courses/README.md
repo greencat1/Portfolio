@@ -58,7 +58,7 @@ The **Certificates** directory contains official credentials and statements of a
 | **Programming** | Python (NumPy, Pandas, SciPy) |
 | **Data Processing** | Advanced Pandas, Feature Engineering |
 | **Visualization** | Matplotlib, Seaborn |
-| **Machine Learning** | Scikit-learn (Regression, Classification, Clustering) |
+| **Machine Learning** | Scikit-learn, MLXtend |
 | **Unsupervised Learning** | Clustering, Dimensionality Reduction |
 | **Model Evaluation** | Cross-validation, Metrics, Model Selection |
 | **Pipelines** | Scikit-learn Pipelines |
