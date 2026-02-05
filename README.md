@@ -83,7 +83,28 @@ Pet projects highlight **initiative**, **curiosity**, and **hands-on machine lea
 - Clustering techniques  
 - Pattern discovery  
 - Dimensionality reduction  
-- Network-based modeling  
+- Network-based modeling
+
+### 🖼 Computer Vision & Object Detection
+- Object detection pipelines
+- Bounding box regression
+- Intersection over Union (IoU)
+- Non-Maximum Suppression (NMS)
+- Mean Average Precision (mAP)
+- Confusion matrix analysis
+
+### 🤖 Deep Learning
+- Convolutional Neural Networks (CNNs)
+- Single Shot Detector (SSD)
+- YOLOv7
+- Transfer learning
+- Training and evaluation of deep models
+
+### 🧪 Model Evaluation & Validation
+- Train / validation / test splits
+- Cross-validation
+- Overfitting detection
+- Metric-driven optimization
 
 ### 📝 NLP & Information Extraction
 - Text preprocessing  
@@ -110,10 +131,13 @@ Category | Tools
 Programming | Python  
 Data Libraries | NumPy, Pandas, SciPy  
 Visualization | Matplotlib, Seaborn  
-Machine Learning | Scikit-learn, MLXtend 
+Machine Learning | Scikit-learn, MLXtend  
+Deep Learning | PyTorch  
+Computer Vision | OpenCV  
 NLP | NLTK  
 Graph Analysis | NetworkX  
 Web Scraping | BeautifulSoup4, Requests  
+Experimentation | Google Colab  
 Workflow | Jupyter Notebook, Git, GitHub  
 
 ---
