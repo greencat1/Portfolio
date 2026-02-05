@@ -134,7 +134,7 @@ Visualization | Matplotlib, Seaborn
 Machine Learning | Scikit-learn, MLXtend  
 Deep Learning | PyTorch  
 Computer Vision | OpenCV  
-NLP | NLTK  
+NLP | NLTK, re(regular expressions) 
 Graph Analysis | NetworkX  
 Web Scraping | BeautifulSoup4, Requests  
 Experimentation | Google Colab  
