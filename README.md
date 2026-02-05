@@ -127,13 +127,10 @@ The **Certificates** folder contains official certificates and statements of acc
 ## 📚 Scientific Publications
 
 - **Traffic Sign Detection Using SSD**  
-  Conference proceedings paper (RSCI), SSD-based object detection  
-  🔗 [scientific publications/Traffic_Sign_Detection_SSD](scientific publications/Traffic_Sign_Detection_SSD)
-
+  Conference proceedings paper (RSCI), SSD-based object detection
 
 - **Application of YOLOv7 for Traffic Sign Detection**  
-  Conference paper (RSCI), YOLOv7-based object detection  
-  🔗 [scientific publications/YOLOv7_Traffic_Sign_Detection](scientific publications/YOLOv7_Traffic_Sign_Detection)
+  Conference paper (RSCI), YOLOv7-based object detection
 
 
 ---
