@@ -1,10 +1,9 @@
-## Bibliographic Information
+## Bibliographic Reference (APA-like)
 
-Sazontov I. Yu.  
-**Application of YOLOv7 Neural Network Model for Traffic Sign Detection**  
-Moscow Aviation Institute (National Research University), 2023.
+Sazontov, I. Yu. (2023).  
+Application of YOLOv7 neural network model for traffic sign detection.  
+In *Proceedings of the XLIX International Youth Scientific Conference “Gagarin Readings – 2023”*  
+(pp. 525–526). Moscow: Pero Publishing House.
 
-Scientific advisor: Rybakov K. A.
-
-Published in eLIBRARY.RU  
-URL: https://elibrary.ru/item.asp?id=54215630
+eLIBRARY ID: 54215630  
+Indexed in: Russian Science Citation Index (RSCI)
