@@ -62,7 +62,7 @@ The **Certificates** directory contains official credentials and statements of a
 | **Unsupervised Learning** | Clustering, Dimensionality Reduction |
 | **Model Evaluation** | Cross-validation, Metrics, Model Selection |
 | **Pipelines** | Scikit-learn Pipelines |
-| **NLP / Information Extraction** | NLTK, Text Preprocessing |
+| **NLP / Information Extraction** | NLTK, Text Preprocessing, re(regular expressions)  |
 | **Graphs & Networks** | NetworkX |
 | **Data Scraping** | BeautifulSoup4, Requests |
 | **Workflow** | Jupyter Notebook, Git, GitHub |
