@@ -156,6 +156,7 @@ Web Scraping | BeautifulSoup4, Requests
 Experimentation | Google Colab  
 Workflow | Jupyter Notebook, Git, GitHub  
 Databases | SQL
+
 ---
 
 ## 📜 Certificates
