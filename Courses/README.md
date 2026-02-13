@@ -7,6 +7,18 @@ The repository reflects my progression from core data science concepts to real-w
 
 ## 📂 Repository Structure
 
+### 🔹 Data Science Fundamentals with Python and SQL Specialization
+
+Foundational data science and analytics skills from the Coursera specialization by IBM, consisting of the following courses:
+
+- **Tools for Data Science**
+- **Python for Data Science, AI & Development**
+- **Python Project for Data Science**
+- **Statistics for Data Science with Python**
+- **Databases and SQL for Data Science with Python**
+
+---
+
 ### 🔹 Applied Data Science with Python Specialization
 A collection of projects and assignments from the Coursera specialization by the University of Michigan, covering:
 - Introduction to Data Science in Python  
@@ -32,7 +44,9 @@ This specialization focuses on solving real-world data problems, working with co
 - Network analysis and graph-based modeling  
 - Information extraction from unstructured data  
 - Model evaluation, validation, and interpretation  
-- Communicating data-driven insights  
+- Communicating data-driven insights
+
+
 
 ---
 
@@ -53,19 +67,20 @@ The **Certificates** directory contains official credentials and statements of a
 
 ## 🛠 Tools & Technologies
 
-| Category | Tools & Libraries |
-| :--- | :--- |
-| **Programming** | Python (NumPy, Pandas, SciPy) |
-| **Data Processing** | Advanced Pandas, Feature Engineering |
-| **Visualization** | Matplotlib, Seaborn |
-| **Machine Learning** | Scikit-learn, MLXtend |
-| **Unsupervised Learning** | Clustering, Dimensionality Reduction |
-| **Model Evaluation** | Cross-validation, Metrics, Model Selection |
-| **Pipelines** | Scikit-learn Pipelines |
-| **NLP / Information Extraction** | NLTK, Text Preprocessing, re(regular expressions)  |
-| **Graphs & Networks** | NetworkX |
-| **Data Scraping** | BeautifulSoup4, Requests |
-| **Workflow** | Jupyter Notebook, Git, GitHub |
+Category | Tools  
+-------- | -----  
+Programming | Python  
+Data Libraries | NumPy, Pandas, SciPy  
+Visualization | Matplotlib, Seaborn  
+Machine Learning | Scikit-learn, MLXtend  
+Deep Learning | PyTorch  
+Computer Vision | OpenCV  
+NLP | NLTK, re(regular expressions) 
+Graph Analysis | NetworkX  
+Web Scraping | BeautifulSoup4, Requests  
+Experimentation | Google Colab  
+Workflow | Jupyter Notebook, Git, GitHub  
+Databases | SQL
 
 ---
 
