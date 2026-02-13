@@ -32,17 +32,25 @@ Portfolio/
 
 ## 🎓 Courses
 
-The **Courses** folder contains coursework, assignments, and capstone projects completed as part of structured learning programs, primarily from **University of Michigan (Coursera)**.
+The **Courses** folder contains coursework, assignments, and capstone projects completed as part of structured data science programs, including Python- and SQL-based analytics.
 
-### Topics covered:
-- Data analysis with Python  
-- Data visualization and storytelling  
-- Machine learning (supervised & unsupervised)  
-- Natural Language Processing (NLP)  
-- Network and graph analysis  
-- Information extraction from unstructured data  
+These materials demonstrate hands-on experience with real-world datasets, relational data sources, and end-to-end analytical workflows — from raw data extraction to insight generation and model evaluation.
 
-These projects emphasize **solid methodology**, **analytical reasoning**, and **best practices in data science**.
+### Topics & competencies covered:
+- **Data analysis with Python** (Pandas, NumPy, data cleaning, feature engineering)
+- **Relational data analysis with SQL** (SELECT queries, JOINs, aggregations, subqueries, basic window functions)
+- **Exploratory data analysis (EDA) & visualization** (Matplotlib, Seaborn, insight-driven storytelling)
+- **Machine learning** (supervised & unsupervised methods, model selection, validation, and metrics)
+- **Natural Language Processing (NLP)** (text preprocessing, tokenization, feature extraction)
+- **Network & graph analysis** (graph construction, centrality measures, community detection)
+- **Information extraction from unstructured data** (regex-based parsing, structured data generation)
+
+These projects emphasize:
+- **Clear problem formulation and analytical thinking**
+- **Metric-driven and reproducible analysis**
+- **Integration of SQL and Python in data workflows**
+- **Clean, well-documented, and reproducible code**
+
 
 ---
 
@@ -120,7 +128,14 @@ Pet projects highlight **initiative**, **curiosity**, and **hands-on machine lea
 
 ### 🌐 Data Collection
 - Web scraping with BeautifulSoup  
-- HTTP requests with Requests  
+- HTTP requests with Requests
+### 🗄 SQL & Relational Databases
+- Writing complex SQL queries (SELECT, WHERE, JOIN)
+- Aggregations and GROUP BY
+- Subqueries and Common Table Expressions (CTE)
+- Window functions (ROW_NUMBER, RANK)
+- Data filtering and transformation
+- Connecting Python to SQL databases
 
 ---
 
@@ -139,7 +154,7 @@ Graph Analysis | NetworkX
 Web Scraping | BeautifulSoup4, Requests  
 Experimentation | Google Colab  
 Workflow | Jupyter Notebook, Git, GitHub  
-
+Databases | SQL
 ---
 
 ## 📜 Certificates
