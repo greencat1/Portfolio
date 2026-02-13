@@ -15,7 +15,8 @@ Portfolio/
 ├── Courses/  
 │   ├── Applied Data Science with Python/  
 │   ├── More Applied Data Science with Python/  
-│   ├── Data Science Foundations/  
+│   ├── Data Science Foundations/
+│   ├── Data Science Fundamentals with Python and SQL Specialization/  
 │   └── Certificates/  
 │  
 ├── Pet_Projects/  
