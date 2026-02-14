@@ -1,7 +1,7 @@
 # 📊 Data Science Fundamentals with Python and SQL  
 **Coursera Specialization by IBM**
 
-This repository contains notes, code, and practice materials created while completing the *Data Science Fundamentals with Python and SQL* specialization on :contentReference[oaicite:0]{index=0}, offered by :contentReference[oaicite:1]{index=1}.
+This repository contains notes, code, and practice materials created while completing the *Data Science Fundamentals with Python and SQL* specialization.
 
 The specialization provides a strong foundation in Data Science, covering Python programming, SQL, statistics, and essential data analysis tools.
 
