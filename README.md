@@ -130,6 +130,7 @@ Pet projects highlight **initiative**, **curiosity**, and **hands-on machine lea
 ### 🌐 Data Collection
 - Web scraping with BeautifulSoup  
 - HTTP requests with Requests
+  
 ### 🗄 SQL & Relational Databases
 - Writing complex SQL queries (SELECT, WHERE, JOIN)
 - Aggregations and GROUP BY
@@ -137,6 +138,58 @@ Pet projects highlight **initiative**, **curiosity**, and **hands-on machine lea
 - Window functions (ROW_NUMBER, RANK)
 - Data filtering and transformation
 - Connecting Python to SQL databases
+
+  ## 📐 Statistics & Probability
+
+### Descriptive Statistics
+- Mean, median, mode  
+- Variance and standard deviation  
+- Quantiles, percentiles, interquartile range (IQR)  
+- Distribution shape analysis (skewness, kurtosis)
+
+### Probability Theory
+- Random variables  
+- Probability distributions  
+- Bernoulli, Binomial, Poisson, Normal distributions  
+- Probability mass and density functions (PMF, PDF)  
+- Cumulative distribution functions (CDF)
+
+### Statistical Inference
+- Sampling techniques and sampling bias  
+- Point estimation  
+- Confidence intervals  
+- Central Limit Theorem (CLT)  
+- Bootstrapping and resampling methods
+
+### Hypothesis Testing
+- Null and alternative hypotheses  
+- p-values and significance levels  
+- One-sample and two-sample tests  
+- t-test and z-test  
+- Chi-square test  
+- Non-parametric tests (Mann–Whitney U, Wilcoxon)
+
+### Correlation & Dependency Analysis
+- Pearson correlation  
+- Spearman rank correlation  
+- Covariance analysis  
+- Multicollinearity detection
+
+### Statistical Modeling Fundamentals
+- Linear regression assumptions  
+- Residual analysis  
+- Bias–variance tradeoff  
+- Statistical interpretation of machine learning models
+
+### Exploratory Statistical Analysis
+- Distribution visualization (histograms, KDE, boxplots)  
+- Outlier detection  
+- Statistical comparison of groups
+
+### Applied Statistics for Data Science
+- A/B testing fundamentals  
+- Data-driven decision making  
+- Statistical validation of model results
 
 ---
 
