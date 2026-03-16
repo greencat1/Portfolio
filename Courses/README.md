@@ -60,6 +60,36 @@ This section covers core concepts required for data analysis, statistical reason
 
 ---
 
+### 🔹 Generative AI Engineering Professional Certificate
+
+Projects and coursework from the **IBM Generative AI Engineering Professional Certificate**, focused on building modern AI systems using large language models (LLMs) and generative AI frameworks.
+
+Key topics covered in this program include:
+
+- **Large Language Models (LLMs)** and transformer architectures  
+- **Prompt engineering** and in-context learning  
+- **Retrieval-Augmented Generation (RAG)** pipelines  
+- **Embeddings and semantic search**  
+- **Fine-tuning transformer models** using parameter-efficient techniques  
+- **Building AI applications with LLMs**
+
+Technologies and tools explored:
+
+- Hugging Face Transformers  
+- PyTorch  
+- LangChain  
+- Vector embeddings and semantic search  
+- Generative AI workflows and LLM-based applications
+
+Projects in this section focus on practical implementation of generative AI systems, such as:
+
+- LLM-powered question answering systems  
+- Retrieval-augmented document assistants  
+- AI chatbots and conversational interfaces  
+- Text generation and summarization systems
+
+
+
 ### 📜 Certificates
 The **Certificates** directory contains official credentials and statements of accomplishment for completed courses and specializations, verifying the skills acquired throughout this learning journey.
 
@@ -81,6 +111,10 @@ Web Scraping | BeautifulSoup4, Requests
 Experimentation | Google Colab  
 Workflow | Jupyter Notebook, Git, GitHub  
 Databases | SQL
+Generative AI | Hugging Face Transformers, LangChain, Prompt Engineering, RAG
+Vector Databases | FAISS / Chroma / Pinecone
+LLM Engineering | Fine-tuning, PEFT (LoRA), embeddings
+
 
 ---
 
