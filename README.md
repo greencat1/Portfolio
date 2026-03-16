@@ -16,7 +16,8 @@ Portfolio/
 │   ├── Applied Data Science with Python/  
 │   ├── More Applied Data Science with Python/  
 │   ├── Data Science Foundations/
-│   ├── Data Science Fundamentals with Python and SQL Specialization/  
+│   ├── Data Science Fundamentals with Python and SQL Specialization/
+│   ├── IBM Generative AI Engineering Professional Certificate/  
 │   └── Certificates/  
 │  
 ├── Pet_Projects/  
@@ -35,23 +36,44 @@ Portfolio/
 
 The **Courses** folder contains coursework, assignments, and capstone projects completed as part of structured data science programs, including Python- and SQL-based analytics.
 
-These materials demonstrate hands-on experience with real-world datasets, relational data sources, and end-to-end analytical workflows — from raw data extraction to insight generation and model evaluation.
+These materials demonstrate hands-on experience with real-world datasets, relational data sources, and end-to-end analytical workflows — from raw data extraction to insight generation, model development, and evaluation.
 
-### Topics & competencies covered:
-- **Data analysis with Python** (Pandas, NumPy, data cleaning, feature engineering)
-- **Relational data analysis with SQL** (SELECT queries, JOINs, aggregations, subqueries, basic window functions)
-- **Exploratory data analysis (EDA) & visualization** (Matplotlib, Seaborn, insight-driven storytelling)
-- **Machine learning** (supervised & unsupervised methods, model selection, validation, and metrics)
-- **Natural Language Processing (NLP)** (text preprocessing, tokenization, feature extraction)
-- **Network & graph analysis** (graph construction, centrality measures, community detection)
-- **Information extraction from unstructured data** (regex-based parsing, structured data generation)
+The projects typically follow a structured **data science workflow**, including:
+
+- Data collection and ingestion  
+- Data cleaning and preprocessing  
+- Exploratory data analysis (EDA)  
+- Feature engineering  
+- Model development and evaluation  
+- Result interpretation and visualization  
+
+### Topics & Competencies Covered
+
+- **Data analysis with Python** (Pandas, NumPy, data cleaning, feature engineering)  
+- **Relational data analysis with SQL** (SELECT queries, JOINs, aggregations, subqueries, basic window functions)  
+- **Exploratory data analysis (EDA) & visualization** (Matplotlib, Seaborn, insight-driven storytelling)  
+- **Machine learning** (supervised & unsupervised methods, model selection, validation, and evaluation metrics such as accuracy, precision, recall, and F1-score)  
+- **Natural Language Processing (NLP)** (text preprocessing, tokenization, feature extraction)  
+- **Network & graph analysis** (graph construction, centrality measures, community detection)  
+- **Information extraction from unstructured data** (regex-based parsing, structured data generation)  
+- **Generative AI fundamentals** (large language models, transformer-based NLP, and prompt-based workflows)
+
+### Additional Focus Areas
+
+- Working with **real-world datasets**, including structured and semi-structured data sources  
+- Integration of **SQL and Python** within analytical workflows  
+- Reproducible research using **Jupyter notebooks** and structured project organization  
+- Experiment-driven model development and performance evaluation  
+- Clear documentation of assumptions, analytical decisions, and limitations  
+
+### Project Principles
 
 These projects emphasize:
-- **Clear problem formulation and analytical thinking**
-- **Metric-driven and reproducible analysis**
-- **Integration of SQL and Python in data workflows**
-- **Clean, well-documented, and reproducible code**
 
+- Clear problem formulation and analytical thinking  
+- Metric-driven and reproducible analysis  
+- Integration of SQL and Python in data workflows  
+- Clean, well-documented, and reproducible code  
 
 ---
 
@@ -191,6 +213,14 @@ Pet projects highlight **initiative**, **curiosity**, and **hands-on machine lea
 - Data-driven decision making  
 - Statistical validation of model results
 
+### 🧠 Generative AI & LLM Engineering
+- Large Language Models (LLMs) fundamentals
+- Transformer architectures (GPT, BERT concepts)
+- Prompt engineering and prompt design
+- Retrieval-Augmented Generation (RAG) concepts
+- Text embeddings and semantic search
+- Building LLM-based applications
+
 ---
 
 ## 🛠 Tools & Technologies
@@ -209,6 +239,9 @@ Web Scraping | BeautifulSoup4, Requests
 Experimentation | Google Colab  
 Workflow | Jupyter Notebook, Git, GitHub  
 Databases | SQL
+Generative AI | Hugging Face Transformers, LangChain, Prompt Engineering, RAG
+Vector Databases | FAISS / Chroma / Pinecone
+LLM Engineering | Fine-tuning, PEFT (LoRA), embeddings
 
 ---
 
