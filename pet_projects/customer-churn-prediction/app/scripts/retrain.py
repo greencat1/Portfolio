@@ -5,9 +5,9 @@ from pathlib import Path
 from datetime import datetime
 import cloudpickle
 from sklearn.pipeline import Pipeline
-from app.model import load_model
+from app.scripts.model import load_model
 from app.config import settings
-from app.transformers import (
+from app.scripts.transformers import (
     TotalChargesCleaner,
     FeatureEngineer,
     CategoricalEncoder,
@@ -29,10 +29,10 @@ def retrain_on_new_data():
     """
     
     # File paths
-    new_data_path = Path('data/new_data/new_data.csv')
-    backup_path = Path('models/inc_churn_pipeline_backup_cloud.pkl')
+    new_data_path = Path('app/data/new_data/new_data.csv')
+    backup_path = Path('app/models/inc_churn_pipeline_backup_cloud.pkl')
     model_path = Path(settings.churn_model_path)
-    retrained_model_path = Path('models/inc_churn_pipeline_retrained_cloud.pkl')
+    retrained_model_path = Path('app/models/inc_churn_pipeline_retrained_cloud.pkl')
     
     # 1. Check if new data file exists
     if not new_data_path.exists():
@@ -195,11 +195,11 @@ def full_retrain_on_combined_data():
     
     
     # File paths
-    old_data_path = Path('data/raw/telco_churn.csv')
-    new_data_path = Path('data/new_data/new_data.csv')
-    backup_path = Path('models/full_churn_pipeline_backup_cloud.pkl')
+    old_data_path = Path('app/data/raw/telco_churn.csv')
+    new_data_path = Path('app/data/new_data/new_data.csv')
+    backup_path = Path('app/models/full_churn_pipeline_backup_cloud.pkl')
     model_path = Path(settings.churn_model_path)
-    retrained_model_path = Path('models/full_churn_pipeline_retrained_cloud.pkl')
+    retrained_model_path = Path('app/models/full_churn_pipeline_retrained_cloud.pkl')
     
     # 1. Load and combine data
     print("Loading data...")
@@ -353,7 +353,7 @@ def get_retraining_status():
     Returns:
         Dictionary with retraining status and data statistics
     """
-    new_data_path = Path('data/new_data/new_data.csv')
+    new_data_path = Path('app/data/new_data/new_data.csv')
     
     if not new_data_path.exists():
         return {

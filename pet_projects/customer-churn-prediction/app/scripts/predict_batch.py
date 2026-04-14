@@ -3,7 +3,7 @@ import numpy as np
 from pathlib import Path
 from datetime import datetime
 from typing import List
-from app.model import load_model
+from app.scripts.model import load_model
 from app.schemas import PredictRequest
 
 
@@ -51,7 +51,7 @@ def _save_single_record(data, prediction: int, probability: float):
     """
     Saves or updates a single record in CSV by customerID
     """
-    file_path = Path('data/new_data/new_data.csv')
+    file_path = Path('app/data/new_data/new_data.csv')
     
     # Prepare record with extra columns
     input_dict = data.dict() if hasattr(data, 'dict') else dict(data)

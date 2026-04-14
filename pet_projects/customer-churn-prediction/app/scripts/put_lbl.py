@@ -17,7 +17,7 @@ def update_label(customer_id: str, churn_label: str) -> Dict[str, Any]:
     Returns:
         Dictionary with status and details of the operation
     """
-    file_path = Path('data/new_data/new_data.csv')
+    file_path = Path('app/data/new_data/new_data.csv')
     
     # Validate input
     if churn_label not in ["Yes", "No"]:
@@ -79,7 +79,7 @@ def batch_update_labels(updates: List[LabelUpdateRequest]) -> Dict[str, Any]:
     Returns:
         Dictionary with summary of updates
     """
-    file_path = Path('data/new_data/new_data.csv')
+    file_path = Path('app/data/new_data/new_data.csv')
     
     if not file_path.exists():
         return {
@@ -150,7 +150,7 @@ def get_label(customer_id: str) -> Dict[str, Any]:
     Returns:
         Dictionary with label information
     """
-    file_path = Path('data/new_data/new_data.csv')
+    file_path = Path('app/data/new_data/new_data.csv')
     
     if not file_path.exists():
         return {
@@ -191,7 +191,7 @@ def get_unlabeled_data() -> pd.DataFrame:
     Returns:
         DataFrame with unlabeled records
     """
-    file_path = Path('data/new_data/new_data.csv')
+    file_path = Path('app/data/new_data/new_data.csv')
     
     if not file_path.exists():
         return pd.DataFrame()
@@ -210,7 +210,7 @@ def get_labeled_data() -> pd.DataFrame:
     Returns:
         DataFrame with labeled records
     """
-    file_path = Path('data/new_data/new_data.csv')
+    file_path = Path('app/data/new_data/new_data.csv')
     
     if not file_path.exists():
         return pd.DataFrame()
@@ -230,7 +230,7 @@ def get_label_statistics() -> Dict[str, Any]:
     Returns:
         Dictionary with statistics
     """
-    file_path = Path('data/new_data/new_data.csv')
+    file_path = Path('app/data/new_data/new_data.csv')
     
     if not file_path.exists():
         return {

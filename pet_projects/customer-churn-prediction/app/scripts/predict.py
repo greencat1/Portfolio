@@ -1,6 +1,6 @@
 # app/predict.py
 import pandas as pd
-from app.model import load_model
+from app.scripts.model import load_model
 import numpy as np
 from pathlib import Path
 from datetime import datetime
@@ -13,7 +13,7 @@ def make_prediction(data):
     prediction = model.predict(input_df)[0]
     probability = model.predict_proba(input_df)[0][1]
 
-    file_path = Path('data/new_data/new_data.csv')
+    file_path = Path('app/data/new_data/new_data.csv')
     
     # Prepare the new record with additional columns
     input_dict = data.dict()

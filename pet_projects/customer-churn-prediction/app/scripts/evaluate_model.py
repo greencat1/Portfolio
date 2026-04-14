@@ -54,12 +54,12 @@ def load_new_labeled_data_raw():
     """
     Load raw new labeled data WITHOUT any preprocessing
     """
-    new_data_path = Path('data/new_data/new_data.csv')
+    new_data_path = Path('app/data/new_data/new_data.csv')
     
     if not new_data_path.exists():
         raise FileNotFoundError(f"New data file not found at {new_data_path}")
     
-    df = pd.read_csv('data/new_data/new_data.csv')
+    df = pd.read_csv('app/data/new_data/new_data.csv')
     df_labeled = df[df['Churn'].notna()].copy()
         
     feature_columns = [
@@ -88,7 +88,7 @@ def test_model_on_new_data(model_name: str = None, save_results: bool = True) ->
         model_path = active_info['path']
         print(f"Using active model: {model_name}")
     else:
-        model_path = Path('models') / model_name
+        model_path = Path('app/models') / model_name
         if not model_path.exists():
             return {
                 'status': 'error',
@@ -97,7 +97,7 @@ def test_model_on_new_data(model_name: str = None, save_results: bool = True) ->
         print(f"Using model: {model_name}")
     
     # Load data
-    new_data_path = Path('data/new_data/new_data.csv')
+    new_data_path = Path('app/data/new_data/new_data.csv')
     if not new_data_path.exists():
         return {
             'status': 'error',
@@ -173,7 +173,7 @@ def test_model_on_new_data(model_name: str = None, save_results: bool = True) ->
     
     if save_results:
         import json
-        metrics_dir = Path('models/metrics')
+        metrics_dir = Path('app/metrics')
         metrics_dir.mkdir(exist_ok=True)
         metrics_path = metrics_dir / f"{Path(model_name).stem}_test_metrics.json"
         with open(metrics_path, 'w') as f:

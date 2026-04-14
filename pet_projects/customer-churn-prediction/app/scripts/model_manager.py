@@ -7,10 +7,10 @@ from typing import List, Dict, Any, Optional
 import json
 
 from app.config import settings
-from app.model import _model, load_model
+from app.scripts.model import _model, load_model
 
 # Models directory
-MODELS_DIR = Path('models')
+MODELS_DIR = Path('app/models')
 EXCLUDE_MODELS = ['full_churn_pipeline.pkl']  # Models to exclude from list
 
 
@@ -173,7 +173,7 @@ def save_model_metrics(model_name: str, metrics: Dict[str, Any]):
     """
     Save metrics for a model
     """
-    metrics_path = MODELS_DIR / f'{Path(model_name).stem}_metrics.json'
+    metrics_path =  f'app/metrics/{Path(model_name).stem}_metrics.json'
     with open(metrics_path, 'w') as f:
         json.dump(metrics, f, indent=2, default=str)
 
@@ -194,7 +194,7 @@ def get_model_metrics(model_name: str) -> Optional[Dict[str, Any]]:
     model_stem = Path(model_name).stem
     
     # Search in models/metrics directory
-    metrics_dir = MODELS_DIR / 'metrics'
+    metrics_dir = Path('app/metrics')
     
     if not metrics_dir.exists():
         print(f"Metrics directory not found: {metrics_dir}")

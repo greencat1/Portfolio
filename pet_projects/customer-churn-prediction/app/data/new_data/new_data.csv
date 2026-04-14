@@ -1,8 +1,6 @@
 customerID,gender,SeniorCitizen,Partner,Dependents,tenure,PhoneService,MultipleLines,InternetService,OnlineSecurity,OnlineBackup,DeviceProtection,TechSupport,StreamingTV,StreamingMovies,Contract,PaperlessBilling,PaymentMethod,MonthlyCharges,TotalCharges,prediction,probability,Churn,timestamp,label_timestamp
 75920-VHVEG,Female,0,Yes,No,1,No,No phone service,DSL,No,Yes,No,No,No,No,Month-to-month,Yes,Electronic check,29.85,29.85,1,0.935113044215042,,2026-04-14T05:25:04.846702,
 7590-VHVsdaEG,Female,0,Yes,No,1,No,No phone service,DSL,No,Yes,No,No,No,No,Month-to-month,Yes,Electronic check,29.85,29.85,1,0.935113044215042,Yes,2026-04-14T06:19:41.011236,2026-04-14T07:08:38.186056
-7590-VHVEG,Female,0,Yes,No,1,No,No phone service,DSL,No,Yes,No,No,No,No,Month-to-month,Yes,Electronic check,29.85,29.85,1,0.935113044215042,Yes,2026-04-14T06:19:53.073309,2026-04-14T06:20:29.616893
-5575-GNVDE,Male,0,No,No,34,Yes,No,DSL,Yes,No,Yes,No,No,No,One year,No,Mailed check,56.95,1889.5,0,0.1524636966616004,No,2026-04-14T06:19:53.097699,2026-04-14T07:08:38.187055
 75190-VHVEG,Female,0,Yes,No,1,No,No phone service,DSL,No,Yes,No,No,No,No,Month-to-month,Yes,Electronic check,29.85,29.85,1,0.935113044215042,Yes,2026-04-14T07:03:29.718776,2026-04-14T07:07:58.266746
 55575-GNVDE,Male,0,No,No,34,Yes,No,DSL,Yes,No,Yes,No,No,No,One year,No,Mailed check,56.95,1889.5,0,0.1524636966616004,No,2026-04-14T07:03:29.726738,2026-04-14T07:07:31.741249
 55571d5-GNVDE,Male,0,No,No,34,Yes,No,DSL,Yes,No,Yes,No,No,No,One year,No,Mailed check,56.95,1889.5,0,0.1524636966616004,No,2026-04-14T07:03:37.277951,2026-04-14T07:07:17.026232
@@ -11,3 +9,5 @@ customerID,gender,SeniorCitizen,Partner,Dependents,tenure,PhoneService,MultipleL
 55571das5-GNVDE,Male,0,No,No,34,Yes,No,DSL,Yes,No,Yes,No,No,No,One year,No,Mailed check,56.95,1889.5,0,0.1524636966616004,No,2026-04-14T07:03:47.805753,2026-04-14T07:06:38.849264
 7512eqew9210-VHVEG,Female,0,Yes,No,1,No,No phone service,DSL,No,Yes,No,No,No,No,Month-to-month,Yes,Electronic check,29.85,29.85,1,0.935113044215042,Yes,2026-04-14T07:04:08.984901,2026-04-14T07:06:05.675223
 55571daadas5-GNVDE,Male,0,No,No,34,Yes,No,DSL,Yes,No,Yes,No,No,No,One year,No,Mailed check,56.95,1889.5,0,0.1524636966616004,No,2026-04-14T07:04:08.988783,2026-04-14T07:06:05.676226
+7590-VHVEG,Female,0,Yes,No,1,No,No phone service,DSL,No,Yes,No,No,No,No,Month-to-month,Yes,Electronic check,29.85,29.85,1,0.935113044215042,Yes,2026-04-14T16:13:23.160596,2026-04-14T16:15:05.286489
+5575-GNVDE,Male,0,No,No,34,Yes,No,DSL,Yes,No,Yes,No,No,No,One year,No,Mailed check,56.95,1889.5,0,0.1524636966616004,No,2026-04-14T16:13:23.197377,2026-04-14T16:15:05.288489

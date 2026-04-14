@@ -60,7 +60,6 @@ def predict_batch_endpoint(request: BatchPredictRequest):
     return predict_batch(request.customers)
 
 # ====================== LABELING ENDPOINTS ======================
-# ВАЖНО: специфические пути ДО параметризованных!
 
 @app.get("/label/stats", response_model=LabelStatisticsResponse)
 def get_label_statistics_endpoint():
@@ -112,11 +111,9 @@ def get_labeled_customers():
         "customers": customers
     }
 
-# Параметризованный эндпоинт ДОЛЖЕН быть ПОСЛЕ специфических
 @app.get("/label/{customer_id}", response_model=LabelInfoResponse)
 def get_label_endpoint(customer_id: str):
     """Get current Churn label and prediction info for a specific customer"""
-    # Проверяем, что customer_id не является специальным значением
     if customer_id in ['stats', 'unlabeled', 'labeled']:
         raise HTTPException(status_code=404, detail=f"Customer ID '{customer_id}' not found")
     
