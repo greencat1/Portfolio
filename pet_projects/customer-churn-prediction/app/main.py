@@ -81,6 +81,9 @@ from app.scripts.evaluate_model import (
     compare_models_on_new_data
 )
 
+# Import logger
+from app.utils.logger import logger
+
 # Initialize FastAPI application
 app = FastAPI(
     title="Churn Prediction API",
@@ -102,6 +105,7 @@ def healthcheck():
     Returns:
         dict: Status message indicating API is running
     """
+    logger.info("Health check requested")
     return {
         "status": "ok",
         "message": "Churn Prediction API is running",
@@ -133,8 +137,13 @@ def predict(data: PredictRequest, auth: dict = Depends(require_user)):
     check_rate_limit(auth["api_key"])
     
     # Make prediction using the loaded model
-    result = make_prediction(data)
-    return result
+    try:
+        result = make_prediction(data)
+        logger.info(f"Prediction successful for customer {data.customerID}")
+        return result
+    except Exception as e:
+        logger.error(f"Prediction failed for customer {data.customerID}: {str(e)}", exc_info=True)
+        raise
 
 
 @app.post("/predict/batch", response_model=BatchPredictResponse)
@@ -156,7 +165,14 @@ def predict_batch_endpoint(
         BatchPredictResponse: List of predictions with probabilities
     """
     check_rate_limit(auth["api_key"])
-    return predict_batch(request.customers)
+    
+    try:
+        result = predict_batch(request.customers)
+        logger.info(f"Batch prediction completed: {result['total']} customers")
+        return result
+    except Exception as e:
+        logger.error(f"Batch prediction failed: {str(e)}", exc_info=True)
+        raise
 
 
 @app.get("/label/stats", response_model=LabelStatisticsResponse)
@@ -175,7 +191,14 @@ def get_label_statistics_endpoint(auth: dict = Depends(require_user)):
         LabelStatisticsResponse: Statistics about labeling progress
     """
     check_rate_limit(auth["api_key"])
-    return get_label_statistics()
+    
+    try:
+        result = get_label_statistics()
+        logger.info(f"Label statistics retrieved: {result.get('labeling_progress', 'N/A')}")
+        return result
+    except Exception as e:
+        logger.error(f"Failed to get label statistics: {str(e)}", exc_info=True)
+        raise
 
 
 @app.get("/label/unlabeled/list")
@@ -194,24 +217,30 @@ def get_unlabeled_customers(auth: dict = Depends(require_user)):
     """
     check_rate_limit(auth["api_key"])
     
-    unlabeled_df = get_unlabeled_data()
-    if unlabeled_df.empty:
-        return {"status": "success", "count": 0, "customers": []}
-    
-    customers = []
-    for _, row in unlabeled_df.iterrows():
-        customers.append({
-            "customerID": row['customerID'],
-            "prediction": int(row['prediction']) if pd.notna(row.get('prediction')) else None,
-            "probability": float(row['probability']) if pd.notna(row.get('probability')) else None,
-            "timestamp": row.get('timestamp')
-        })
-    
-    return {
-        "status": "success",
-        "count": len(customers),
-        "customers": customers
-    }
+    try:
+        unlabeled_df = get_unlabeled_data()
+        if unlabeled_df.empty:
+            logger.info("No unlabeled customers found")
+            return {"status": "success", "count": 0, "customers": []}
+        
+        customers = []
+        for _, row in unlabeled_df.iterrows():
+            customers.append({
+                "customerID": row['customerID'],
+                "prediction": int(row['prediction']) if pd.notna(row.get('prediction')) else None,
+                "probability": float(row['probability']) if pd.notna(row.get('probability')) else None,
+                "timestamp": row.get('timestamp')
+            })
+        
+        logger.info(f"Retrieved {len(customers)} unlabeled customers")
+        return {
+            "status": "success",
+            "count": len(customers),
+            "customers": customers
+        }
+    except Exception as e:
+        logger.error(f"Failed to get unlabeled customers: {str(e)}", exc_info=True)
+        raise
 
 
 @app.get("/label/labeled/list")
@@ -230,25 +259,31 @@ def get_labeled_customers(auth: dict = Depends(require_user)):
     """
     check_rate_limit(auth["api_key"])
     
-    labeled_df = get_labeled_data()
-    if labeled_df.empty:
-        return {"status": "success", "count": 0, "customers": []}
-    
-    customers = []
-    for _, row in labeled_df.iterrows():
-        customers.append({
-            "customerID": row['customerID'],
-            "Churn": row['Churn'],
-            "prediction": int(row['prediction']) if pd.notna(row.get('prediction')) else None,
-            "probability": float(row['probability']) if pd.notna(row.get('probability')) else None,
-            "label_timestamp": row.get('label_timestamp')
-        })
-    
-    return {
-        "status": "success",
-        "count": len(customers),
-        "customers": customers
-    }
+    try:
+        labeled_df = get_labeled_data()
+        if labeled_df.empty:
+            logger.info("No labeled customers found")
+            return {"status": "success", "count": 0, "customers": []}
+        
+        customers = []
+        for _, row in labeled_df.iterrows():
+            customers.append({
+                "customerID": row['customerID'],
+                "Churn": row['Churn'],
+                "prediction": int(row['prediction']) if pd.notna(row.get('prediction')) else None,
+                "probability": float(row['probability']) if pd.notna(row.get('probability')) else None,
+                "label_timestamp": row.get('label_timestamp')
+            })
+        
+        logger.info(f"Retrieved {len(customers)} labeled customers")
+        return {
+            "status": "success",
+            "count": len(customers),
+            "customers": customers
+        }
+    except Exception as e:
+        logger.error(f"Failed to get labeled customers: {str(e)}", exc_info=True)
+        raise
 
 
 @app.get("/label/{customer_id}", response_model=LabelInfoResponse)
@@ -270,15 +305,25 @@ def get_label_endpoint(customer_id: str, auth: dict = Depends(require_user)):
     
     # Prevent path traversal attacks on special IDs
     if customer_id in ['stats', 'unlabeled', 'labeled']:
+        logger.warning(f"Attempt to access reserved ID: {customer_id}")
         raise HTTPException(
             status_code=404,
             detail=f"Customer ID '{customer_id}' not found"
         )
     
-    result = get_label(customer_id)
-    if result["status"] == "error":
-        raise HTTPException(status_code=404, detail=result["message"])
-    return result
+    try:
+        result = get_label(customer_id)
+        if result["status"] == "error":
+            logger.warning(f"Label not found for customer {customer_id}")
+            raise HTTPException(status_code=404, detail=result["message"])
+        
+        logger.info(f"Label retrieved for customer {customer_id}")
+        return result
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to get label for customer {customer_id}: {str(e)}", exc_info=True)
+        raise
 
 
 @app.post("/label/update", response_model=LabelUpdateResponse)
@@ -301,10 +346,19 @@ def update_label_endpoint(
     """
     check_rate_limit(auth["api_key"])
     
-    result = update_label(request.customerID, request.Churn)
-    if result["status"] == "error":
-        raise HTTPException(status_code=404, detail=result["message"])
-    return result
+    try:
+        result = update_label(request.customerID, request.Churn)
+        if result["status"] == "error":
+            logger.warning(f"Label update failed for {request.customerID}: {result.get('message')}")
+            raise HTTPException(status_code=404, detail=result["message"])
+        
+        logger.info(f"Label updated for customer {request.customerID}: {request.Churn}")
+        return result
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to update label for {request.customerID}: {str(e)}", exc_info=True)
+        raise
 
 
 @app.post("/label/batch", response_model=BatchLabelUpdateResponse)
@@ -327,10 +381,18 @@ def batch_update_labels_endpoint(
     """
     check_rate_limit(auth["api_key"])
     
-    result = batch_update_labels(request.updates)
-    if result["status"] == "error":
-        raise HTTPException(status_code=404, detail=result["message"])
-    return result
+    try:
+        result = batch_update_labels(request.updates)
+        logger.info(f"Batch label update completed: {result['successful']} successful, {result['failed']} failed")
+        
+        if result["status"] == "error":
+            raise HTTPException(status_code=404, detail=result["message"])
+        return result
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to batch update labels: {str(e)}", exc_info=True)
+        raise
 
 
 @app.get("/admin/rate-limit")
@@ -347,7 +409,9 @@ def get_rate_limit_info(auth: dict = Depends(require_user)):
     Returns:
         dict: Rate limit information (current, limit, remaining, reset time)
     """
-    return get_rate_limit_status(auth["api_key"])
+    result = get_rate_limit_status(auth["api_key"])
+    logger.info(f"Rate limit info requested for key {auth['api_key'][:8]}...")
+    return result
 
 
 # ============================================================================
@@ -369,7 +433,13 @@ def retrain_status(auth: dict = Depends(require_admin)):
     Returns:
         RetrainStatusResponse: Status and statistics for retraining readiness
     """
-    return get_retraining_status()
+    try:
+        result = get_retraining_status()
+        logger.info(f"Retraining status checked: {result.get('status')}")
+        return result
+    except Exception as e:
+        logger.error(f"Failed to get retraining status: {str(e)}", exc_info=True)
+        raise
 
 
 @app.post("/retrain/incremental", response_model=RetrainResponse)
@@ -393,9 +463,14 @@ def retrain_incremental(auth: dict = Depends(require_admin)):
     Returns:
         RetrainResponse: Status and metrics of retraining operation
     """
+    logger.info("Starting incremental retraining")
     result = retrain_on_new_data()
+    
     if result["status"] == "error":
+        logger.error(f"Incremental retraining failed: {result.get('message')}")
         raise HTTPException(status_code=400, detail=result["message"])
+    
+    logger.info(f"Incremental retraining completed: {result.get('samples_used', 0)} samples used")
     return result
 
 
@@ -420,9 +495,14 @@ def retrain_full(auth: dict = Depends(require_admin)):
     Returns:
         RetrainResponse: Status and metrics of retraining operation
     """
+    logger.info("Starting full retraining")
     result = full_retrain_on_combined_data()
+    
     if result["status"] == "error":
+        logger.error(f"Full retraining failed: {result.get('message')}")
         raise HTTPException(status_code=400, detail=result["message"])
+    
+    logger.info(f"Full retraining completed: {result.get('samples_used', 0)} total samples")
     return result
 
 
@@ -440,16 +520,21 @@ def list_models(auth: dict = Depends(require_admin)):
     Returns:
         ModelsListResponse: List of models with metadata and active model info
     """
-    models = get_all_models()
-    active_info = get_active_model_info()
-    
-    return {
-        "status": "success",
-        "active_model": active_info['name'],
-        "active_model_path": active_info['path'],
-        "models": models,
-        "total_models": len(models)
-    }
+    try:
+        models = get_all_models()
+        active_info = get_active_model_info()
+        logger.info(f"Listed {len(models)} models")
+        
+        return {
+            "status": "success",
+            "active_model": active_info['name'],
+            "active_model_path": active_info['path'],
+            "models": models,
+            "total_models": len(models)
+        }
+    except Exception as e:
+        logger.error(f"Failed to list models: {str(e)}", exc_info=True)
+        raise
 
 
 @app.get("/models/active")
@@ -466,10 +551,16 @@ def get_active_model(auth: dict = Depends(require_admin)):
     Returns:
         dict: Active model information (name, path, size, creation date)
     """
-    return {
-        "status": "success",
-        **get_active_model_info()
-    }
+    try:
+        result = get_active_model_info()
+        logger.info(f"Active model retrieved: {result.get('name')}")
+        return {
+            "status": "success",
+            **result
+        }
+    except Exception as e:
+        logger.error(f"Failed to get active model: {str(e)}", exc_info=True)
+        raise
 
 
 @app.post("/models/switch", response_model=SwitchModelResponse)
@@ -493,11 +584,14 @@ def switch_model(request: SwitchModelRequest, auth: dict = Depends(require_admin
     Returns:
         SwitchModelResponse: Status with previous and current model info
     """
+    logger.info(f"Switching model to: {request.model_name}")
     result = switch_active_model(request.model_name)
     
     if result['status'] == 'error':
+        logger.error(f"Model switch failed: {result.get('message')}")
         raise HTTPException(status_code=400, detail=result['message'])
     
+    logger.info(f"Model switched from {result['previous_model']} to {result['current_model']}")
     return result
 
 
@@ -522,11 +616,14 @@ def delete_model_endpoint(
     Returns:
         DeleteModelResponse: Status of deletion operation
     """
+    logger.warning(f"Deleting model: {request.model_name}, force={force}")
     result = delete_model(request.model_name, force=force)
     
     if result['status'] == 'error':
+        logger.error(f"Model deletion failed: {result.get('message')}")
         raise HTTPException(status_code=400, detail=result['message'])
     
+    logger.info(f"Model deleted: {result['deleted_model']}")
     return result
 
 
@@ -554,9 +651,11 @@ def compare_models_endpoint(
     Returns:
         CompareModelsResponse: Detailed comparison of both models
     """
+    logger.info(f"Comparing models: {model1} vs {model2}")
     result = compare_models(model1, model2)
     
     if result['status'] == 'error':
+        logger.error(f"Model comparison failed: {result.get('message')}")
         raise HTTPException(status_code=404, detail=result['message'])
     
     return result
@@ -583,11 +682,13 @@ def get_model_metrics_endpoint(
     metrics = get_model_metrics(model_name)
     
     if not metrics:
+        logger.warning(f"No metrics found for model {model_name}")
         raise HTTPException(
             status_code=404,
             detail=f"No metrics found for model {model_name}"
         )
     
+    logger.info(f"Metrics retrieved for model {model_name}")
     return {
         "status": "success",
         "model_name": model_name,
@@ -610,9 +711,14 @@ def test_model(model_name: str, auth: dict = Depends(require_admin)):
     Returns:
         dict: Evaluation metrics (recall, precision, accuracy, F1, ROC-AUC)
     """
+    logger.info(f"Testing model: {model_name}")
     result = test_model_on_new_data(model_name)
+    
     if result['status'] == 'error':
+        logger.error(f"Model test failed: {result.get('message')}")
         raise HTTPException(status_code=404, detail=result['message'])
+    
+    logger.info(f"Model {model_name} test completed: recall={result['metrics'].get('recall', 'N/A')}")
     return result
 
 
@@ -637,6 +743,7 @@ def create_new_api_key(
     Returns the new API key. Store it securely!
     """
     result = create_api_key(role, name, rate_limit)
+    logger.info(f"New API key created: role={role}, name={name}, rate_limit={rate_limit}")
     return result
 
 
@@ -656,6 +763,7 @@ def revoke_existing_api_key(api_key: str, auth: dict = Depends(require_admin)):
     Returns:
         dict: Status of the revocation operation
     """
+    logger.warning(f"Revoking API key: {api_key[:8]}...")
     return revoke_api_key(api_key, auth)
 
 
@@ -673,4 +781,6 @@ def list_all_api_keys(auth: dict = Depends(require_admin)):
     Returns:
         dict: List of key previews with metadata and total count
     """
-    return list_api_keys(auth)
+    result = list_api_keys(auth)
+    logger.info(f"Listed {result.get('total', 0)} API keys")
+    return result

@@ -10,6 +10,7 @@ import time
 from collections import defaultdict
 from typing import Dict
 from fastapi import HTTPException
+from app.utils.logger import logger
 
 # In-memory request log (use Redis for production deployments)
 # Maps API key -> list of request timestamps
@@ -48,6 +49,7 @@ def check_rate_limit(api_key: str, rate_limit: int = None) -> bool:
     ]
     
     if len(request_log[api_key]) >= rate_limit:
+        logger.warning(f"Rate limit exceeded for API key {api_key[:8]}...")
         raise HTTPException(
             status_code=429,
             detail=f"Rate limit exceeded. Maximum {rate_limit} requests per minute."

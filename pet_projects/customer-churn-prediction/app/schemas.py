@@ -13,6 +13,7 @@ Defines request/response models for all API endpoints including:
 
 from pydantic import BaseModel
 from typing import List, Dict, Any, Optional
+from app.utils.logger import logger
 
 
 # ============================================================================

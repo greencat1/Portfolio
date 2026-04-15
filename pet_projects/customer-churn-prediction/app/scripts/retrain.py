@@ -20,6 +20,7 @@ from sklearn.preprocessing import StandardScaler
 from catboost import CatBoostClassifier
 import shutil
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from app.utils.logger import logger
 
 
 def retrain_on_new_data():
@@ -71,8 +72,9 @@ def retrain_on_new_data():
     # 6. Load existing model
     try:
         old_model = load_model()
-        print(f"Loaded existing model from {settings.churn_model_path}")
+        logger.info(f"Loaded existing model from {settings.churn_model_path}")
     except Exception as e:
+        logger.error(f"Retraining failed: {str(e)}", exc_info=True)
         return {
             "status": "error",
             "message": f"Failed to load model: {str(e)}"
@@ -81,7 +83,7 @@ def retrain_on_new_data():
     # 7. Create backup of old model
     if model_path.exists():
         shutil.copy(model_path, backup_path)
-        print(f"Backup saved to {backup_path}")
+        logger.info(f"Backup saved to {backup_path}")
     
     # 8. Extract CatBoost base model from pipeline
     catboost_model = None

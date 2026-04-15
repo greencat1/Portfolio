@@ -11,6 +11,7 @@ from catboost import CatBoostClassifier
 
 import pickle
 import warnings
+from app.utils.logger import logger
 
 # Ignore warnings for cleaner output
 warnings.filterwarnings('ignore')

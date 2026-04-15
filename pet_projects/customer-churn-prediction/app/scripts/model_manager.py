@@ -8,6 +8,7 @@ import json
 
 from app.config import settings
 from app.scripts.model import _model, load_model
+from app.utils.logger import logger
 
 # Models directory
 MODELS_DIR = Path('app/models')

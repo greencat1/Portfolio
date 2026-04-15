@@ -5,6 +5,7 @@ from datetime import datetime
 from typing import List
 from app.scripts.model import load_model
 from app.schemas import PredictRequest
+from app.utils.logger import logger
 
 
 # ====================== BATCH PREDICTION ======================
@@ -67,7 +68,7 @@ def _save_single_record(data, prediction: int, probability: float):
     if not file_path.exists():
         # First time - create file
         new_row.to_csv(file_path, index=False)
-        print(f"File created. Added customerID: {input_dict.get('customerID')}")
+        logger.info(f"File created. Added customerID: {input_dict.get('customerID')}")
     else:
         # Read existing file
         df = pd.read_csv(file_path)
@@ -77,9 +78,11 @@ def _save_single_record(data, prediction: int, probability: float):
         if customer_id_str in df['customerID'].astype(str).values:
             # Update existing record
             df = df[df['customerID'].astype(str) != customer_id_str]
-            print(f"Updated existing record for customerID: {customer_id_str}")
+            logger.info(f"Updated existing record for customerID: {customer_id_str}")
+        
         else:
-            print(f"Added new record for customerID: {customer_id_str}")
+            logger.info(f"Added new record for customerID: {customer_id_str}")
+            
         
         # Append new record
         df = pd.concat([df, new_row], ignore_index=True)

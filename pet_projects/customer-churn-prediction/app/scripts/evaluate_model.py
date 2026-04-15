@@ -15,6 +15,7 @@ from sklearn.metrics import (
 
 from app.config import settings
 from app.scripts.model_manager import get_active_model_info
+from app.utils.logger import logger
 
 
 def inspect_pipeline_features(model_path):

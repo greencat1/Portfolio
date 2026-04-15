@@ -4,6 +4,7 @@ from pathlib import Path
 from datetime import datetime
 from app.schemas import LabelUpdateRequest
 from typing import List, Dict, Any, Optional
+from app.utils.logger import logger
 
 # ====================== MAIN FUNCTION ======================
 def update_label(customer_id: str, churn_label: str) -> Dict[str, Any]:

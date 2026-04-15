@@ -4,6 +4,8 @@ from app.scripts.model import load_model
 import numpy as np
 from pathlib import Path
 from datetime import datetime
+from app.utils.logger import logger
+
 
 def make_prediction(data):
     model = load_model()
@@ -29,7 +31,7 @@ def make_prediction(data):
     if not file_path.exists():
         # First time: create new file with header
         new_row.to_csv(file_path, index=False)
-        print(f"File created. Added customerID: {data.customerID}")
+        logger.info(f"File created. Added customerID: {data.customerID}")
         
     else:
         # Read existing data
@@ -41,9 +43,9 @@ def make_prediction(data):
         if customer_id_str in df['customerID'].astype(str).values:
             # Remove old record for this customer
             df = df[df['customerID'].astype(str) != customer_id_str]
-            print(f"Updated existing record for customerID: {data.customerID}")
+            logger.info(f"Updated existing record for customerID: {data.customerID}")
         else:
-            print(f"Added new record for customerID: {data.customerID}")
+            logger.info(f"Added new record for customerID: {data.customerID}")
         
         # Append the new record
         df = pd.concat([df, new_row], ignore_index=True)

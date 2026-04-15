@@ -2,7 +2,6 @@ import joblib
 import os
 from app.config import settings
 from app.scripts.transformers import *
-from app.utils.logger import logger
 
 import cloudpickle
 
@@ -14,8 +13,8 @@ def load_model():
     if _model is None:
         if not os.path.exists(settings.churn_model_path):
             raise FileNotFoundError(f"Model not found at {settings.churn_model_path}")
-        logger.info(f"Loading model from {settings.churn_model_path}")
+        print(f"Loading model from {settings.churn_model_path}")
         with open(settings.churn_model_path, 'rb') as f:
             _model = cloudpickle.load(f)
-        logger.info("Model loaded successfully!")
+        print("Model loaded successfully!")
     return _model
