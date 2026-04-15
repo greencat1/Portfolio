@@ -1,26 +1,68 @@
-from fastapi import FastAPI, HTTPException
+# app/main.py
+"""
+Churn Prediction API - Main Application Entry Point
+
+This FastAPI application provides endpoints for:
+- Customer churn prediction (single and batch)
+- Label management (update and retrieve customer churn labels)
+- Model management (switch, delete, compare models)
+- Retraining (incremental and full retraining)
+- Security with API key authentication and role-based access control
+
+Security Levels:
+- Public: Health check endpoint (no authentication)
+- User: Any valid API key (predictions, labeling)
+- Admin: Admin API key required (model management, retraining, key management)
+"""
+
+from fastapi import FastAPI, HTTPException, Depends
+from typing import List
+import pandas as pd
+from pathlib import Path
+
+# Import authentication and rate limiting modules
+from app.auth import (
+    verify_api_key,      # Validates any API key
+    require_user,        # Requires user or admin role (for data operations)
+    require_admin,       # Requires admin role (for model management)
+    create_api_key,      # Create new API keys (admin only)
+    revoke_api_key,      # Revoke existing API keys (admin only)
+    list_api_keys        # List all API keys (admin only)
+)
+from app.rate_limit import check_rate_limit, get_rate_limit_status
+
+# Import schemas (request/response models)
 from app.schemas import (
-    PredictRequest, PredictResponse, 
+    PredictRequest, PredictResponse,
     BatchPredictRequest, BatchPredictResponse,
     LabelUpdateRequest, LabelUpdateResponse,
     BatchLabelUpdateRequest, BatchLabelUpdateResponse,
-    LabelInfoResponse, LabelStatisticsResponse, RetrainResponse, RetrainStatusResponse,
+    LabelInfoResponse, LabelStatisticsResponse,
+    RetrainResponse, RetrainStatusResponse,
     ModelInfo, ModelsListResponse,
     SwitchModelRequest, SwitchModelResponse,
     DeleteModelRequest, DeleteModelResponse,
-    CompareModelsResponse, ModelMetricsResponse
+    CompareModelsResponse, ModelMetricsResponse,
+    APIKeyCreateRequest,
+    APIKeyCreateResponse,
+    APIKeyInfo,
+    APIKeyListResponse,
+    APIKeyRevokeRequest,
+    APIKeyRevokeResponse,
+    RateLimitStatusResponse
 )
+
+# Import business logic scripts
 from app.scripts.predict import make_prediction
 from app.scripts.predict_batch import predict_batch
 from app.scripts.put_lbl import (
-    update_label, 
-    batch_update_labels, 
-    get_label, 
+    update_label,
+    batch_update_labels,
+    get_label,
     get_label_statistics,
     get_unlabeled_data,
     get_labeled_data
 )
-
 from app.scripts.model_manager import (
     get_all_models,
     get_active_model_info,
@@ -29,46 +71,129 @@ from app.scripts.model_manager import (
     compare_models,
     get_model_metrics
 )
-
-from app.scripts.retrain import retrain_on_new_data, full_retrain_on_combined_data, get_retraining_status
-from typing import List
-import pandas as pd
-from pathlib import Path
-
+from app.scripts.retrain import (
+    retrain_on_new_data,
+    full_retrain_on_combined_data,
+    get_retraining_status
+)
 from app.scripts.evaluate_model import (
     test_model_on_new_data,
     compare_models_on_new_data
 )
 
+# Initialize FastAPI application
+app = FastAPI(
+    title="Churn Prediction API",
+    description="API for customer churn prediction and labeling with role-based access control",
+    version="2.0.0"
+)
 
-app = FastAPI(title="Churn Prediction API", description="API for customer churn prediction and labeling")
+
+# ============================================================================
+# PUBLIC ENDPOINTS (No Authentication Required)
+# ============================================================================
 
 @app.get("/")
 def healthcheck():
-    return {"status": "ok", "message": "Churn Prediction API is running"}
+    """
+    Health check endpoint.
+    No authentication required. Used for monitoring and service discovery.
+    
+    Returns:
+        dict: Status message indicating API is running
+    """
+    return {
+        "status": "ok",
+        "message": "Churn Prediction API is running",
+        "version": "2.0.0"
+    }
 
-# ====================== PREDICTION ENDPOINTS ======================
+
+# ============================================================================
+# DATA & PREDICTION ENDPOINTS (User + Admin Access)
+# These endpoints require any valid API key (user or admin role)
+# ============================================================================
+
 @app.post("/predict", response_model=PredictResponse)
-def predict(data: PredictRequest):
-    """Make a single prediction"""
+def predict(data: PredictRequest, auth: dict = Depends(require_user)):
+    """
+    Make a single churn prediction for a customer.
+    
+    Requires a valid API key (user or admin role).
+    Rate limits apply based on the API key configuration.
+    
+    Args:
+        data: Customer information (all features required for prediction)
+        auth: Authentication data from API key (injected by dependency)
+    
+    Returns:
+        PredictResponse: Prediction result (0 = No Churn, 1 = Churn) and probability
+    """
+    # Apply rate limiting based on API key
+    check_rate_limit(auth["api_key"])
+    
+    # Make prediction using the loaded model
     result = make_prediction(data)
     return result
 
+
 @app.post("/predict/batch", response_model=BatchPredictResponse)
-def predict_batch_endpoint(request: BatchPredictRequest):
-    """Make batch predictions for multiple customers"""
+def predict_batch_endpoint(
+    request: BatchPredictRequest,
+    auth: dict = Depends(require_user)
+):
+    """
+    Make batch predictions for multiple customers.
+    
+    More efficient than making individual predictions.
+    Requires a valid API key (user or admin role).
+    
+    Args:
+        request: List of customer data objects
+        auth: Authentication data from API key (injected by dependency)
+    
+    Returns:
+        BatchPredictResponse: List of predictions with probabilities
+    """
+    check_rate_limit(auth["api_key"])
     return predict_batch(request.customers)
 
-# ====================== LABELING ENDPOINTS ======================
 
 @app.get("/label/stats", response_model=LabelStatisticsResponse)
-def get_label_statistics_endpoint():
-    """Get statistics about labeled vs unlabeled data"""
+def get_label_statistics_endpoint(auth: dict = Depends(require_user)):
+    """
+    Get statistics about labeled vs unlabeled data.
+    
+    Returns counts of total, labeled, unlabeled records,
+    and churn distribution.
+    Requires a valid API key (user or admin role).
+    
+    Args:
+        auth: Authentication data from API key (injected by dependency)
+    
+    Returns:
+        LabelStatisticsResponse: Statistics about labeling progress
+    """
+    check_rate_limit(auth["api_key"])
     return get_label_statistics()
 
+
 @app.get("/label/unlabeled/list")
-def get_unlabeled_customers():
-    """Get list of all customers without Churn labels"""
+def get_unlabeled_customers(auth: dict = Depends(require_user)):
+    """
+    Get list of all customers without Churn labels.
+    
+    Useful for identifying which customers need manual labeling.
+    Requires a valid API key (user or admin role).
+    
+    Args:
+        auth: Authentication data from API key (injected by dependency)
+    
+    Returns:
+        dict: List of unlabeled customers with their prediction data
+    """
+    check_rate_limit(auth["api_key"])
+    
     unlabeled_df = get_unlabeled_data()
     if unlabeled_df.empty:
         return {"status": "success", "count": 0, "customers": []}
@@ -88,9 +213,23 @@ def get_unlabeled_customers():
         "customers": customers
     }
 
+
 @app.get("/label/labeled/list")
-def get_labeled_customers():
-    """Get list of all customers with Churn labels"""
+def get_labeled_customers(auth: dict = Depends(require_user)):
+    """
+    Get list of all customers with Churn labels.
+    
+    Returns already labeled customers with their true labels.
+    Requires a valid API key (user or admin role).
+    
+    Args:
+        auth: Authentication data from API key (injected by dependency)
+    
+    Returns:
+        dict: List of labeled customers with their true labels
+    """
+    check_rate_limit(auth["api_key"])
+    
     labeled_df = get_labeled_data()
     if labeled_df.empty:
         return {"status": "success", "count": 0, "customers": []}
@@ -111,92 +250,195 @@ def get_labeled_customers():
         "customers": customers
     }
 
+
 @app.get("/label/{customer_id}", response_model=LabelInfoResponse)
-def get_label_endpoint(customer_id: str):
-    """Get current Churn label and prediction info for a specific customer"""
+def get_label_endpoint(customer_id: str, auth: dict = Depends(require_user)):
+    """
+    Get current Churn label and prediction info for a specific customer.
+    
+    Returns both the true label (if available) and the model's prediction.
+    Requires a valid API key (user or admin role).
+    
+    Args:
+        customer_id: Unique customer identifier
+        auth: Authentication data from API key (injected by dependency)
+    
+    Returns:
+        LabelInfoResponse: Label and prediction information for the customer
+    """
+    check_rate_limit(auth["api_key"])
+    
+    # Prevent path traversal attacks on special IDs
     if customer_id in ['stats', 'unlabeled', 'labeled']:
-        raise HTTPException(status_code=404, detail=f"Customer ID '{customer_id}' not found")
+        raise HTTPException(
+            status_code=404,
+            detail=f"Customer ID '{customer_id}' not found"
+        )
     
     result = get_label(customer_id)
     if result["status"] == "error":
         raise HTTPException(status_code=404, detail=result["message"])
     return result
 
+
 @app.post("/label/update", response_model=LabelUpdateResponse)
-def update_label_endpoint(request: LabelUpdateRequest):
+def update_label_endpoint(
+    request: LabelUpdateRequest,
+    auth: dict = Depends(require_user)
+):
     """
     Update Churn label for a single customer.
-    Label must be 'Yes' (churned) or 'No' (not churned)
+    
+    Labels are used for model retraining and evaluation.
+    Requires a valid API key (user or admin role).
+    
+    Args:
+        request: Contains customerID and Churn label ('Yes' or 'No')
+        auth: Authentication data from API key (injected by dependency)
+    
+    Returns:
+        LabelUpdateResponse: Status of the update operation
     """
+    check_rate_limit(auth["api_key"])
+    
     result = update_label(request.customerID, request.Churn)
     if result["status"] == "error":
         raise HTTPException(status_code=404, detail=result["message"])
     return result
 
+
 @app.post("/label/batch", response_model=BatchLabelUpdateResponse)
-def batch_update_labels_endpoint(request: BatchLabelUpdateRequest):
+def batch_update_labels_endpoint(
+    request: BatchLabelUpdateRequest,
+    auth: dict = Depends(require_user)
+):
     """
     Update Churn labels for multiple customers at once.
-    Each label must be 'Yes' or 'No'
+    
+    More efficient than individual updates for bulk operations.
+    Requires a valid API key (user or admin role).
+    
+    Args:
+        request: List of customer label updates
+        auth: Authentication data from API key (injected by dependency)
+    
+    Returns:
+        BatchLabelUpdateResponse: Summary of successful and failed updates
     """
+    check_rate_limit(auth["api_key"])
+    
     result = batch_update_labels(request.updates)
     if result["status"] == "error":
         raise HTTPException(status_code=404, detail=result["message"])
     return result
 
-# ====================== RETRAINING ENDPOINTS ======================
+
+@app.get("/admin/rate-limit")
+def get_rate_limit_info(auth: dict = Depends(require_user)):
+    """
+    Get current rate limit status for your API key.
+    
+    Shows how many requests you've made and how many remain.
+    Requires a valid API key (user or admin role).
+    
+    Args:
+        auth: Authentication data from API key (injected by dependency)
+    
+    Returns:
+        dict: Rate limit information (current, limit, remaining, reset time)
+    """
+    return get_rate_limit_status(auth["api_key"])
+
+
+# ============================================================================
+# MODEL MANAGEMENT ENDPOINTS (Admin Only)
+# These endpoints require admin API key
+# ============================================================================
 
 @app.get("/retrain/status", response_model=RetrainStatusResponse)
-def retrain_status():
+def retrain_status(auth: dict = Depends(require_admin)):
     """
     Check if there's enough labeled data for retraining.
+    
     Returns statistics about available labeled data.
+    Admin only endpoint.
+    
+    Args:
+        auth: Authentication data from API key (admin role required)
+    
+    Returns:
+        RetrainStatusResponse: Status and statistics for retraining readiness
     """
     return get_retraining_status()
 
+
 @app.post("/retrain/incremental", response_model=RetrainResponse)
-def retrain_incremental():
+def retrain_incremental(auth: dict = Depends(require_admin)):
     """
     Incremental retraining on new labeled data only.
-    Faster - continues training from current model.
-    Requires at least 10 labeled samples.
     
-    This method:
-    - Loads existing model
-    - Applies transformations to new labeled data
-    - Continues training (incremental learning)
-    - Saves updated model to models/full_churn_pipeline_retrained.pkl
+    Faster method - continues training from current model.
+    Requires at least 10 labeled samples.
+    Admin only endpoint.
+    
+    Process:
+    1. Loads existing model
+    2. Applies transformations to new labeled data
+    3. Continues training (incremental learning)
+    4. Saves updated model
+    
+    Args:
+        auth: Authentication data from API key (admin role required)
+    
+    Returns:
+        RetrainResponse: Status and metrics of retraining operation
     """
     result = retrain_on_new_data()
     if result["status"] == "error":
         raise HTTPException(status_code=400, detail=result["message"])
     return result
 
+
 @app.post("/retrain/full", response_model=RetrainResponse)
-def retrain_full():
+def retrain_full(auth: dict = Depends(require_admin)):
     """
     Full retraining from scratch on combined data (old + new labeled).
+    
     Slower but potentially more accurate.
     Uses all available data including original training data.
+    Admin only endpoint.
     
-    This method:
-    - Loads original training data (data/raw/telco_churn.csv)
-    - Loads newly labeled data (data/new_data/new_data.csv)
-    - Combines both datasets
-    - Trains brand new model from scratch
-    - Saves retrained model to models/full_churn_pipeline_retrained.pkl
+    Process:
+    1. Loads original training data
+    2. Loads newly labeled data
+    3. Combines both datasets
+    4. Trains brand new model from scratch
+    
+    Args:
+        auth: Authentication data from API key (admin role required)
+    
+    Returns:
+        RetrainResponse: Status and metrics of retraining operation
     """
     result = full_retrain_on_combined_data()
     if result["status"] == "error":
         raise HTTPException(status_code=400, detail=result["message"])
     return result
 
-# ====================== MODEL MANAGEMENT ENDPOINTS ======================
 
 @app.get("/models", response_model=ModelsListResponse)
-def list_models():
+def list_models(auth: dict = Depends(require_admin)):
     """
-    List all available models (excluding full_churn_pipeline.pkl)
+    List all available models.
+    
+    Returns all models in the models directory (excluding protected models).
+    Admin only endpoint.
+    
+    Args:
+        auth: Authentication data from API key (admin role required)
+    
+    Returns:
+        ModelsListResponse: List of models with metadata and active model info
     """
     models = get_all_models()
     active_info = get_active_model_info()
@@ -211,9 +453,18 @@ def list_models():
 
 
 @app.get("/models/active")
-def get_active_model():
+def get_active_model(auth: dict = Depends(require_admin)):
     """
-    Get currently active model information
+    Get currently active model information.
+    
+    Returns details about the model currently used for predictions.
+    Admin only endpoint.
+    
+    Args:
+        auth: Authentication data from API key (admin role required)
+    
+    Returns:
+        dict: Active model information (name, path, size, creation date)
     """
     return {
         "status": "success",
@@ -222,15 +473,25 @@ def get_active_model():
 
 
 @app.post("/models/switch", response_model=SwitchModelResponse)
-def switch_model(request: SwitchModelRequest):
+def switch_model(request: SwitchModelRequest, auth: dict = Depends(require_admin)):
     """
-    Switch active model by filename
+    Switch active model by filename.
     
-    Example model names:
-    - full_churn_pipeline_cloud.pkl
-    - full_churn_pipeline_retrained_cloud.pkl
-    - inc_churn_pipeline_retrained_cloud.pkl
-    - inc_churn_pipeline_backup_cloud.pkl
+    Changes which model is used for predictions.
+    Admin only endpoint.
+    
+    Available models:
+    - full_churn_pipeline_cloud.pkl (original trained model)
+    - full_churn_pipeline_retrained_cloud.pkl (full retrained model)
+    - inc_churn_pipeline_retrained_cloud.pkl (incrementally retrained model)
+    - inc_churn_pipeline_backup_cloud.pkl (backup of previous model)
+    
+    Args:
+        request: Contains model_name of the target model
+        auth: Authentication data from API key (admin role required)
+    
+    Returns:
+        SwitchModelResponse: Status with previous and current model info
     """
     result = switch_active_model(request.model_name)
     
@@ -241,13 +502,25 @@ def switch_model(request: SwitchModelRequest):
 
 
 @app.post("/models/delete", response_model=DeleteModelResponse)
-def delete_model_endpoint(request: DeleteModelRequest, force: bool = False):
+def delete_model_endpoint(
+    request: DeleteModelRequest,
+    force: bool = False,
+    auth: dict = Depends(require_admin)
+):
     """
-    Delete a model (cannot delete active model unless force=true)
+    Delete a model file.
     
-    Example model names:
-    - full_churn_pipeline_backup_cloud.pkl
-    - inc_churn_pipeline_backup_cloud.pkl
+    Cannot delete the active model unless force=true is specified.
+    Protected models cannot be deleted.
+    Admin only endpoint.
+    
+    Args:
+        request: Contains model_name of the model to delete
+        force: If True, allows deletion of active model (use with caution)
+        auth: Authentication data from API key (admin role required)
+    
+    Returns:
+        DeleteModelResponse: Status of deletion operation
     """
     result = delete_model(request.model_name, force=force)
     
@@ -260,20 +533,26 @@ def delete_model_endpoint(request: DeleteModelRequest, force: bool = False):
 @app.get("/models/compare/{model1}/{model2}", response_model=CompareModelsResponse)
 def compare_models_endpoint(
     model1: str = "full_churn_pipeline_cloud.pkl",
-    model2: str = "full_churn_pipeline_retrained_cloud.pkl"
+    model2: str = "full_churn_pipeline_retrained_cloud.pkl",
+    auth: dict = Depends(require_admin)
 ):
     """
-    Compare two models by filename
+    Compare two models by filename.
+    
+    Shows metrics, file sizes, and creation dates for both models.
+    Admin only endpoint.
     
     Default values:
     - model1: full_churn_pipeline_cloud.pkl
     - model2: full_churn_pipeline_retrained_cloud.pkl
     
-    Available models:
-    - full_churn_pipeline_cloud.pkl
-    - full_churn_pipeline_retrained_cloud.pkl
-    - inc_churn_pipeline_retrained_cloud.pkl
-    - inc_churn_pipeline_backup_cloud.pkl
+    Args:
+        model1: First model filename to compare
+        model2: Second model filename to compare
+        auth: Authentication data from API key (admin role required)
+    
+    Returns:
+        CompareModelsResponse: Detailed comparison of both models
     """
     result = compare_models(model1, model2)
     
@@ -285,23 +564,29 @@ def compare_models_endpoint(
 
 @app.get("/models/{model_name}/metrics", response_model=ModelMetricsResponse)
 def get_model_metrics_endpoint(
-    model_name: str = "full_churn_pipeline_retrained_cloud.pkl"
+    model_name: str = "full_churn_pipeline_retrained_cloud.pkl",
+    auth: dict = Depends(require_admin)
 ):
     """
-    Get metrics for a specific model
+    Get metrics for a specific model.
     
-    Default: full_churn_pipeline_retrained_cloud.pkl
+    Returns training metrics (accuracy, precision, recall, F1 score, ROC-AUC).
+    Admin only endpoint.
     
-    Available models:
-    - full_churn_pipeline_cloud.pkl
-    - full_churn_pipeline_retrained_cloud.pkl
-    - inc_churn_pipeline_retrained_cloud.pkl
-    - inc_churn_pipeline_backup_cloud.pkl
+    Args:
+        model_name: Name of the model file
+        auth: Authentication data from API key (admin role required)
+    
+    Returns:
+        ModelMetricsResponse: Model metrics and metadata
     """
     metrics = get_model_metrics(model_name)
     
     if not metrics:
-        raise HTTPException(status_code=404, detail=f"No metrics found for model {model_name}")
+        raise HTTPException(
+            status_code=404,
+            detail=f"No metrics found for model {model_name}"
+        )
     
     return {
         "status": "success",
@@ -309,9 +594,83 @@ def get_model_metrics_endpoint(
         "metrics": metrics
     }
 
+
 @app.post("/test/{model_name}")
-def test_model(model_name: str):
+def test_model(model_name: str, auth: dict = Depends(require_admin)):
+    """
+    Test a model on new labeled data.
+    
+    Evaluates model performance on recently labeled data.
+    Admin only endpoint.
+    
+    Args:
+        model_name: Name of the model to test
+        auth: Authentication data from API key (admin role required)
+    
+    Returns:
+        dict: Evaluation metrics (recall, precision, accuracy, F1, ROC-AUC)
+    """
     result = test_model_on_new_data(model_name)
     if result['status'] == 'error':
         raise HTTPException(status_code=404, detail=result['message'])
     return result
+
+
+# ============================================================================
+# ADMIN KEY MANAGEMENT ENDPOINTS (Admin Only)
+# ============================================================================
+
+@app.post("/admin/keys", response_model=APIKeyCreateResponse)
+def create_new_api_key(
+    role: str,
+    name: str,
+    rate_limit: int = None,
+    auth: dict = Depends(require_admin)
+):
+    """
+    Create a new API key.
+    
+    - **role**: 'user' or 'admin' - determines access level
+    - **name**: Display name for identifying the key
+    - **rate_limit**: Optional custom rate limit (default: 100 for user, 1000 for admin)
+    
+    Returns the new API key. Store it securely!
+    """
+    result = create_api_key(role, name, rate_limit)
+    return result
+
+
+@app.delete("/admin/keys/{api_key}")
+def revoke_existing_api_key(api_key: str, auth: dict = Depends(require_admin)):
+    """
+    Revoke (deactivate) an API key.
+    
+    Revoked keys cannot be used for authentication anymore.
+    Useful for key rotation or when a key is compromised.
+    Admin only endpoint.
+    
+    Args:
+        api_key: The API key to revoke
+        auth: Authentication data from API key (admin role required)
+    
+    Returns:
+        dict: Status of the revocation operation
+    """
+    return revoke_api_key(api_key, auth)
+
+
+@app.get("/admin/keys")
+def list_all_api_keys(auth: dict = Depends(require_admin)):
+    """
+    List all registered API keys.
+    
+    Returns preview of each key (only first and last 8 characters for security).
+    Admin only endpoint.
+    
+    Args:
+        auth: Authentication data from API key (admin role required)
+    
+    Returns:
+        dict: List of key previews with metadata and total count
+    """
+    return list_api_keys(auth)

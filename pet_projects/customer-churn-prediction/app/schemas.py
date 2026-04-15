@@ -1,31 +1,48 @@
+# app/schemas.py
+"""
+Pydantic Schemas for Churn Prediction API
+
+Defines request/response models for all API endpoints including:
+- Prediction endpoints (single and batch)
+- Label management endpoints
+- Retraining endpoints
+- Model management endpoints
+- API key management endpoints
+- Evaluation endpoints
+"""
+
 from pydantic import BaseModel
 from typing import List, Dict, Any, Optional
 
 
+# ============================================================================
+# PREDICTION SCHEMAS
+# ============================================================================
+
 class PredictRequest(BaseModel):
-    customerID : object 
-    gender : object 
-    SeniorCitizen : int
-    Partner : object 
-    Dependents : object 
-    tenure : int
-    PhoneService : object
-    MultipleLines : object
-    InternetService : object
-    OnlineSecurity : object
-    OnlineBackup : object
-    DeviceProtection : object
-    TechSupport : object
-    StreamingTV : object
-    StreamingMovies : object
-    Contract : object
-    PaperlessBilling : object
-    PaymentMethod : object
-    MonthlyCharges : float
-    TotalCharges : object
+    """Request model for single customer prediction"""
+    customerID: object
+    gender: object
+    SeniorCitizen: int
+    Partner: object
+    Dependents: object
+    tenure: int
+    PhoneService: object
+    MultipleLines: object
+    InternetService: object
+    OnlineSecurity: object
+    OnlineBackup: object
+    DeviceProtection: object
+    TechSupport: object
+    StreamingTV: object
+    StreamingMovies: object
+    Contract: object
+    PaperlessBilling: object
+    PaymentMethod: object
+    MonthlyCharges: float
+    TotalCharges: object
 
     class Config:
-        
         json_schema_extra = {
             "example": {
                 "customerID": "7590-VHVEG",
@@ -51,12 +68,15 @@ class PredictRequest(BaseModel):
             }
         }
 
+
 class PredictResponse(BaseModel):
+    """Response model for single prediction"""
     prediction: int
     probability: float
 
 
 class BatchPredictRequest(BaseModel):
+    """Request model for batch predictions"""
     customers: List[PredictRequest]
 
     class Config:
@@ -111,17 +131,21 @@ class BatchPredictRequest(BaseModel):
             }
         }
 
+
 class BatchPredictResponse(BaseModel):
+    """Response model for batch predictions"""
     predictions: List[PredictResponse]
     total: int
 
 
-# Добавьте эти классы в конец файла schemas.py
+# ============================================================================
+# LABEL MANAGEMENT SCHEMAS
+# ============================================================================
 
-# ====================== LABEL SCHEMAS ======================
 class LabelUpdateRequest(BaseModel):
+    """Request model for updating a single customer label"""
     customerID: str
-    Churn: str  # "Yes" или "No"
+    Churn: str  # "Yes" or "No"
     
     class Config:
         json_schema_extra = {
@@ -131,7 +155,9 @@ class LabelUpdateRequest(BaseModel):
             }
         }
 
+
 class LabelUpdateResponse(BaseModel):
+    """Response model for label update operation"""
     status: str
     message: str
     customerID: str
@@ -139,7 +165,9 @@ class LabelUpdateResponse(BaseModel):
     new_label: Optional[str] = None
     timestamp: Optional[str] = None
 
+
 class BatchLabelUpdateRequest(BaseModel):
+    """Request model for batch label updates"""
     updates: List[LabelUpdateRequest]
     
     class Config:
@@ -152,14 +180,18 @@ class BatchLabelUpdateRequest(BaseModel):
             }
         }
 
+
 class BatchLabelUpdateResponse(BaseModel):
+    """Response model for batch label update operation"""
     status: str
     total_updates: int
     successful: int
     failed: int
     results: List[dict]
 
+
 class LabelInfoResponse(BaseModel):
+    """Response model for customer label information"""
     status: str
     customerID: str
     Churn: Optional[str] = None
@@ -168,7 +200,9 @@ class LabelInfoResponse(BaseModel):
     timestamp: Optional[str] = None
     label_timestamp: Optional[str] = None
 
+
 class LabelStatisticsResponse(BaseModel):
+    """Response model for labeling statistics"""
     status: str
     total_records: int
     labeled_records: int
@@ -178,8 +212,9 @@ class LabelStatisticsResponse(BaseModel):
     labeling_progress: str
 
 
-# ====================== RETRAINING SCHEMAS ======================
-
+# ============================================================================
+# RETRAINING SCHEMAS
+# ============================================================================
 
 class RetrainResponse(BaseModel):
     """Response schema for retraining endpoints"""
@@ -208,7 +243,9 @@ class RetrainStatusResponse(BaseModel):
     can_retrain: Optional[bool] = None
 
 
-# ====================== MODEL MANAGEMENT SCHEMAS ======================
+# ============================================================================
+# MODEL MANAGEMENT SCHEMAS
+# ============================================================================
 
 class ModelInfo(BaseModel):
     """Information about a single model"""
@@ -354,7 +391,142 @@ class ModelMetricsResponse(BaseModel):
         }
 
 
-# ====================== EVALUATION SCHEMAS ======================
+# ============================================================================
+# API KEY MANAGEMENT SCHEMAS
+# ============================================================================
+
+class APIKeyCreateRequest(BaseModel):
+    """Request model for creating a new API key"""
+    role: str  # "user" or "admin"
+    name: str  # Display name for identifying the key
+    rate_limit: Optional[int] = None  # Custom rate limit (default: 100 for user, 1000 for admin)
+    
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "role": "user",
+                "name": "production_client",
+                "rate_limit": 500
+            }
+        }
+
+
+class APIKeyCreateResponse(BaseModel):
+    """Response model for API key creation"""
+    status: str
+    api_key: str  # The actual API key (store this securely!)
+    name: str
+    role: str
+    rate_limit: int
+    created_at: str
+    message: str
+    
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "status": "success",
+                "api_key": "a1b2c3d4e5f67890abcdef1234567890",
+                "name": "production_client",
+                "role": "user",
+                "rate_limit": 500,
+                "created_at": "2026-04-15T10:30:00",
+                "message": "API key created successfully"
+            }
+        }
+
+
+class APIKeyInfo(BaseModel):
+    """Information about an API key (without exposing the full key)"""
+    key_preview: str  # First 8 and last 8 characters only
+    name: str
+    role: str
+    rate_limit: int
+    created_at: str
+    is_active: bool
+
+
+class APIKeyListResponse(BaseModel):
+    """Response model for listing API keys"""
+    status: str
+    keys: List[APIKeyInfo]
+    total: int
+    
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "status": "success",
+                "keys": [
+                    {
+                        "key_preview": "user_7f3e...f0a1b",
+                        "name": "default_user",
+                        "role": "user",
+                        "rate_limit": 100,
+                        "created_at": "2026-04-15T10:00:00",
+                        "is_active": True
+                    },
+                    {
+                        "key_preview": "admin_9a8b...5c4d3",
+                        "name": "admin",
+                        "role": "admin",
+                        "rate_limit": 1000,
+                        "created_at": "2026-04-15T10:00:00",
+                        "is_active": True
+                    }
+                ],
+                "total": 2
+            }
+        }
+
+
+class APIKeyRevokeRequest(BaseModel):
+    """Request model for revoking an API key"""
+    api_key: str
+    
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "api_key": "user_7f3e8a2b1c5d9e4f6a8b2c4d6e8f0a1b"
+            }
+        }
+
+
+class APIKeyRevokeResponse(BaseModel):
+    """Response model for API key revocation"""
+    status: str
+    message: str
+    api_key: str
+    
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "status": "success",
+                "message": "API key user_7f3e... revoked",
+                "api_key": "user_7f3e8a2b1c5d9e4f6a8b2c4d6e8f0a1b"
+            }
+        }
+
+
+class RateLimitStatusResponse(BaseModel):
+    """Response model for rate limit status"""
+    current_requests: int
+    rate_limit: int
+    remaining: int
+    reset_in_seconds: int
+    
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "current_requests": 25,
+                "rate_limit": 100,
+                "remaining": 75,
+                "reset_in_seconds": 45
+            }
+        }
+
+
+# ============================================================================
+# EVALUATION SCHEMAS
+# ============================================================================
 
 class EvaluationMetrics(BaseModel):
     """Metrics from model evaluation"""
@@ -391,3 +563,178 @@ class ComparisonResponse(BaseModel):
     best_model: str
     best_recall: float
     timestamp: str
+
+
+# ============================================================================
+# AUTHENTICATION SCHEMAS
+# ============================================================================
+
+class AuthErrorResponse(BaseModel):
+    """Response model for authentication errors"""
+    detail: str
+    
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "detail": "Missing API Key. Please provide X-API-Key header"
+            }
+        }
+
+
+class ForbiddenResponse(BaseModel):
+    """Response model for forbidden access"""
+    detail: str
+    
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "detail": "Admin privileges required for this endpoint"
+            }
+        }
+
+
+class RateLimitErrorResponse(BaseModel):
+    """Response model for rate limit exceeded"""
+    detail: str
+    
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "detail": "Rate limit exceeded. Maximum 100 requests per minute."
+            }
+        }
+
+
+# ============================================================================
+# API KEY MANAGEMENT SCHEMAS
+# ============================================================================
+
+class APIKeyCreateRequest(BaseModel):
+    """Request model for creating a new API key"""
+    role: str  # "user" or "admin"
+    name: str  # Display name for identifying the key
+    rate_limit: Optional[int] = None  # Custom rate limit (default: 100 for user, 1000 for admin)
+    
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "role": "user",
+                "name": "production_client",
+                "rate_limit": 500
+            }
+        }
+
+
+class APIKeyCreateResponse(BaseModel):
+    """Response model for API key creation"""
+    status: str
+    api_key: str  # The actual API key (store this securely!)
+    key_preview: str
+    name: str
+    role: str
+    rate_limit: int
+    created_at: str
+    message: str
+    
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "status": "success",
+                "api_key": "a1b2c3d4e5f67890abcdef1234567890",
+                "key_preview": "a1b2c3d4...34567890",
+                "name": "production_client",
+                "role": "user",
+                "rate_limit": 500,
+                "created_at": "2026-04-15T10:30:00",
+                "message": "API key created successfully for 'production_client' with role 'user'"
+            }
+        }
+
+
+class APIKeyInfo(BaseModel):
+    """Information about an API key (without exposing the full key)"""
+    key_preview: str  # First 8 and last 8 characters only
+    name: str
+    role: str
+    rate_limit: int
+    created_at: str
+    is_active: bool
+
+
+class APIKeyListResponse(BaseModel):
+    """Response model for listing API keys"""
+    status: str
+    keys: List[APIKeyInfo]
+    total: int
+    
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "status": "success",
+                "keys": [
+                    {
+                        "key_preview": "user_7f3e...f0a1b",
+                        "name": "default_user",
+                        "role": "user",
+                        "rate_limit": 100,
+                        "created_at": "2026-04-15T10:00:00",
+                        "is_active": True
+                    },
+                    {
+                        "key_preview": "admin_9a8b...5c4d3",
+                        "name": "admin",
+                        "role": "admin",
+                        "rate_limit": 1000,
+                        "created_at": "2026-04-15T10:00:00",
+                        "is_active": True
+                    }
+                ],
+                "total": 2
+            }
+        }
+
+
+class APIKeyRevokeRequest(BaseModel):
+    """Request model for revoking an API key"""
+    api_key: str
+    
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "api_key": "user_7f3e8a2b1c5d9e4f6a8b2c4d6e8f0a1b"
+            }
+        }
+
+
+class APIKeyRevokeResponse(BaseModel):
+    """Response model for API key revocation"""
+    status: str
+    message: str
+    api_key: str
+    
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "status": "success",
+                "message": "API key user_7f3e... revoked",
+                "api_key": "user_7f3e8a2b1c5d9e4f6a8b2c4d6e8f0a1b"
+            }
+        }
+
+
+class RateLimitStatusResponse(BaseModel):
+    """Response model for rate limit status"""
+    current_requests: int
+    rate_limit: int
+    remaining: int
+    reset_in_seconds: int
+    
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "current_requests": 25,
+                "rate_limit": 100,
+                "remaining": 75,
+                "reset_in_seconds": 45
+            }
+        }

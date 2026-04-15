@@ -24,8 +24,8 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 
 def retrain_on_new_data():
     """
-    Retrains the model on newly labeled data from data/new_data/new_data.csv
-    Saves the updated model to models/full_churn_pipeline_retrained.pkl
+    Incrementally retrains the model on newly labeled data.
+    Uses CatBoost's init_model with proper feature alignment.
     """
     
     # File paths
@@ -79,15 +79,11 @@ def retrain_on_new_data():
         }
     
     # 7. Create backup of old model
-    import shutil
     if model_path.exists():
         shutil.copy(model_path, backup_path)
         print(f"Backup saved to {backup_path}")
     
     # 8. Extract CatBoost base model from pipeline
-    # The pipeline consists of transformers and a model at the end
-    # Need to find the CatBoost model inside the pipeline
-    
     catboost_model = None
     model_index = None
     
@@ -100,7 +96,6 @@ def retrain_on_new_data():
     
     # If not found by name, take the last step (usually the model)
     if catboost_model is None:
-        # Take the last step of the pipeline as the model
         last_step_name = list(old_model.named_steps.keys())[-1]
         catboost_model = old_model.named_steps[last_step_name]
         model_index = len(old_model.named_steps) - 1
@@ -113,51 +108,74 @@ def retrain_on_new_data():
         }
     
     # 9. Apply all transformations to new data (excluding the final model)
-    # Create a temporary pipeline without the model
     temp_pipeline = Pipeline(steps=list(old_model.named_steps.items())[:model_index])
     
     try:
         # Transform new data
         X_transformed = temp_pipeline.transform(X_new)
-        print(f"Transformed {len(X_transformed)} samples for retraining")
         
-        # 10. Retrain the model
-        # For CatBoost, use fit with init_model to continue training
+        # CRITICAL FIX: Ensure X_transformed has column names
+        # CatBoost needs feature names to match the original model
+        if not hasattr(X_transformed, 'columns'):
+            # Get feature names from the original model
+            if hasattr(catboost_model, 'feature_names_'):
+                expected_features = catboost_model.feature_names_
+                print(f"Expected {len(expected_features)} features from model")
+                
+                # Convert to DataFrame with proper column names
+                X_transformed = pd.DataFrame(
+                    X_transformed,
+                    columns=expected_features[:X_transformed.shape[1]]
+                )
+                print(f"Converted to DataFrame with {X_transformed.shape[1]} columns")
+        
+        print(f"Transformed {len(X_transformed)} samples for retraining")
+        print(f"Feature shape: {X_transformed.shape}")
+        
+        # 10. Get original model parameters
+        model_params = catboost_model.get_params()
+        
+        # 11. Continue training with init_model
         print("Starting incremental training...")
         
-        # Get current model parameters
-        current_params = catboost_model.get_params()
+        # Create a new model with same parameters
+        # Use CatBoost's ability to continue training via init_model
+        continued_model = CatBoostClassifier(
+            iterations=model_params.get('iterations', 500),
+            learning_rate=model_params.get('learning_rate', 0.03),
+            depth=model_params.get('depth', 4),
+            l2_leaf_reg=model_params.get('l2_leaf_reg', 50),
+            min_data_in_leaf=model_params.get('min_data_in_leaf', 1),
+            random_strength=model_params.get('random_strength', 5),
+            class_weights=model_params.get('class_weights', [1, 5]),
+            random_state=42,
+            verbose=50
+        )
         
-        # Important: to continue training, need to pass init_model
-        # and set warm_start=True or use fit with init_model
-        catboost_model.fit(
-            X_transformed, 
+        # CRITICAL: Use fit with init_model to continue training
+        # This adds new trees without retraining existing ones
+        continued_model.fit(
+            X_transformed,
             y_new,
-            init_model=catboost_model,  # Continue training from current model
+            init_model=catboost_model,  # Continue from existing model
             verbose=50
         )
         
         print(f"Model retrained successfully on {len(X_new)} samples")
         
-        # 11. Update pipeline with the new model
+        # 12. Update pipeline with the continued model
         new_steps = list(old_model.named_steps.items())
-        new_steps[model_index] = (new_steps[model_index][0], catboost_model)
+        new_steps[model_index] = (new_steps[model_index][0], continued_model)
         new_pipeline = Pipeline(steps=new_steps)
         
-        # 12. Save the updated model
+        # 13. Save the updated model
         with open(retrained_model_path, 'wb') as f:
             cloudpickle.dump(new_pipeline, f)
         print(f"Retrained model saved to {retrained_model_path}")
         
-        # 13. Update config paths (optional)
-        # Can replace old model with new one
-        # shutil.copy(retrained_model_path, model_path)
-        
         # 14. Get retraining statistics
-        
-        # Make predictions on the same data for evaluation
-        y_pred = catboost_model.predict(X_transformed)
-        y_proba = catboost_model.predict_proba(X_transformed)[:, 1]
+        y_pred = continued_model.predict(X_transformed)
+        y_proba = continued_model.predict_proba(X_transformed)[:, 1]
         
         metrics = {
             "accuracy": float(accuracy_score(y_new, y_pred)),
@@ -168,7 +186,7 @@ def retrain_on_new_data():
         
         return {
             "status": "success",
-            "message": f"Model retrained on {len(X_new)} labeled samples",
+            "message": f"Model incrementally retrained on {len(X_new)} labeled samples",
             "samples_used": len(X_new),
             "churn_yes": int((y_new == 1).sum()),
             "churn_no": int((y_new == 0).sum()),
@@ -183,9 +201,6 @@ def retrain_on_new_data():
             "message": f"Retraining failed: {str(e)}",
             "samples_attempted": len(X_new)
         }
-
-
-
 
 def full_retrain_on_combined_data():
     """
