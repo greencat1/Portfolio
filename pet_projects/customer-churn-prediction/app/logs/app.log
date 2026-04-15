@@ -56,3 +56,5 @@
 2026-04-15 18:28:41,231 - churn_api - INFO - Updated existing record for customerID: TEST-001
 2026-04-15 18:28:41,233 - churn_api - INFO - Prediction successful for customer TEST-001
 2026-04-15 18:28:41,264 - churn_api - WARNING - Rate limit exceeded for API key test_key...
+2026-04-15 18:53:06,734 - churn_api - INFO - Label statistics retrieved: 10/13 (76.9%)
+2026-04-15 18:53:09,346 - churn_api - INFO - Listed 4 models
