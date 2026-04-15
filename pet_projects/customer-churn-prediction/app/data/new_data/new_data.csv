@@ -11,3 +11,4 @@ customerID,gender,SeniorCitizen,Partner,Dependents,tenure,PhoneService,MultipleL
 55571daadas5-GNVDE,Male,0,No,No,34,Yes,No,DSL,Yes,No,Yes,No,No,No,One year,No,Mailed check,56.95,1889.5,0,0.1524636966616004,No,2026-04-14T07:04:08.988783,2026-04-14T07:06:05.676226
 7590-VHVEG,Female,0,Yes,No,1,No,No phone service,DSL,No,Yes,No,No,No,No,Month-to-month,Yes,Electronic check,29.85,29.85,1,0.935113044215042,Yes,2026-04-15T09:56:27.057517,2026-04-15T09:57:37.782726
 5575-GNVDE,Male,0,No,No,34,Yes,No,DSL,Yes,No,Yes,No,No,No,One year,No,Mailed check,56.95,1889.5,0,0.1524636966616004,No,2026-04-15T09:56:27.081680,2026-04-15T09:57:37.783727
+TEST-001,Male,0,Yes,No,12,Yes,No,DSL,No,Yes,No,No,No,No,Month-to-month,Yes,Electronic check,29.85,358.20,1,0.6440965558094731,,2026-04-15T11:28:41.214858,
