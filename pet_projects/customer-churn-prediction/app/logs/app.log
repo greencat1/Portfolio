@@ -58,3 +58,116 @@
 2026-04-15 18:28:41,264 - churn_api - WARNING - Rate limit exceeded for API key test_key...
 2026-04-15 18:53:06,734 - churn_api - INFO - Label statistics retrieved: 10/13 (76.9%)
 2026-04-15 18:53:09,346 - churn_api - INFO - Listed 4 models
+2026-04-16 16:42:00,189 - churn_api - INFO - Health check requested
+2026-04-16 16:42:23,926 - churn_api - INFO - Loading model from app/models/full_churn_pipeline_cloud.pkl
+2026-04-16 16:42:23,957 - churn_api - INFO - Model loaded successfully!
+2026-04-16 16:42:24,034 - churn_api - ERROR - Prediction failed for customer 7590-VHVEG: no such column: customer_id
+Traceback (most recent call last):
+  File "C:\Users\isazo\OneDrive\Рабочий стол\courses\partfolio\pet_projects\customer-churn-prediction\app\main.py", line 174, in predict
+    result = make_prediction(data)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\isazo\OneDrive\Рабочий стол\courses\partfolio\pet_projects\customer-churn-prediction\app\scripts\predict.py", line 26, in make_prediction
+    existing = cursor.execute(
+               ^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: customer_id
+2026-04-16 16:52:56,835 - churn_api - INFO - Health check requested
+2026-04-16 16:53:40,297 - churn_api - INFO - Loading model from app/models/full_churn_pipeline_cloud.pkl
+2026-04-16 16:53:40,300 - churn_api - INFO - Model loaded successfully!
+2026-04-16 16:53:40,328 - churn_api - ERROR - Prediction failed for customer 7590-VHVEG: table new_data has no column named created_at
+Traceback (most recent call last):
+  File "C:\Users\isazo\OneDrive\Рабочий стол\courses\partfolio\pet_projects\customer-churn-prediction\app\main.py", line 174, in predict
+    result = make_prediction(data)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\isazo\OneDrive\Рабочий стол\courses\partfolio\pet_projects\customer-churn-prediction\app\scripts\predict.py", line 58, in make_prediction
+    cursor.execute('''
+sqlite3.OperationalError: table new_data has no column named created_at
+2026-04-16 16:58:04,637 - churn_api - INFO - Loading model from app/models/full_churn_pipeline_cloud.pkl
+2026-04-16 16:58:04,639 - churn_api - INFO - Model loaded successfully!
+2026-04-16 16:58:04,663 - churn_api - ERROR - Prediction failed for customer 7590-VHVEG: table new_data has no column named created_at
+Traceback (most recent call last):
+  File "C:\Users\isazo\OneDrive\Рабочий стол\courses\partfolio\pet_projects\customer-churn-prediction\app\main.py", line 174, in predict
+    result = make_prediction(data)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\isazo\OneDrive\Рабочий стол\courses\partfolio\pet_projects\customer-churn-prediction\app\scripts\predict.py", line 58, in make_prediction
+    cursor.execute('''
+sqlite3.OperationalError: table new_data has no column named created_at
+2026-04-16 16:59:12,271 - churn_api - INFO - Loading model from app/models/full_churn_pipeline_cloud.pkl
+2026-04-16 16:59:12,274 - churn_api - INFO - Model loaded successfully!
+2026-04-16 16:59:12,296 - churn_api - ERROR - Prediction failed for customer 7590-VHVEG: table new_data has no column named created_at
+Traceback (most recent call last):
+  File "C:\Users\isazo\OneDrive\Рабочий стол\courses\partfolio\pet_projects\customer-churn-prediction\app\main.py", line 174, in predict
+    result = make_prediction(data)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\isazo\OneDrive\Рабочий стол\courses\partfolio\pet_projects\customer-churn-prediction\app\scripts\predict.py", line 58, in make_prediction
+    cursor.execute('''
+sqlite3.OperationalError: table new_data has no column named created_at
+2026-04-16 17:05:54,563 - churn_api - INFO - Loading model from app/models/full_churn_pipeline_cloud.pkl
+2026-04-16 17:05:54,565 - churn_api - INFO - Model loaded successfully!
+2026-04-16 17:05:54,595 - churn_api - INFO - Added new record for customerID: 7590-VHVEG
+2026-04-16 17:05:54,595 - churn_api - INFO - Prediction successful for customer 7590-VHVEG
+2026-04-16 17:06:04,920 - churn_api - INFO - Added new record for customerID: 7590-VHV31EG
+2026-04-16 17:06:04,931 - churn_api - INFO - Prediction successful for customer 7590-VHV31EG
+2026-04-16 17:06:10,540 - churn_api - INFO - Added new record for customerID: 7590-VHV31zaqEG
+2026-04-16 17:06:10,548 - churn_api - INFO - Prediction successful for customer 7590-VHV31zaqEG
+2026-04-16 17:06:16,656 - churn_api - INFO - Updated existing record for customerID: 7590-VHV31zaqEG
+2026-04-16 17:06:16,664 - churn_api - INFO - Prediction successful for customer 7590-VHV31zaqEG
+2026-04-16 17:06:20,903 - churn_api - INFO - Updated existing record for customerID: 7590-VHV31zaqEG
+2026-04-16 17:06:20,912 - churn_api - INFO - Prediction successful for customer 7590-VHV31zaqEG
+2026-04-16 17:06:28,750 - churn_api - INFO - Added new record for customerID: 7590-VHV31za555qEG
+2026-04-16 17:06:28,754 - churn_api - INFO - Prediction successful for customer 7590-VHV31za555qEG
+2026-04-16 17:06:38,947 - churn_api - INFO - Updated existing record for customerID: 7590-VHV31za555qEG
+2026-04-16 17:06:38,955 - churn_api - INFO - Prediction successful for customer 7590-VHV31za555qEG
+2026-04-16 17:06:57,843 - churn_api - ERROR - Batch prediction failed: no such column: customer_id
+Traceback (most recent call last):
+  File "C:\Users\isazo\OneDrive\Рабочий стол\courses\partfolio\pet_projects\customer-churn-prediction\app\main.py", line 203, in predict_batch_endpoint
+    result = predict_batch(request.customers)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\isazo\OneDrive\Рабочий стол\courses\partfolio\pet_projects\customer-churn-prediction\app\scripts\predict_batch.py", line 33, in predict_batch
+    existing = cursor.execute(
+               ^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: customer_id
+2026-04-16 17:07:47,448 - churn_api - INFO - Loading model from app/models/full_churn_pipeline_cloud.pkl
+2026-04-16 17:07:47,450 - churn_api - INFO - Model loaded successfully!
+2026-04-16 17:07:47,511 - churn_api - INFO - Batch prediction completed: 2 customers
+2026-04-16 17:08:01,635 - churn_api - INFO - Label statistics retrieved: 0/10 (0.0%)
+2026-04-16 17:08:21,548 - churn_api - INFO - Batch prediction completed: 2 customers
+2026-04-16 17:08:32,183 - churn_api - INFO - Batch prediction completed: 2 customers
+2026-04-16 17:08:37,006 - churn_api - INFO - Label statistics retrieved: 0/12 (0.0%)
+2026-04-16 18:05:22,878 - churn_api - INFO - Health check requested
+2026-04-16 18:05:30,141 - churn_api - INFO - Loading model from app/models/full_churn_pipeline_cloud.pkl
+2026-04-16 18:05:30,145 - churn_api - INFO - Model loaded successfully!
+2026-04-16 18:05:30,178 - churn_api - INFO - Added new record for customerID: 7590-VHVEG
+2026-04-16 18:05:30,178 - churn_api - INFO - Prediction successful for customer 7590-VHVEG
+2026-04-16 18:05:37,981 - churn_api - INFO - Batch prediction completed: 2 customers
+2026-04-16 18:05:53,585 - churn_api - INFO - Batch prediction completed: 2 customers
+2026-04-16 18:05:58,906 - churn_api - INFO - Label statistics retrieved: 200/204 (98.0%)
+2026-04-16 18:06:21,009 - churn_api - ERROR - Failed to get unlabeled customers: Execution failed on sql '
+            SELECT customer_id, prediction, probability, created_at
+            FROM new_data WHERE churn_label IS NULL
+        ': no such column: customer_id
+Traceback (most recent call last):
+  File "C:\Users\isazo\anaconda3\Lib\site-packages\pandas\io\sql.py", line 2674, in execute
+    cur.execute(sql, *args)
+sqlite3.OperationalError: no such column: customer_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\isazo\OneDrive\Рабочий стол\courses\partfolio\pet_projects\customer-churn-prediction\app\main.py", line 254, in get_unlabeled_customers
+    unlabeled_df = get_unlabeled_data()
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\isazo\OneDrive\Рабочий стол\courses\partfolio\pet_projects\customer-churn-prediction\app\scripts\put_lbl.py", line 141, in get_unlabeled_data
+    df = pd.read_sql_query('''
+         ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\isazo\anaconda3\Lib\site-packages\pandas\io\sql.py", line 526, in read_sql_query
+    return pandas_sql.read_query(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\isazo\anaconda3\Lib\site-packages\pandas\io\sql.py", line 2738, in read_query
+    cursor = self.execute(sql, params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\isazo\anaconda3\Lib\site-packages\pandas\io\sql.py", line 2686, in execute
+    raise ex from exc
+pandas.errors.DatabaseError: Execution failed on sql '
+            SELECT customer_id, prediction, probability, created_at
+            FROM new_data WHERE churn_label IS NULL
+        ': no such column: customer_id

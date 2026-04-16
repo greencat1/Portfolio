@@ -1,89 +1,95 @@
+# app/scripts/predict_batch.py
 import pandas as pd
-import numpy as np
-from pathlib import Path
-from datetime import datetime
 from typing import List
 from app.scripts.model import load_model
+from app.core.database import get_db
 from app.schemas import PredictRequest
 from app.utils.logger import logger
 
-
-# ====================== BATCH PREDICTION ======================
 def predict_batch(data_list: List[PredictRequest]):
-    """
-    Batch prediction function.
-    - Makes fast batch prediction
-    - Saves each record to CSV (updates if customerID already exists)
-    """
+    """Batch prediction with SQLite storage"""
     if not data_list:
         return {"predictions": [], "total": 0}
-
+    
     model = load_model()
     
-    # Convert list of PredictRequest to DataFrame for batch inference
+    # Convert to DataFrame for batch inference
     input_list = [item.dict() for item in data_list]
     input_df = pd.DataFrame(input_list)
     
-    # Batch prediction (efficient)
+    # Batch prediction
     predictions = model.predict(input_df)
     probabilities = model.predict_proba(input_df)[:, 1]
-
-    # Save each prediction to CSV
-    for i, item in enumerate(data_list):
-        _save_single_record(item, predictions[i], probabilities[i])
-
+    
+    # Save each to SQLite
+    with get_db() as conn:
+        cursor = conn.cursor()
+        
+        for i, item in enumerate(data_list):
+            input_dict = item.dict()
+            pred = int(predictions[i])
+            prob = float(probabilities[i])
+            
+            existing = cursor.execute(
+                "SELECT customerID FROM new_data WHERE customerID = ?",
+                (input_dict['customerID'],)
+            ).fetchone()
+            
+            if existing:
+                cursor.execute('''
+                    UPDATE new_data SET
+                        gender = ?, SeniorCitizen = ?, Partner = ?, Dependents = ?,
+                        tenure = ?, PhoneService = ?, MultipleLines = ?, InternetService = ?,
+                        OnlineSecurity = ?, OnlineBackup = ?, DeviceProtection = ?,
+                        TechSupport = ?, StreamingTV = ?, StreamingMovies = ?,
+                        Contract = ?, PaperlessBilling = ?, PaymentMethod = ?,
+                        MonthlyCharges = ?, TotalCharges = ?,
+                        prediction = ?, probability = ?, created_at = CURRENT_TIMESTAMP
+                    WHERE customerID = ?
+                ''', (
+                    input_dict['gender'], input_dict['SeniorCitizen'], input_dict['Partner'],
+                    input_dict['Dependents'], input_dict['tenure'], input_dict['PhoneService'],
+                    input_dict['MultipleLines'], input_dict['InternetService'],
+                    input_dict['OnlineSecurity'], input_dict['OnlineBackup'],
+                    input_dict['DeviceProtection'], input_dict['TechSupport'],
+                    input_dict['StreamingTV'], input_dict['StreamingMovies'],
+                    input_dict['Contract'], input_dict['PaperlessBilling'],
+                    input_dict['PaymentMethod'], input_dict['MonthlyCharges'],
+                    float(input_dict['TotalCharges']) if input_dict['TotalCharges'] else 0,
+                    pred, prob, input_dict['customerID']
+                ))
+            else:
+                cursor.execute('''
+                    INSERT INTO new_data (
+                        customerID, gender, SeniorCitizen, Partner, Dependents, tenure,
+                        PhoneService, MultipleLines, InternetService, OnlineSecurity,
+                        OnlineBackup, DeviceProtection, TechSupport, StreamingTV,
+                        StreamingMovies, Contract, PaperlessBilling, PaymentMethod,
+                        MonthlyCharges, TotalCharges, prediction, probability, created_at
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+                ''', (
+                    input_dict['customerID'], input_dict['gender'], input_dict['SeniorCitizen'],
+                    input_dict['Partner'], input_dict['Dependents'], input_dict['tenure'],
+                    input_dict['PhoneService'], input_dict['MultipleLines'],
+                    input_dict['InternetService'], input_dict['OnlineSecurity'],
+                    input_dict['OnlineBackup'], input_dict['DeviceProtection'],
+                    input_dict['TechSupport'], input_dict['StreamingTV'],
+                    input_dict['StreamingMovies'], input_dict['Contract'],
+                    input_dict['PaperlessBilling'], input_dict['PaymentMethod'],
+                    input_dict['MonthlyCharges'],
+                    float(input_dict['TotalCharges']) if input_dict['TotalCharges'] else 0,
+                    pred, prob
+                ))
+        
+        conn.commit()
+    
     # Prepare response
     results = [
-        {
-            "prediction": int(pred),
-            "probability": float(prob)
-        }
+        {"prediction": int(pred), "probability": float(prob)}
         for pred, prob in zip(predictions, probabilities)
     ]
-
+    
     return {
         "predictions": results,
         "total": len(results)
     }
-
-
-# ====================== INTERNAL SAVE FUNCTION ======================
-def _save_single_record(data, prediction: int, probability: float):
-    """
-    Saves or updates a single record in CSV by customerID
-    """
-    file_path = Path('app/data/new_data/new_data.csv')
-    
-    # Prepare record with extra columns
-    input_dict = data.dict() if hasattr(data, 'dict') else dict(data)
-    input_dict.update({
-        'prediction': int(prediction),
-        'probability': float(probability),
-        'Churn': np.nan,                    # true label is unknown for now
-        'timestamp': datetime.utcnow().isoformat()
-    })
-    
-    new_row = pd.DataFrame([input_dict])
-
-    if not file_path.exists():
-        # First time - create file
-        new_row.to_csv(file_path, index=False)
-        logger.info(f"File created. Added customerID: {input_dict.get('customerID')}")
-    else:
-        # Read existing file
-        df = pd.read_csv(file_path)
-        
-        customer_id_str = str(input_dict.get('customerID'))
-        
-        if customer_id_str in df['customerID'].astype(str).values:
-            # Update existing record
-            df = df[df['customerID'].astype(str) != customer_id_str]
-            logger.info(f"Updated existing record for customerID: {customer_id_str}")
-        
-        else:
-            logger.info(f"Added new record for customerID: {customer_id_str}")
-            
-        
-        # Append new record
-        df = pd.concat([df, new_row], ignore_index=True)
-        df.to_csv(file_path, index=False)

@@ -26,17 +26,6 @@ class Settings:
         "app/models/full_churn_pipeline_cloud.pkl"
     )
     
-    # API Keys (for authentication)
-    # In production, generate secure random keys
-    user_api_key: str = os.getenv(
-        "USER_API_KEY",
-        "user_7f3e8a2b1c5d9e4f6a8b2c4d6e8f0a1b"
-    )
-    
-    admin_api_key: str = os.getenv(
-        "ADMIN_API_KEY",
-        "admin_9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d3"
-    )
     
     # Rate limiting settings
     rate_limit_user: int = int(os.getenv("RATE_LIMIT_USER", "100"))

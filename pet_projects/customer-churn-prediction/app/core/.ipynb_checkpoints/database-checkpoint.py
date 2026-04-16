@@ -84,12 +84,6 @@ from app.scripts.evaluate_model import (
 # Import logger
 from app.utils.logger import logger
 
-# Import DB
-import app.core.database
-from app.core.database import init_db
-from app.core.key_input import input_and_save_keys, refresh_key_cache
-
-
 # Initialize FastAPI application
 app = FastAPI(
     title="Churn Prediction API",
@@ -97,33 +91,6 @@ app = FastAPI(
     version="2.0.0"
 )
 
-# Create keys and write them to the database
-@app.on_event("startup")
-def startup_event():
-    """Initialize database, prompt for keys, refresh cache on startup"""
-    print("\n" + "="*60)
-    print(" STARTING CHURN PREDICTION API")
-    print("="*60)
-    
-    # 1. Initialize database tables
-    from app.core.database import init_db, get_db
-    init_db()
-    
-    # 2. Prompt for API keys (will block until entered)
-    from app.core.key_input import input_and_save_keys
-    try:
-        input_and_save_keys()
-    except ValueError as e:
-        print(f"❌ Startup failed: {e}")
-        raise
-    
-    # 3. Refresh auth cache
-    from app.auth import refresh_key_cache
-    refresh_key_cache()
-    
-    print("="*60)
-    print(" API is ready! Press Ctrl+C to stop")
-    print("="*60 + "\n")
 
 # ============================================================================
 # PUBLIC ENDPOINTS (No Authentication Required)

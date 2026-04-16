@@ -1,26 +1,13 @@
+# app/scripts/put_lbl.py
 import pandas as pd
 import numpy as np
-from pathlib import Path
 from datetime import datetime
-from app.schemas import LabelUpdateRequest
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any
+from app.core.database import get_db
 from app.utils.logger import logger
 
-# ====================== MAIN FUNCTION ======================
 def update_label(customer_id: str, churn_label: str) -> Dict[str, Any]:
-    """
-    Update or add Churn label for a specific customer by ID.
-    
-    Args:
-        customer_id: Customer ID to update
-        churn_label: True label ("Yes" = churn, "No" = no churn)
-    
-    Returns:
-        Dictionary with status and details of the operation
-    """
-    file_path = Path('app/data/new_data/new_data.csv')
-    
-    # Validate input
+    """Update or add Churn label for a specific customer"""
     if churn_label not in ["Yes", "No"]:
         return {
             "status": "error",
@@ -28,105 +15,88 @@ def update_label(customer_id: str, churn_label: str) -> Dict[str, Any]:
             "customerID": customer_id
         }
     
-    # Check if file exists
-    if not file_path.exists():
-        return {
-            "status": "error",
-            "message": f"Data file not found at {file_path}",
-            "customerID": customer_id
-        }
-    
-    # Read existing data
-    df = pd.read_csv(file_path)
-    
-    # Check if customer exists
-    customer_id_str = str(customer_id)
-    mask = df['customerID'].astype(str) == customer_id_str
-    
-    if not mask.any():
-        return {
-            "status": "error",
-            "message": f"Customer ID '{customer_id}' not found in the database",
-            "customerID": customer_id,
-            "available_customers": df['customerID'].astype(str).tolist()[:10]
-        }
-    
-    # Update the label
-    old_label = df.loc[mask, 'Churn'].iloc[0]
-    df.loc[mask, 'Churn'] = churn_label
-    df.loc[mask, 'label_timestamp'] = datetime.utcnow().isoformat()
-    
-    # Save back to CSV
-    df.to_csv(file_path, index=False)
+    with get_db() as conn:
+        cursor = conn.cursor()
+        
+        # Check if customer exists
+        row = cursor.execute(
+            "SELECT churn_label FROM new_data WHERE customer_id = ?",
+            (customer_id,)
+        ).fetchone()
+        
+        if not row:
+            return {
+                "status": "error",
+                "message": f"Customer ID '{customer_id}' not found in database",
+                "customerID": customer_id
+            }
+        
+        old_label = row['churn_label']
+        
+        # Update label
+        cursor.execute('''
+            UPDATE new_data 
+            SET churn_label = ?, label_timestamp = CURRENT_TIMESTAMP
+            WHERE customer_id = ?
+        ''', (churn_label, customer_id))
+        
+        conn.commit()
     
     return {
         "status": "success",
         "message": f"Label updated for customer {customer_id}",
         "customerID": customer_id,
-        "old_label": old_label if pd.notna(old_label) else None,
+        "old_label": old_label,
         "new_label": churn_label,
-        "timestamp": datetime.utcnow().isoformat()
+        "timestamp": datetime.now().isoformat()
     }
 
-
-# ====================== BATCH UPDATE FUNCTION ======================
-def batch_update_labels(updates: List[LabelUpdateRequest]) -> Dict[str, Any]:
-    """
-    Update multiple Churn labels at once.
-    
-    Args:
-        updates: List of LabelUpdateRequest objects
-    
-    Returns:
-        Dictionary with summary of updates
-    """
-    file_path = Path('app/data/new_data/new_data.csv')
-    
-    if not file_path.exists():
-        return {
-            "status": "error",
-            "message": f"Data file not found at {file_path}",
-            "successful_updates": [],
-            "failed_updates": []
-        }
-    
-    df = pd.read_csv(file_path)
+def batch_update_labels(updates: List) -> Dict[str, Any]:
+    """Update multiple Churn labels at once"""
     results = []
     
-    for update in updates:
-        customer_id = update.customerID
-        churn_label = update.Churn
+    with get_db() as conn:
+        cursor = conn.cursor()
         
-        # Validate label
-        if churn_label not in ["Yes", "No"]:
-            results.append({
-                "customerID": customer_id,
-                "status": "failed",
-                "message": "Churn label must be 'Yes' or 'No'"
-            })
-            continue
+        for update in updates:
+            customer_id = update.customerID
+            churn_label = update.Churn
+            
+            if churn_label not in ["Yes", "No"]:
+                results.append({
+                    "customerID": customer_id,
+                    "status": "failed",
+                    "message": "Churn label must be 'Yes' or 'No'"
+                })
+                continue
+            
+            row = cursor.execute(
+                "SELECT churn_label FROM new_data WHERE customer_id = ?",
+                (customer_id,)
+            ).fetchone()
+            
+            if row:
+                old_label = row['churn_label']
+                cursor.execute('''
+                    UPDATE new_data 
+                    SET churn_label = ?, label_timestamp = CURRENT_TIMESTAMP
+                    WHERE customer_id = ?
+                ''', (churn_label, customer_id))
+                
+                results.append({
+                    "customerID": customer_id,
+                    "status": "success",
+                    "old_label": old_label,
+                    "new_label": churn_label
+                })
+            else:
+                results.append({
+                    "customerID": customer_id,
+                    "status": "failed",
+                    "message": "Customer ID not found"
+                })
         
-        mask = df['customerID'].astype(str) == str(customer_id)
-        
-        if mask.any():
-            old_label = df.loc[mask, 'Churn'].iloc[0]
-            df.loc[mask, 'Churn'] = churn_label
-            df.loc[mask, 'label_timestamp'] = datetime.utcnow().isoformat()
-            results.append({
-                "customerID": customer_id,
-                "status": "success",
-                "old_label": old_label if pd.notna(old_label) else None,
-                "new_label": churn_label
-            })
-        else:
-            results.append({
-                "customerID": customer_id,
-                "status": "failed",
-                "message": "Customer ID not found"
-            })
-    
-    # Save all changes at once
-    df.to_csv(file_path, index=False)
+        conn.commit()
     
     successful = [r for r in results if r["status"] == "success"]
     failed = [r for r in results if r["status"] == "failed"]
@@ -139,125 +109,80 @@ def batch_update_labels(updates: List[LabelUpdateRequest]) -> Dict[str, Any]:
         "results": results
     }
 
-
-# ====================== GET LABEL FUNCTION ======================
 def get_label(customer_id: str) -> Dict[str, Any]:
-    """
-    Get the current Churn label for a specific customer.
-    
-    Args:
-        customer_id: Customer ID to look up
-    
-    Returns:
-        Dictionary with label information
-    """
-    file_path = Path('app/data/new_data/new_data.csv')
-    
-    if not file_path.exists():
-        return {
-            "status": "error",
-            "message": f"Data file not found at {file_path}",
-            "customerID": customer_id
-        }
-    
-    df = pd.read_csv(file_path)
-    mask = df['customerID'].astype(str) == str(customer_id)
-    
-    if not mask.any():
-        return {
-            "status": "error",
-            "message": f"Customer ID '{customer_id}' not found",
-            "customerID": customer_id
-        }
-    
-    row = df.loc[mask].iloc[0]
-    churn_value = row.get('Churn')
+    """Get current Churn label for a customer"""
+    with get_db() as conn:
+        row = conn.execute('''
+            SELECT customer_id, churn_label, prediction, probability, 
+                   created_at, label_timestamp
+            FROM new_data WHERE customer_id = ?
+        ''', (customer_id,)).fetchone()
+        
+        if not row:
+            return {
+                "status": "error",
+                "message": f"Customer ID '{customer_id}' not found",
+                "customerID": customer_id
+            }
     
     return {
         "status": "success",
-        "customerID": customer_id,
-        "Churn": churn_value if pd.notna(churn_value) else None,
-        "prediction": int(row.get('prediction')) if pd.notna(row.get('prediction')) else None,
-        "probability": float(row.get('probability')) if pd.notna(row.get('probability')) else None,
-        "timestamp": row.get('timestamp'),
-        "label_timestamp": row.get('label_timestamp') if 'label_timestamp' in row else None
+        "customerID": row['customer_id'],
+        "Churn": row['churn_label'],
+        "prediction": row['prediction'],
+        "probability": row['probability'],
+        "timestamp": row['created_at'],
+        "label_timestamp": row['label_timestamp']
     }
 
-
-# ====================== GET UNLABELED DATA ======================
 def get_unlabeled_data() -> pd.DataFrame:
-    """
-    Get all records that don't have Churn labels yet.
+    """Get all records without Churn labels"""
+    with get_db() as conn:
+        df = pd.read_sql_query('''
+            SELECT customer_id, prediction, probability, created_at
+            FROM new_data WHERE churn_label IS NULL
+        ''', conn)
     
-    Returns:
-        DataFrame with unlabeled records
-    """
-    file_path = Path('app/data/new_data/new_data.csv')
-    
-    if not file_path.exists():
-        return pd.DataFrame()
-    
-    df = pd.read_csv(file_path)
-    unlabeled = df[df['Churn'].isna()]
-    
-    return unlabeled
+    if not df.empty:
+        df = df.rename(columns={'customer_id': 'customerID'})
+    return df
 
-
-# ====================== GET LABELED DATA ======================
 def get_labeled_data() -> pd.DataFrame:
-    """
-    Get all records that have Churn labels.
+    """Get all records with Churn labels"""
+    with get_db() as conn:
+        df = pd.read_sql_query('''
+            SELECT customer_id, churn_label as Churn, prediction, probability, label_timestamp
+            FROM new_data WHERE churn_label IS NOT NULL
+        ''', conn)
     
-    Returns:
-        DataFrame with labeled records
-    """
-    file_path = Path('app/data/new_data/new_data.csv')
-    
-    if not file_path.exists():
-        return pd.DataFrame()
-    
-    df = pd.read_csv(file_path)
-    labeled = df[df['Churn'].notna()]
-    
-    return labeled
+    if not df.empty:
+        df = df.rename(columns={'customer_id': 'customerID'})
+    return df
 
-
-
-# ====================== STATISTICS FUNCTION ======================
 def get_label_statistics() -> Dict[str, Any]:
-    """
-    Get statistics about labeled vs unlabeled data.
+    """Get statistics about labeled vs unlabeled data"""
+    with get_db() as conn:
+        stats = conn.execute('''
+            SELECT 
+                COUNT(*) as total_records,
+                SUM(CASE WHEN churn_label IS NOT NULL THEN 1 ELSE 0 END) as labeled_records,
+                SUM(CASE WHEN churn_label = 'Yes' THEN 1 ELSE 0 END) as churn_yes,
+                SUM(CASE WHEN churn_label = 'No' THEN 1 ELSE 0 END) as churn_no
+            FROM new_data
+        ''').fetchone()
     
-    Returns:
-        Dictionary with statistics
-    """
-    file_path = Path('app/data/new_data/new_data.csv')
+    total = stats['total_records']
+    labeled = stats['labeled_records']
+    unlabeled = total - labeled
     
-    if not file_path.exists():
-        return {
-            "status": "error",
-            "message": f"Data file not found at {file_path}"
-        }
-    
-    df = pd.read_csv(file_path)
-    
-    labeled = df[df['Churn'].notna()]
-    unlabeled = df[df['Churn'].isna()]
-    
-    if len(labeled) > 0:
-        churn_yes = len(labeled[labeled['Churn'] == 'Yes'])
-        churn_no = len(labeled[labeled['Churn'] == 'No'])
-    else:
-        churn_yes = 0
-        churn_no = 0
+    progress = f"{labeled}/{total} ({labeled/total*100:.1f}%)" if total > 0 else "0/0 (0%)"
     
     return {
         "status": "success",
-        "total_records": len(df),
-        "labeled_records": len(labeled),
-        "unlabeled_records": len(unlabeled),
-        "churn_yes": churn_yes,
-        "churn_no": churn_no,
-        "labeling_progress": f"{len(labeled)}/{len(df)} ({len(labeled)/len(df)*100:.1f}%)"
+        "total_records": total,
+        "labeled_records": labeled,
+        "unlabeled_records": unlabeled,
+        "churn_yes": stats['churn_yes'] or 0,
+        "churn_no": stats['churn_no'] or 0,
+        "labeling_progress": progress
     }
-

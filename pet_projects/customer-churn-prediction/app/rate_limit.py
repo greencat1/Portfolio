@@ -1,48 +1,28 @@
 # app/rate_limit.py
-"""
-Rate Limiting Module
-
-Provides rate limiting functionality to prevent API abuse.
-Tracks request counts per API key within a sliding time window.
-"""
-
 import time
 from collections import defaultdict
 from typing import Dict
 from fastapi import HTTPException
 from app.utils.logger import logger
 
-# In-memory request log (use Redis for production deployments)
-# Maps API key -> list of request timestamps
 request_log: Dict[str, list] = defaultdict(list)
 
+def get_rate_limit_for_key(api_key: str) -> int:
+    """Get rate limit from cached key info"""
+    from app.auth import KEY_CACHE, hash_key
+    key_hash = hash_key(api_key)
+    key_info = KEY_CACHE.get(key_hash, {})
+    return key_info.get('rate_limit', 100)
 
 def check_rate_limit(api_key: str, rate_limit: int = None) -> bool:
-    """
-    Check if a request is within the rate limit for the given API key.
-    
-    Implements a sliding window rate limiter with a 60-second window.
-    If the limit is exceeded, raises HTTP 429 (Too Many Requests).
-    
-    Args:
-        api_key: The API key being used for the request
-        rate_limit: Optional custom rate limit (uses key's default if not provided)
-        
-    Returns:
-        True if request is allowed
-        
-    Raises:
-        HTTPException 429: If rate limit is exceeded
-    """
+    """Check if request is within rate limit"""
     if rate_limit is None:
-        from app.auth import API_KEYS
-        key_info = API_KEYS.get(api_key, {})
-        rate_limit = key_info.get("rate_limit", 60)
+        rate_limit = get_rate_limit_for_key(api_key)
     
     now = time.time()
-    window = 60  # 1 minute sliding window
+    window = 60
     
-    # Clean up old requests outside the current window
+    # Clean old requests
     request_log[api_key] = [
         req_time for req_time in request_log[api_key]
         if now - req_time < window
@@ -58,37 +38,21 @@ def check_rate_limit(api_key: str, rate_limit: int = None) -> bool:
     request_log[api_key].append(now)
     return True
 
-
 def get_rate_limit_status(api_key: str) -> Dict:
-    """
-    Get current rate limit status for an API key.
-    
-    Returns information about how many requests have been made
-    and how many are still available within the current window.
-    
-    Args:
-        api_key: The API key to check
-        
-    Returns:
-        Dictionary with current request count, limit, remaining, and reset time
-    """
+    """Get current rate limit status"""
     now = time.time()
     window = 60
     
-    # Clean up old requests
-    from app.auth import API_KEYS
     request_log[api_key] = [
         req_time for req_time in request_log[api_key]
         if now - req_time < window
     ]
     
-    key_info = API_KEYS.get(api_key, {})
-    rate_limit = key_info.get("rate_limit", 60)
+    rate_limit = get_rate_limit_for_key(api_key)
     
     reset_time = 0
     if request_log[api_key]:
-        reset_time = window - (now - request_log[api_key][0])
-        reset_time = max(0, int(reset_time))
+        reset_time = max(0, int(window - (now - request_log[api_key][0])))
     
     return {
         "current_requests": len(request_log[api_key]),
