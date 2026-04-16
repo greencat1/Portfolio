@@ -16,6 +16,7 @@ from sklearn.metrics import (
 from app.config import settings
 from app.scripts.model_manager import get_active_model_info
 from app.utils.logger import logger
+from app.core.database import get_db
 
 
 def inspect_pipeline_features(model_path):
@@ -53,31 +54,38 @@ def inspect_pipeline_features(model_path):
 
 def load_new_labeled_data_raw():
     """
-    Load raw new labeled data WITHOUT any preprocessing
+    Load raw new labeled data from SQLite WITHOUT any preprocessing
     """
-    new_data_path = Path('app/data/new_data/new_data.csv')
+    with get_db() as conn:
+        # Load only rows that have churn_label (labeled data)
+        df_labeled = pd.read_sql_query('''
+            SELECT * FROM new_data 
+            WHERE churn_label IS NOT NULL
+        ''', conn)
     
-    if not new_data_path.exists():
-        raise FileNotFoundError(f"New data file not found at {new_data_path}")
+    if len(df_labeled) == 0:
+        raise ValueError("No labeled data found in database")
     
-    df = pd.read_csv('app/data/new_data/new_data.csv')
-    df_labeled = df[df['Churn'].notna()].copy()
-        
+    # Rename churn_label to Churn for consistency with old code
+    df_labeled = df_labeled.rename(columns={'churn_label': 'Churn'})
+    
     feature_columns = [
-            'gender', 'SeniorCitizen', 'Partner', 'Dependents', 'tenure',
-            'PhoneService', 'MultipleLines', 'InternetService', 'OnlineSecurity',
-            'OnlineBackup', 'DeviceProtection', 'TechSupport', 'StreamingTV',
-            'StreamingMovies', 'Contract', 'PaperlessBilling', 'PaymentMethod',
-            'MonthlyCharges', 'TotalCharges'
-        ]
-        
+        'gender', 'SeniorCitizen', 'Partner', 'Dependents', 'tenure',
+        'PhoneService', 'MultipleLines', 'InternetService', 'OnlineSecurity',
+        'OnlineBackup', 'DeviceProtection', 'TechSupport', 'StreamingTV',
+        'StreamingMovies', 'Contract', 'PaperlessBilling', 'PaymentMethod',
+        'MonthlyCharges', 'TotalCharges'
+    ]
+    
     X_test = df_labeled[feature_columns].copy()
-    y_test = df_labeled['Churn'].map(lambda x: 1 if x =='Yes' else 0)
+    y_test = df_labeled['Churn'].map(lambda x: 1 if x == 'Yes' else 0)
+    
     return X_test, y_test
+
 
 def test_model_on_new_data(model_name: str = None, save_results: bool = True) -> Dict[str, Any]:
     """
-    Test a model on new labeled data from new_data.csv
+    Test a model on new labeled data from SQLite database
     """
     print("=" * 50)
     print("TESTING MODEL ON NEW DATA")
@@ -97,32 +105,33 @@ def test_model_on_new_data(model_name: str = None, save_results: bool = True) ->
             }
         print(f"Using model: {model_name}")
     
-    # Load data
-    new_data_path = Path('app/data/new_data/new_data.csv')
-    if not new_data_path.exists():
-        return {
-            'status': 'error',
-            'message': f"New data file not found at {new_data_path}"
-        }
-    
-    df = pd.read_csv(new_data_path)
-    df_labeled = df[df['Churn'].notna()].copy()
+    # Load labeled data from SQLite
+    with get_db() as conn:
+        df_labeled = pd.read_sql_query('''
+            SELECT * FROM new_data 
+            WHERE churn_label IS NOT NULL
+        ''', conn)
     
     if len(df_labeled) == 0:
         return {
             'status': 'error',
-            'message': "No labeled data found"
+            'message': "No labeled data found in database"
         }
     
-    # Get true labels
-    y_true = df_labeled['Churn'].map({'Yes': 1, 'No': 0}).values
+    # Get true labels (churn_label column)
+    y_true = df_labeled['churn_label'].map({'Yes': 1, 'No': 0}).values
     
     # Load model
     with open(model_path, 'rb') as f:
         pipeline = cloudpickle.load(f)
     
-    # Prepare data (remove Churn column, keep everything else)
-    X_raw = df_labeled.drop('Churn', axis=1)
+    # Prepare data (drop label columns, keep features)
+    columns_to_drop = ['id', 'churn_label', 'label_timestamp', 'created_at', 'prediction', 'probability']
+    X_raw = df_labeled.drop(columns=[col for col in columns_to_drop if col in df_labeled.columns], errors='ignore')
+    
+    # Also drop customerID if present
+    if 'customerID' in X_raw.columns:
+        X_raw = X_raw.drop(columns=['customerID'])
     
     # Apply transformations
     X = X_raw.copy()
@@ -191,7 +200,7 @@ def test_model_on_new_data(model_name: str = None, save_results: bool = True) ->
 
 def compare_models_on_new_data(model_names: List[str]) -> Dict[str, Any]:
     """
-    Compare multiple models on new labeled data
+    Compare multiple models on new labeled data from SQLite
     """
     print("=" * 50)
     print("COMPARING MODELS ON NEW DATA")
@@ -241,5 +250,3 @@ def compare_models_on_new_data(model_names: List[str]) -> Dict[str, Any]:
         'best_recall': results[0]['recall'],
         'timestamp': datetime.now().isoformat()
     }
-
-

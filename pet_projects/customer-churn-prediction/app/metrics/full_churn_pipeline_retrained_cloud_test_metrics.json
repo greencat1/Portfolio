@@ -1,10 +1,10 @@
 {
-  "recall": 1.0,
-  "precision": 1.0,
-  "accuracy": 1.0,
-  "f1_score": 1.0,
-  "roc_auc": 1.0,
-  "test_samples": 10,
-  "churn_yes": 5,
-  "churn_no": 5
+  "recall": 0.8840579710144928,
+  "precision": 0.5596330275229358,
+  "accuracy": 0.7227722772277227,
+  "f1_score": 0.6853932584269663,
+  "roc_auc": 0.8312084559224148,
+  "test_samples": 202,
+  "churn_yes": 69,
+  "churn_no": 133
 }

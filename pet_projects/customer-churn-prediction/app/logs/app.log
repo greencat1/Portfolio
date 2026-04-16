@@ -171,3 +171,51 @@ pandas.errors.DatabaseError: Execution failed on sql '
             SELECT customer_id, prediction, probability, created_at
             FROM new_data WHERE churn_label IS NULL
         ': no such column: customer_id
+2026-04-16 18:10:52,236 - churn_api - INFO - Retrieved 4 unlabeled customers
+2026-04-16 18:11:18,642 - churn_api - INFO - Retrieved 200 labeled customers
+2026-04-16 18:12:02,364 - churn_api - ERROR - Failed to get label for customer 5575-GNVDE: No item with that key
+Traceback (most recent call last):
+  File "C:\Users\isazo\OneDrive\Рабочий стол\courses\partfolio\pet_projects\customer-churn-prediction\app\main.py", line 348, in get_label_endpoint
+    result = get_label(customer_id)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\isazo\OneDrive\Рабочий стол\courses\partfolio\pet_projects\customer-churn-prediction\app\scripts\put_lbl.py", line 130, in get_label
+    "customerID": row['customer_id'],
+                  ~~~^^^^^^^^^^^^^^^
+IndexError: No item with that key
+2026-04-16 18:13:10,367 - churn_api - INFO - Label retrieved for customer 5575-GNVDE
+2026-04-16 18:13:26,580 - churn_api - INFO - Label updated for customer 7590-VHVEG: Yes
+2026-04-16 18:13:37,094 - churn_api - INFO - Batch label update completed: 2 successful, 0 failed
+2026-04-16 18:13:52,398 - churn_api - INFO - Rate limit info requested for key 123...
+2026-04-16 18:14:37,992 - churn_api - INFO - Retraining status checked: ready
+2026-04-16 18:14:47,876 - churn_api - INFO - Starting incremental retraining
+2026-04-16 18:14:47,885 - churn_api - INFO - Loaded 202 labeled samples from database
+2026-04-16 18:14:47,885 - churn_api - INFO - Loading model from app/models/full_churn_pipeline_cloud.pkl
+2026-04-16 18:14:47,885 - churn_api - INFO - Model loaded successfully!
+2026-04-16 18:14:47,885 - churn_api - INFO - Loaded existing model from app/models/full_churn_pipeline_cloud.pkl
+2026-04-16 18:14:47,885 - churn_api - INFO - Backup saved to app\models\inc_churn_pipeline_backup_cloud.pkl
+2026-04-16 18:14:47,901 - churn_api - INFO - Transformed 202 samples for retraining
+2026-04-16 18:14:48,559 - churn_api - INFO - Incremental retraining completed: 202 samples used
+2026-04-16 18:15:03,761 - churn_api - INFO - Starting full retraining
+2026-04-16 18:15:03,809 - churn_api - INFO - Loaded 7043 samples from raw_data table
+2026-04-16 18:15:03,813 - churn_api - INFO - Loaded 202 labeled samples from new_data table
+2026-04-16 18:15:03,817 - churn_api - INFO - Combined 7043 old + 202 new = 7245 total samples
+2026-04-16 18:15:03,825 - churn_api - INFO - Features: 20 columns
+2026-04-16 18:15:03,825 - churn_api - INFO - Target distribution: Yes=1938, No=5307
+2026-04-16 18:15:03,825 - churn_api - INFO - Building pipeline...
+2026-04-16 18:15:03,825 - churn_api - INFO - Training model...
+2026-04-16 18:15:05,058 - churn_api - INFO - Model training completed successfully!
+2026-04-16 18:15:05,150 - churn_api - INFO - Training metrics: {'accuracy': 0.694271911663216, 'precision': 0.4635430376414846, 'recall': 0.9086687306501547, 'f1_score': 0.6139097089070943}
+2026-04-16 18:15:05,150 - churn_api - INFO - Backup saved to app\models\full_churn_pipeline_backup_cloud.pkl
+2026-04-16 18:15:05,150 - churn_api - INFO - Retrained model saved to app\models\full_churn_pipeline_retrained_cloud.pkl
+2026-04-16 18:15:05,159 - churn_api - INFO - Full retraining completed: 7245 total samples
+2026-04-16 18:15:27,097 - churn_api - INFO - Listed 5 models
+2026-04-16 18:15:39,206 - churn_api - INFO - Active model retrieved: full_churn_pipeline_cloud.pkl
+2026-04-16 18:15:56,173 - churn_api - INFO - Switching model to: full_churn_pipeline_retrained_cloud.pkl
+2026-04-16 18:15:56,173 - churn_api - INFO - Model switched from full_churn_pipeline_cloud.pkl to full_churn_pipeline_retrained_cloud.pkl
+2026-04-16 18:16:07,338 - churn_api - WARNING - Deleting model: full_churn_pipeline_backup_cloud.pkl, force=False
+2026-04-16 18:16:07,346 - churn_api - INFO - Model deleted: full_churn_pipeline_backup_cloud.pkl
+2026-04-16 18:16:23,557 - churn_api - INFO - Comparing models: full_churn_pipeline_cloud.pkl vs full_churn_pipeline_retrained_cloud.pkl
+2026-04-16 18:16:43,656 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_retrained_cloud
+2026-04-16 18:17:50,963 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-16 18:18:15,227 - churn_api - INFO - Testing model: full_churn_pipeline_cloud.pkl
+2026-04-16 18:18:15,267 - churn_api - INFO - Model full_churn_pipeline_cloud.pkl test completed: recall=1.0

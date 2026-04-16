@@ -20,7 +20,7 @@ def update_label(customer_id: str, churn_label: str) -> Dict[str, Any]:
         
         # Check if customer exists
         row = cursor.execute(
-            "SELECT churn_label FROM new_data WHERE customer_id = ?",
+            "SELECT churn_label FROM new_data WHERE customerID = ?",
             (customer_id,)
         ).fetchone()
         
@@ -37,7 +37,7 @@ def update_label(customer_id: str, churn_label: str) -> Dict[str, Any]:
         cursor.execute('''
             UPDATE new_data 
             SET churn_label = ?, label_timestamp = CURRENT_TIMESTAMP
-            WHERE customer_id = ?
+            WHERE customerID = ?
         ''', (churn_label, customer_id))
         
         conn.commit()
@@ -71,7 +71,7 @@ def batch_update_labels(updates: List) -> Dict[str, Any]:
                 continue
             
             row = cursor.execute(
-                "SELECT churn_label FROM new_data WHERE customer_id = ?",
+                "SELECT churn_label FROM new_data WHERE customerID = ?",
                 (customer_id,)
             ).fetchone()
             
@@ -80,7 +80,7 @@ def batch_update_labels(updates: List) -> Dict[str, Any]:
                 cursor.execute('''
                     UPDATE new_data 
                     SET churn_label = ?, label_timestamp = CURRENT_TIMESTAMP
-                    WHERE customer_id = ?
+                    WHERE customerID = ?
                 ''', (churn_label, customer_id))
                 
                 results.append({
@@ -113,9 +113,9 @@ def get_label(customer_id: str) -> Dict[str, Any]:
     """Get current Churn label for a customer"""
     with get_db() as conn:
         row = conn.execute('''
-            SELECT customer_id, churn_label, prediction, probability, 
+            SELECT customerID, churn_label, prediction, probability, 
                    created_at, label_timestamp
-            FROM new_data WHERE customer_id = ?
+            FROM new_data WHERE customerID = ?
         ''', (customer_id,)).fetchone()
         
         if not row:
@@ -127,7 +127,7 @@ def get_label(customer_id: str) -> Dict[str, Any]:
     
     return {
         "status": "success",
-        "customerID": row['customer_id'],
+        "customerID": row['customerID'],
         "Churn": row['churn_label'],
         "prediction": row['prediction'],
         "probability": row['probability'],
@@ -139,7 +139,7 @@ def get_unlabeled_data() -> pd.DataFrame:
     """Get all records without Churn labels"""
     with get_db() as conn:
         df = pd.read_sql_query('''
-            SELECT customer_id, prediction, probability, created_at
+            SELECT customerID, prediction, probability, created_at
             FROM new_data WHERE churn_label IS NULL
         ''', conn)
     
@@ -151,7 +151,7 @@ def get_labeled_data() -> pd.DataFrame:
     """Get all records with Churn labels"""
     with get_db() as conn:
         df = pd.read_sql_query('''
-            SELECT customer_id, churn_label as Churn, prediction, probability, label_timestamp
+            SELECT customerID, churn_label as Churn, prediction, probability, label_timestamp
             FROM new_data WHERE churn_label IS NOT NULL
         ''', conn)
     
