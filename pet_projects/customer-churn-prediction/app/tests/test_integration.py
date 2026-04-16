@@ -8,8 +8,8 @@ from app.main import app
 
 client = TestClient(app)
 
-USER_KEY = "user_7f3e8a2b1c5d9e4f6a8b2c4d6e8f0a1b"
-ADMIN_KEY = "admin_9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d3"
+USER_KEY = "test_user_key"  
+ADMIN_KEY = "test_admin_key"
 
 
 def test_healthcheck():

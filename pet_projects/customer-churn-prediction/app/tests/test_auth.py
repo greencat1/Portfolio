@@ -5,13 +5,36 @@ Tests for API key authentication.
 
 import pytest
 from fastapi import HTTPException
-from app.auth import verify_api_key, require_admin, require_user, API_KEYS
+from app.auth import verify_api_key, require_admin, require_user
+
+
+
+# app/tests/test_auth.py
+import pytest
+from fastapi import HTTPException
+from app.auth import verify_api_key, require_admin, require_user
+from app.core.database import get_db
+from app.core.key_input import hash_key
+
+
+@pytest.fixture(autouse=True)
+def setup_test_keys():
+    """Add test keys to database before tests"""
+    with get_db() as conn:
+        conn.execute('''
+            INSERT OR REPLACE INTO api_keys (key_hash, name, role, rate_limit, is_active)
+            VALUES (?, ?, ?, ?, ?)
+        ''', (hash_key("test_user_key"), "test_user", "user", 100, 1))
+        conn.commit()
+    yield
+    with get_db() as conn:
+        conn.execute("DELETE FROM api_keys WHERE name LIKE 'test_%'")
+        conn.commit()
 
 
 def test_valid_api_key_works():
     """Valid key should pass authentication."""
-    valid_key = "user_7f3e8a2b1c5d9e4f6a8b2c4d6e8f0a1b"
-    result = verify_api_key(valid_key)
+    result = verify_api_key("test_user_key")
     assert result["role"] == "user"
 
 

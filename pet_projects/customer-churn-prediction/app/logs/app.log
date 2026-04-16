@@ -219,3 +219,45 @@ IndexError: No item with that key
 2026-04-16 18:17:50,963 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
 2026-04-16 18:18:15,227 - churn_api - INFO - Testing model: full_churn_pipeline_cloud.pkl
 2026-04-16 18:18:15,267 - churn_api - INFO - Model full_churn_pipeline_cloud.pkl test completed: recall=1.0
+2026-04-16 18:19:56,117 - churn_api - INFO - Testing model: full_churn_pipeline_cloud.pkl
+2026-04-16 18:19:56,160 - churn_api - INFO - Model full_churn_pipeline_cloud.pkl test completed: recall=0.8840579710144928
+2026-04-16 18:21:06,066 - churn_api - INFO - Testing model: full_churn_pipeline_cloud.pkl
+2026-04-16 18:21:06,091 - churn_api - INFO - Model full_churn_pipeline_cloud.pkl test completed: recall=0.8840579710144928
+2026-04-16 18:21:20,776 - churn_api - INFO - Testing model: full_churn_pipeline_backup_cloud.pkl
+2026-04-16 18:21:20,776 - churn_api - ERROR - Model test failed: Model full_churn_pipeline_backup_cloud.pkl not found
+2026-04-16 18:21:51,383 - churn_api - INFO - Testing model: full_churn_pipeline_retrained_cloud.pkl
+2026-04-16 18:21:51,434 - churn_api - INFO - Model full_churn_pipeline_retrained_cloud.pkl test completed: recall=0.8840579710144928
+2026-04-16 18:22:15,092 - churn_api - INFO - Testing model: inc_churn_pipeline_backup_cloud.pkl
+2026-04-16 18:22:15,153 - churn_api - INFO - Model inc_churn_pipeline_backup_cloud.pkl test completed: recall=0.8840579710144928
+2026-04-16 18:22:35,335 - churn_api - INFO - Testing model: inc_churn_pipeline_retrained_cloud.pkl
+2026-04-16 18:22:35,436 - churn_api - INFO - Model inc_churn_pipeline_retrained_cloud.pkl test completed: recall=0.9710144927536232
+2026-04-16 18:22:59,982 - churn_api - INFO - Comparing models: full_churn_pipeline_cloud.pkl vs inc_churn_pipeline_retrained_cloud.pkl
+2026-04-16 18:23:22,734 - churn_api - INFO - Comparing models: full_churn_pipeline_retrained_cloud.pkl vs inc_churn_pipeline_retrained_cloud.pkl
+2026-04-16 18:26:32,759 - churn_api - INFO - New API key created: role=user, name=user1, rate_limit=100
+2026-04-16 18:26:43,917 - churn_api - INFO - Listed 3 API keys
+2026-04-16 18:27:03,360 - churn_api - WARNING - Revoking API key: c3cafb28...
+2026-04-16 18:27:30,223 - churn_api - INFO - New API key created: role=admin, name=admin2, rate_limit=1000
+2026-04-16 18:27:49,656 - churn_api - INFO - Loading model from app/models/full_churn_pipeline_cloud.pkl
+2026-04-16 18:27:49,663 - churn_api - INFO - Model loaded successfully!
+2026-04-16 18:27:49,689 - churn_api - INFO - Updated existing record for customerID: 7590-VHVEG
+2026-04-16 18:27:49,698 - churn_api - INFO - Prediction successful for customer 7590-VHVEG
+2026-04-16 19:02:50,968 - churn_api - INFO - Health check requested
+2026-04-16 19:02:51,101 - churn_api - WARNING - Rate limit exceeded for API key test_key...
+2026-04-16 19:07:51,350 - churn_api - INFO - Health check requested
+2026-04-16 19:07:51,358 - churn_api - INFO - Loading model from app/models/full_churn_pipeline_cloud.pkl
+2026-04-16 19:07:51,358 - churn_api - INFO - Model loaded successfully!
+2026-04-16 19:07:51,397 - churn_api - INFO - Added new record for customerID: TEST-001
+2026-04-16 19:07:51,401 - churn_api - INFO - Prediction successful for customer TEST-001
+2026-04-16 19:07:51,596 - churn_api - WARNING - Rate limit exceeded for API key test_key...
+2026-04-16 19:09:25,643 - churn_api - INFO - Health check requested
+2026-04-16 19:09:25,659 - churn_api - INFO - Loading model from app/models/full_churn_pipeline_cloud.pkl
+2026-04-16 19:09:25,659 - churn_api - INFO - Model loaded successfully!
+2026-04-16 19:09:25,685 - churn_api - INFO - Updated existing record for customerID: TEST-001
+2026-04-16 19:09:25,685 - churn_api - INFO - Prediction successful for customer TEST-001
+2026-04-16 19:09:25,914 - churn_api - WARNING - Rate limit exceeded for API key test_key...
+2026-04-16 19:13:10,892 - churn_api - INFO - Health check requested
+2026-04-16 19:13:10,907 - churn_api - INFO - Loading model from app/models/full_churn_pipeline_cloud.pkl
+2026-04-16 19:13:10,907 - churn_api - INFO - Model loaded successfully!
+2026-04-16 19:13:10,923 - churn_api - INFO - Updated existing record for customerID: TEST-001
+2026-04-16 19:13:10,923 - churn_api - INFO - Prediction successful for customer TEST-001
+2026-04-16 19:13:10,939 - churn_api - WARNING - Rate limit exceeded for API key test_key...

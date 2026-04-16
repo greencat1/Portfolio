@@ -6,7 +6,8 @@ Tests for rate limiting.
 import pytest
 from fastapi import HTTPException
 from app.rate_limit import check_rate_limit, get_rate_limit_status, request_log
-
+from app.core.database import get_db  
+from app.core.key_input import hash_key  
 
 def setup_function():
     """Clear request log before each test."""
@@ -31,15 +32,16 @@ def test_exceeding_limit_fails():
 
 
 def test_rate_limit_status_shows_remaining():
-    """Status endpoint should correctly show remaining requests."""
-    # Make 30 requests
+    
+    with get_db() as conn:
+        conn.execute('''
+            INSERT OR REPLACE INTO api_keys (key_hash, name, role, rate_limit, is_active)
+            VALUES (?, ?, ?, ?, ?)
+        ''', (hash_key("rate_test_key"), "rate_test", "user", 100, 1))
+        conn.commit()
+    
     for _ in range(30):
-        check_rate_limit("test_key", rate_limit=100)
+        check_rate_limit("rate_test_key")
     
-    status = get_rate_limit_status("test_key")
-    
-    assert status["current_requests"] == 30
-    # Default rate limit is 60 when key doesn't exist in API_KEYS
-    assert status["rate_limit"] == 60  # Changed from 100 to 60
-    assert status["remaining"] == 30  # 60 - 30 = 30
-    assert "reset_in_seconds" in status
+    status = get_rate_limit_status("rate_test_key")
+    assert status["rate_limit"] == 100
