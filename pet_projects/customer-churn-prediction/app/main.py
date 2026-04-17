@@ -258,13 +258,20 @@ def get_unlabeled_customers(auth: dict = Depends(require_user)):
         
         customers = []
         for _, row in unlabeled_df.iterrows():
-            customers.append({
-                "customerID": row['customerID'],
-                "prediction": int(row['prediction']) if pd.notna(row.get('prediction')) else None,
-                "probability": float(row['probability']) if pd.notna(row.get('probability')) else None,
-                "timestamp": row.get('timestamp')
-            })
-        
+            customer_data = {
+                                "customerID": row['customerID'],
+                                "prediction": int(row['prediction']) if pd.notna(row.get('prediction')) else None,
+                                "probability": float(row['probability']) if pd.notna(row.get('probability')) else None,
+                                "timestamp": row.get('created_at'),
+                                
+                                "MonthlyCharges": float(row['MonthlyCharges']) if pd.notna(row.get('MonthlyCharges')) else 0,
+                                "tenure": int(row['tenure']) if pd.notna(row.get('tenure')) else 0,
+                                "Contract": row.get('Contract'),
+                                "OnlineSecurity": row.get('OnlineSecurity')
+                            }
+            customers.append(customer_data)
+            
+            
         logger.info(f"Retrieved {len(customers)} unlabeled customers")
         return {
             "status": "success",
@@ -300,13 +307,18 @@ def get_labeled_customers(auth: dict = Depends(require_user)):
         
         customers = []
         for _, row in labeled_df.iterrows():
-            customers.append({
-                "customerID": row['customerID'],
-                "Churn": row['Churn'],
-                "prediction": int(row['prediction']) if pd.notna(row.get('prediction')) else None,
-                "probability": float(row['probability']) if pd.notna(row.get('probability')) else None,
-                "label_timestamp": row.get('label_timestamp')
-            })
+            customer_data = {
+                                "customerID": row['customerID'],
+                                "prediction": int(row['prediction']) if pd.notna(row.get('prediction')) else None,
+                                "probability": float(row['probability']) if pd.notna(row.get('probability')) else None,
+                                "timestamp": row.get('created_at'),
+                                "Churn" : row['churn_label'],
+                                "MonthlyCharges": float(row['MonthlyCharges']) if pd.notna(row.get('MonthlyCharges')) else 0,
+                                "tenure": int(row['tenure']) if pd.notna(row.get('tenure')) else 0,
+                                "Contract": row.get('Contract'),
+                                "OnlineSecurity": row.get('OnlineSecurity')
+                            }
+            customers.append(customer_data)
         
         logger.info(f"Retrieved {len(customers)} labeled customers")
         return {

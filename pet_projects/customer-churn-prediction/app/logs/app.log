@@ -261,3 +261,130 @@ IndexError: No item with that key
 2026-04-16 19:13:10,923 - churn_api - INFO - Updated existing record for customerID: TEST-001
 2026-04-16 19:13:10,923 - churn_api - INFO - Prediction successful for customer TEST-001
 2026-04-16 19:13:10,939 - churn_api - WARNING - Rate limit exceeded for API key test_key...
+2026-04-17 13:09:09,270 - churn_api - INFO - Label statistics retrieved: 202/205 (98.5%)
+2026-04-17 13:09:09,283 - churn_api - INFO - Retrieved 3 unlabeled customers
+2026-04-17 13:09:09,300 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-17 13:09:09,311 - churn_api - INFO - Listed 4 models
+2026-04-17 13:09:09,317 - churn_api - INFO - Active model retrieved: full_churn_pipeline_cloud.pkl
+2026-04-17 13:09:10,012 - churn_api - INFO - Retraining status checked: ready
+2026-04-17 13:12:12,643 - churn_api - INFO - Rate limit info requested for key 456...
+2026-04-17 13:12:12,647 - churn_api - INFO - Label statistics retrieved: 202/205 (98.5%)
+2026-04-17 13:12:12,647 - churn_api - INFO - Retrieved 3 unlabeled customers
+2026-04-17 13:12:12,663 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-17 13:12:12,670 - churn_api - INFO - Listed 4 models
+2026-04-17 13:12:12,674 - churn_api - INFO - Active model retrieved: full_churn_pipeline_cloud.pkl
+2026-04-17 13:12:12,749 - churn_api - INFO - Retraining status checked: ready
+2026-04-17 13:12:15,829 - churn_api - INFO - Rate limit info requested for key 456...
+2026-04-17 13:17:27,796 - churn_api - INFO - Loading model from app/models/full_churn_pipeline_cloud.pkl
+2026-04-17 13:17:27,829 - churn_api - INFO - Model loaded successfully!
+2026-04-17 13:17:27,863 - churn_api - INFO - Batch prediction completed: 10 customers
+2026-04-17 13:17:39,376 - churn_api - INFO - Rate limit info requested for key 456...
+2026-04-17 13:17:39,383 - churn_api - INFO - Label statistics retrieved: 202/215 (94.0%)
+2026-04-17 13:17:39,388 - churn_api - INFO - Retrieved 13 unlabeled customers
+2026-04-17 13:17:39,399 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-17 13:17:39,405 - churn_api - INFO - Listed 4 models
+2026-04-17 13:17:39,412 - churn_api - INFO - Active model retrieved: full_churn_pipeline_cloud.pkl
+2026-04-17 13:17:39,539 - churn_api - INFO - Retraining status checked: ready
+2026-04-17 13:17:39,617 - churn_api - INFO - Rate limit info requested for key 456...
+2026-04-17 13:17:39,623 - churn_api - INFO - Label statistics retrieved: 202/215 (94.0%)
+2026-04-17 13:17:39,628 - churn_api - INFO - Retrieved 13 unlabeled customers
+2026-04-17 13:17:39,639 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-17 13:17:39,647 - churn_api - INFO - Listed 4 models
+2026-04-17 13:17:39,651 - churn_api - INFO - Active model retrieved: full_churn_pipeline_cloud.pkl
+2026-04-17 13:17:39,727 - churn_api - INFO - Retraining status checked: ready
+2026-04-17 13:23:34,446 - churn_api - INFO - Label statistics retrieved: 202/215 (94.0%)
+2026-04-17 13:23:34,461 - churn_api - INFO - Retrieved 13 unlabeled customers
+2026-04-17 13:23:34,486 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-17 13:23:34,502 - churn_api - INFO - Listed 4 models
+2026-04-17 13:23:34,505 - churn_api - INFO - Active model retrieved: full_churn_pipeline_cloud.pkl
+2026-04-17 13:23:35,122 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-17 13:38:52,773 - churn_api - INFO - Label statistics retrieved: 202/215 (94.0%)
+2026-04-17 13:38:52,785 - churn_api - INFO - Retrieved 13 unlabeled customers
+2026-04-17 13:38:52,809 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-17 13:38:52,824 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-17 13:39:26,852 - churn_api - INFO - Label statistics retrieved: 202/215 (94.0%)
+2026-04-17 13:39:26,862 - churn_api - INFO - Retrieved 13 unlabeled customers
+2026-04-17 13:39:26,884 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-17 13:39:26,895 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-17 13:42:39,776 - churn_api - INFO - Label statistics retrieved: 202/215 (94.0%)
+2026-04-17 13:42:39,783 - churn_api - INFO - Retrieved 13 unlabeled customers
+2026-04-17 13:42:39,794 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-17 13:42:39,801 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-17 13:53:02,512 - churn_api - INFO - Label statistics retrieved: 202/215 (94.0%)
+2026-04-17 13:53:02,519 - churn_api - INFO - Retrieved 13 unlabeled customers
+2026-04-17 13:53:02,531 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-17 13:53:02,542 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-17 13:55:48,014 - churn_api - INFO - Label statistics retrieved: 202/215 (94.0%)
+2026-04-17 13:55:48,020 - churn_api - INFO - Retrieved 13 unlabeled customers
+2026-04-17 13:55:48,038 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-17 13:55:48,047 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-17 13:57:44,567 - churn_api - INFO - Label statistics retrieved: 202/215 (94.0%)
+2026-04-17 13:57:44,577 - churn_api - INFO - Retrieved 13 unlabeled customers
+2026-04-17 13:57:44,600 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-17 13:57:44,612 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-17 14:00:39,601 - churn_api - INFO - Label statistics retrieved: 202/215 (94.0%)
+2026-04-17 14:00:39,608 - churn_api - INFO - Retrieved 13 unlabeled customers
+2026-04-17 14:00:39,619 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-17 14:00:39,626 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-17 14:02:06,590 - churn_api - INFO - Label statistics retrieved: 202/215 (94.0%)
+2026-04-17 14:02:06,597 - churn_api - INFO - Retrieved 13 unlabeled customers
+2026-04-17 14:02:06,611 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-17 14:02:06,619 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-17 14:05:26,130 - churn_api - INFO - Label statistics retrieved: 202/215 (94.0%)
+2026-04-17 14:05:26,134 - churn_api - INFO - Retrieved 13 unlabeled customers
+2026-04-17 14:05:26,150 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-17 14:05:26,154 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-17 14:07:51,644 - churn_api - INFO - Retrieved 13 unlabeled customers
+2026-04-17 14:09:39,469 - churn_api - INFO - Retrieved 13 unlabeled customers
+2026-04-17 14:09:42,040 - churn_api - INFO - Retrieved 13 unlabeled customers
+2026-04-17 14:10:37,896 - churn_api - INFO - Retrieved 13 unlabeled customers
+2026-04-17 14:15:26,623 - churn_api - INFO - Label statistics retrieved: 202/215 (94.0%)
+2026-04-17 14:15:26,629 - churn_api - INFO - Retrieved 13 unlabeled customers
+2026-04-17 14:15:26,640 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-17 14:15:26,649 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-17 14:24:12,939 - churn_api - INFO - Retrieved 13 unlabeled customers
+2026-04-17 14:24:24,636 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-17 14:29:12,026 - churn_api - ERROR - Failed to get labeled customers: 'Churn'
+Traceback (most recent call last):
+  File "C:\Users\isazo\anaconda3\Lib\site-packages\pandas\core\indexes\base.py", line 3805, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\\_libs\\hashtable_class_helper.pxi", line 7081, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas\\_libs\\hashtable_class_helper.pxi", line 7089, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'Churn'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\isazo\OneDrive\Рабочий стол\courses\partfolio\pet_projects\customer-churn-prediction\app\main.py", line 315, in get_labeled_customers
+    "Churn" : row['Churn'],
+              ~~~^^^^^^^^^
+  File "C:\Users\isazo\anaconda3\Lib\site-packages\pandas\core\series.py", line 1121, in __getitem__
+    return self._get_value(key)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\isazo\anaconda3\Lib\site-packages\pandas\core\series.py", line 1237, in _get_value
+    loc = self.index.get_loc(label)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\isazo\anaconda3\Lib\site-packages\pandas\core\indexes\base.py", line 3812, in get_loc
+    raise KeyError(key) from err
+KeyError: 'Churn'
+2026-04-17 14:30:03,499 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-17 14:30:15,055 - churn_api - INFO - Retrieved 13 unlabeled customers
+2026-04-17 14:38:16,376 - churn_api - INFO - Label statistics retrieved: 202/215 (94.0%)
+2026-04-17 14:38:16,383 - churn_api - INFO - Retrieved 13 unlabeled customers
+2026-04-17 14:38:16,398 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-17 14:38:16,403 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-17 14:44:07,002 - churn_api - INFO - Label statistics retrieved: 202/215 (94.0%)
+2026-04-17 14:44:07,009 - churn_api - INFO - Retrieved 13 unlabeled customers
+2026-04-17 14:44:07,027 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-17 14:44:07,038 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-17 14:46:01,656 - churn_api - INFO - Label statistics retrieved: 202/215 (94.0%)
+2026-04-17 14:46:01,662 - churn_api - INFO - Retrieved 13 unlabeled customers
+2026-04-17 14:46:01,677 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-17 14:46:01,684 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-17 14:46:01,889 - churn_api - INFO - Label statistics retrieved: 202/215 (94.0%)
+2026-04-17 14:46:01,893 - churn_api - INFO - Retrieved 13 unlabeled customers
+2026-04-17 14:46:01,919 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-17 14:46:01,928 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl

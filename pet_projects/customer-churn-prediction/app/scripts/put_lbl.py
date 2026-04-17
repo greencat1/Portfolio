@@ -139,7 +139,7 @@ def get_unlabeled_data() -> pd.DataFrame:
     """Get all records without Churn labels"""
     with get_db() as conn:
         df = pd.read_sql_query('''
-            SELECT customerID, prediction, probability, created_at
+            SELECT *
             FROM new_data WHERE churn_label IS NULL
         ''', conn)
     
@@ -151,7 +151,7 @@ def get_labeled_data() -> pd.DataFrame:
     """Get all records with Churn labels"""
     with get_db() as conn:
         df = pd.read_sql_query('''
-            SELECT customerID, churn_label as Churn, prediction, probability, label_timestamp
+            SELECT *
             FROM new_data WHERE churn_label IS NOT NULL
         ''', conn)
     
