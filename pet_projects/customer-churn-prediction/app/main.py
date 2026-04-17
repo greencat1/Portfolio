@@ -25,6 +25,7 @@ from app.auth import (
     verify_api_key,      # Validates any API key
     require_user,        # Requires user or admin role (for data operations)
     require_admin,       # Requires admin role (for model management)
+    require_dashboard,
     create_api_key,      # Create new API keys (admin only)
     revoke_api_key,      # Revoke existing API keys (admin only)
     list_api_keys        # List all API keys (admin only)
@@ -209,7 +210,7 @@ def predict_batch_endpoint(
 
 
 @app.get("/label/stats", response_model=LabelStatisticsResponse)
-def get_label_statistics_endpoint(auth: dict = Depends(require_user)):
+def get_label_statistics_endpoint(auth: dict = Depends(require_dashboard)):
     """
     Get statistics about labeled vs unlabeled data.
     
@@ -235,7 +236,7 @@ def get_label_statistics_endpoint(auth: dict = Depends(require_user)):
 
 
 @app.get("/label/unlabeled/list")
-def get_unlabeled_customers(auth: dict = Depends(require_user)):
+def get_unlabeled_customers(auth: dict = Depends(require_dashboard)):
     """
     Get list of all customers without Churn labels.
     
@@ -284,7 +285,7 @@ def get_unlabeled_customers(auth: dict = Depends(require_user)):
 
 
 @app.get("/label/labeled/list")
-def get_labeled_customers(auth: dict = Depends(require_user)):
+def get_labeled_customers(auth: dict = Depends(require_dashboard)):
     """
     Get list of all customers with Churn labels.
     
@@ -441,7 +442,7 @@ def batch_update_labels_endpoint(
 
 
 @app.get("/admin/rate-limit")
-def get_rate_limit_info(auth: dict = Depends(require_user)):
+def get_rate_limit_info(auth: dict = Depends(require_dashboard)):
     """
     Get current rate limit status for your API key.
     
@@ -709,7 +710,7 @@ def compare_models_endpoint(
 @app.get("/models/{model_name}/metrics", response_model=ModelMetricsResponse)
 def get_model_metrics_endpoint(
     model_name: str = "full_churn_pipeline_retrained_cloud.pkl",
-    auth: dict = Depends(require_admin)
+    auth: dict = Depends(require_dashboard)
 ):
     """
     Get metrics for a specific model.

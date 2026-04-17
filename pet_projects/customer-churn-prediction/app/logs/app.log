@@ -388,3 +388,65 @@ KeyError: 'Churn'
 2026-04-17 14:46:01,893 - churn_api - INFO - Retrieved 13 unlabeled customers
 2026-04-17 14:46:01,919 - churn_api - INFO - Retrieved 202 labeled customers
 2026-04-17 14:46:01,928 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-17 15:41:55,066 - churn_api - INFO - New API key created: role=dashboard, name=dashboard, rate_limit=1000
+2026-04-17 16:06:00,151 - churn_api - INFO - Label statistics retrieved: 202/215 (94.0%)
+2026-04-17 16:06:21,938 - churn_api - INFO - Label statistics retrieved: 202/215 (94.0%)
+2026-04-17 16:06:21,956 - churn_api - INFO - Retrieved 13 unlabeled customers
+2026-04-17 16:06:21,998 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-17 16:06:22,022 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-17 16:15:00,971 - churn_api - INFO - Label statistics retrieved: 200/200 (100.0%)
+2026-04-17 16:15:00,989 - churn_api - INFO - No unlabeled customers found
+2026-04-17 16:15:01,038 - churn_api - INFO - Retrieved 200 labeled customers
+2026-04-17 16:15:01,066 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-17 16:16:53,519 - churn_api - INFO - Label statistics retrieved: 200/200 (100.0%)
+2026-04-17 16:16:53,536 - churn_api - INFO - No unlabeled customers found
+2026-04-17 16:16:53,584 - churn_api - INFO - Retrieved 200 labeled customers
+2026-04-17 16:16:53,641 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-17 16:16:53,910 - churn_api - INFO - Label statistics retrieved: 200/200 (100.0%)
+2026-04-17 16:16:53,925 - churn_api - INFO - No unlabeled customers found
+2026-04-17 16:16:53,964 - churn_api - INFO - Retrieved 200 labeled customers
+2026-04-17 16:16:53,991 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-17 16:17:22,675 - churn_api - INFO - Listed 3 API keys
+2026-04-17 16:18:50,642 - churn_api - INFO - Loading model from app/models/full_churn_pipeline_cloud.pkl
+2026-04-17 16:18:50,649 - churn_api - INFO - Model loaded successfully!
+2026-04-17 16:18:50,762 - churn_api - INFO - Added new record for customerID: 7590-VHVEG
+2026-04-17 16:18:50,768 - churn_api - INFO - Prediction successful for customer 7590-VHVEG
+2026-04-17 16:19:00,068 - churn_api - INFO - Batch prediction completed: 2 customers
+2026-04-17 16:21:33,032 - churn_api - INFO - Batch prediction completed: 12 customers
+2026-04-17 16:22:23,762 - churn_api - INFO - Batch prediction completed: 12 customers
+2026-04-17 16:22:48,845 - churn_api - INFO - Label statistics retrieved: 200/202 (99.0%)
+2026-04-17 16:22:48,863 - churn_api - INFO - Retrieved 2 unlabeled customers
+2026-04-17 16:22:48,906 - churn_api - INFO - Retrieved 200 labeled customers
+2026-04-17 16:22:48,940 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-17 16:22:49,470 - churn_api - INFO - Label statistics retrieved: 200/202 (99.0%)
+2026-04-17 16:22:49,484 - churn_api - INFO - Retrieved 2 unlabeled customers
+2026-04-17 16:22:49,544 - churn_api - INFO - Retrieved 200 labeled customers
+2026-04-17 16:22:49,576 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-17 16:23:11,347 - churn_api - INFO - Batch prediction completed: 12 customers
+2026-04-17 16:23:28,433 - churn_api - INFO - Label statistics retrieved: 200/202 (99.0%)
+2026-04-17 16:23:28,451 - churn_api - INFO - Retrieved 2 unlabeled customers
+2026-04-17 16:23:28,497 - churn_api - INFO - Retrieved 200 labeled customers
+2026-04-17 16:23:28,524 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-17 16:24:22,783 - churn_api - INFO - Batch prediction completed: 12 customers
+2026-04-17 16:24:30,124 - churn_api - INFO - Label statistics retrieved: 200/202 (99.0%)
+2026-04-17 16:24:30,140 - churn_api - INFO - Retrieved 2 unlabeled customers
+2026-04-17 16:24:30,183 - churn_api - INFO - Retrieved 200 labeled customers
+2026-04-17 16:24:30,218 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-17 16:24:30,706 - churn_api - INFO - Label statistics retrieved: 200/202 (99.0%)
+2026-04-17 16:24:30,722 - churn_api - INFO - Retrieved 2 unlabeled customers
+2026-04-17 16:24:30,771 - churn_api - INFO - Retrieved 200 labeled customers
+2026-04-17 16:24:30,793 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-17 16:24:47,683 - churn_api - INFO - Label statistics retrieved: 200/202 (99.0%)
+2026-04-17 16:26:44,768 - churn_api - INFO - Label statistics retrieved: 200/202 (99.0%)
+2026-04-17 16:26:56,292 - churn_api - INFO - Loading model from app/models/full_churn_pipeline_cloud.pkl
+2026-04-17 16:26:56,295 - churn_api - INFO - Model loaded successfully!
+2026-04-17 16:26:56,390 - churn_api - INFO - Batch prediction completed: 2 customers
+2026-04-17 16:27:00,461 - churn_api - INFO - Label statistics retrieved: 200/202 (99.0%)
+2026-04-17 16:27:10,660 - churn_api - INFO - Batch prediction completed: 2 customers
+2026-04-17 16:27:15,132 - churn_api - INFO - Label statistics retrieved: 200/203 (98.5%)
+2026-04-17 16:28:58,472 - churn_api - INFO - Batch prediction completed: 20 customers
+2026-04-17 16:29:03,299 - churn_api - INFO - Label statistics retrieved: 200/223 (89.7%)
+2026-04-17 16:29:44,651 - churn_api - INFO - Label statistics retrieved: 200/223 (89.7%)
+2026-04-17 16:29:44,678 - churn_api - INFO - Retrieved 23 unlabeled customers
+2026-04-17 16:29:44,729 - churn_api - INFO - Retrieved 200 labeled customers
+2026-04-17 16:29:44,756 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl

@@ -96,6 +96,14 @@ def require_admin(auth: dict = Depends(verify_api_key)) -> dict:
         )
     return auth
 
+def require_dashboard(auth: dict = Depends(verify_api_key)) -> dict:
+    """Dashboard only access"""
+    if auth.get("role") not in ["user", "admin", "dashboard"]:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Dashboard privileges required for this endpoint"
+        )
+    return auth
 
 # =====================================================
 # API Key Management Functions (Admin Only)
