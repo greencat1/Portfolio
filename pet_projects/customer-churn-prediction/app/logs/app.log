@@ -461,3 +461,60 @@ KeyError: 'Churn'
 2026-04-18 06:13:15,211 - churn_api - INFO - Retrieved 23 unlabeled customers
 2026-04-18 06:13:15,236 - churn_api - INFO - Retrieved 200 labeled customers
 2026-04-18 06:13:15,271 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-18 06:59:23,083 - churn_api - INFO - Label statistics retrieved: 200/223 (89.7%)
+2026-04-18 06:59:23,099 - churn_api - INFO - Retrieved 23 unlabeled customers
+2026-04-18 06:59:23,120 - churn_api - INFO - Retrieved 200 labeled customers
+2026-04-18 06:59:23,158 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-18 06:59:41,837 - churn_api - INFO - Loading model from app/models/full_churn_pipeline_cloud.pkl
+2026-04-18 06:59:41,917 - churn_api - INFO - Model loaded successfully!
+2026-04-18 06:59:41,955 - churn_api - INFO - Updated existing record for customerID: 7590-VHVEG
+2026-04-18 06:59:41,960 - churn_api - INFO - Prediction successful for customer 7590-VHVEG
+2026-04-18 06:59:47,001 - churn_api - INFO - Batch prediction completed: 2 customers
+2026-04-18 06:59:54,198 - churn_api - INFO - Label statistics retrieved: 200/223 (89.7%)
+2026-04-18 07:00:01,288 - churn_api - INFO - Retrieved 23 unlabeled customers
+2026-04-18 07:00:09,237 - churn_api - INFO - Retrieved 200 labeled customers
+2026-04-18 07:00:26,889 - churn_api - INFO - Label retrieved for customer 1902-XBTFB
+2026-04-18 07:00:34,690 - churn_api - INFO - Label updated for customer 7590-VHVEG: Yes
+2026-04-18 07:00:42,728 - churn_api - INFO - Batch label update completed: 2 successful, 0 failed
+2026-04-18 07:00:50,586 - churn_api - INFO - Rate limit info requested for key 456...
+2026-04-18 07:01:01,158 - churn_api - INFO - Retraining status checked: ready
+2026-04-18 07:01:08,017 - churn_api - INFO - Starting incremental retraining
+2026-04-18 07:01:08,030 - churn_api - INFO - Loaded 202 labeled samples from database
+2026-04-18 07:01:08,030 - churn_api - INFO - Loaded existing model from app/models/full_churn_pipeline_cloud.pkl
+2026-04-18 07:01:08,040 - churn_api - INFO - Backup saved to app/models/inc_churn_pipeline_backup_cloud.pkl
+2026-04-18 07:01:08,053 - churn_api - INFO - Transformed 202 samples for retraining
+2026-04-18 07:01:08,469 - churn_api - INFO - Incremental retraining completed: 202 samples used
+2026-04-18 07:01:19,102 - churn_api - INFO - Starting full retraining
+2026-04-18 07:01:19,177 - churn_api - INFO - Loaded 7043 samples from raw_data table
+2026-04-18 07:01:19,185 - churn_api - INFO - Loaded 202 labeled samples from new_data table
+2026-04-18 07:01:19,190 - churn_api - INFO - Combined 7043 old + 202 new = 7245 total samples
+2026-04-18 07:01:19,198 - churn_api - INFO - Features: 20 columns
+2026-04-18 07:01:19,200 - churn_api - INFO - Target distribution: Yes=1940, No=5305
+2026-04-18 07:01:19,200 - churn_api - INFO - Building pipeline...
+2026-04-18 07:01:19,200 - churn_api - INFO - Training model...
+2026-04-18 07:01:20,173 - churn_api - INFO - Model training completed successfully!
+2026-04-18 07:01:20,222 - churn_api - INFO - Training metrics: {'accuracy': 0.692063492063492, 'precision': 0.4618610747051114, 'recall': 0.9082474226804124, 'f1_score': 0.6123370981754995}
+2026-04-18 07:01:20,238 - churn_api - INFO - Backup saved to app/models/full_churn_pipeline_backup_cloud.pkl
+2026-04-18 07:01:20,243 - churn_api - INFO - Retrained model saved to app/models/full_churn_pipeline_retrained_cloud.pkl
+2026-04-18 07:01:20,247 - churn_api - INFO - Full retraining completed: 7245 total samples
+2026-04-18 07:01:28,318 - churn_api - INFO - Listed 5 models
+2026-04-18 07:01:40,074 - churn_api - INFO - Active model retrieved: full_churn_pipeline_cloud.pkl
+2026-04-18 07:01:48,450 - churn_api - INFO - Switching model to: full_churn_pipeline_retrained_cloud.pkl
+2026-04-18 07:01:48,451 - churn_api - INFO - Model switched from full_churn_pipeline_cloud.pkl to full_churn_pipeline_retrained_cloud.pkl
+2026-04-18 07:01:58,785 - churn_api - WARNING - Deleting model: full_churn_pipeline_backup_cloud.pkl, force=False
+2026-04-18 07:01:58,789 - churn_api - INFO - Model deleted: full_churn_pipeline_backup_cloud.pkl
+2026-04-18 07:02:14,749 - churn_api - INFO - Comparing models: full_churn_pipeline_cloud.pkl vs full_churn_pipeline_retrained_cloud.pkl
+2026-04-18 07:02:28,609 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_retrained_cloud.pkl
+2026-04-18 07:02:37,221 - churn_api - INFO - Testing model: full_churn_pipeline_retrained_cloud.pkl
+2026-04-18 07:02:37,254 - churn_api - INFO - Model full_churn_pipeline_retrained_cloud.pkl test completed: recall=0.8450704225352113
+2026-04-18 07:02:56,557 - churn_api - INFO - New API key created: role=tester, name=user, rate_limit=100
+2026-04-18 07:03:05,379 - churn_api - INFO - Listed 4 API keys
+2026-04-18 07:03:31,394 - churn_api - WARNING - Revoking API key: 70ae7450...
+2026-04-18 07:03:38,569 - churn_api - INFO - Label statistics retrieved: 202/223 (90.6%)
+2026-04-18 07:03:38,583 - churn_api - INFO - Retrieved 21 unlabeled customers
+2026-04-18 07:03:38,612 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-18 07:03:38,632 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-18 07:03:38,789 - churn_api - INFO - Label statistics retrieved: 202/223 (90.6%)
+2026-04-18 07:03:38,803 - churn_api - INFO - Retrieved 21 unlabeled customers
+2026-04-18 07:03:38,827 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-18 07:03:38,844 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
