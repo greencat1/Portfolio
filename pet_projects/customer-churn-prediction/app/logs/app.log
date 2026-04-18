@@ -518,3 +518,24 @@ KeyError: 'Churn'
 2026-04-18 07:03:38,803 - churn_api - INFO - Retrieved 21 unlabeled customers
 2026-04-18 07:03:38,827 - churn_api - INFO - Retrieved 202 labeled customers
 2026-04-18 07:03:38,844 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-18 07:25:12,739 - churn_api - INFO - Label statistics retrieved: 202/223 (90.6%)
+2026-04-18 07:25:12,754 - churn_api - INFO - Retrieved 21 unlabeled customers
+2026-04-18 07:25:12,772 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-18 07:25:12,801 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-18 07:29:19,203 - churn_api - INFO - Label statistics retrieved: 202/223 (90.6%)
+2026-04-18 07:29:19,218 - churn_api - INFO - Retrieved 21 unlabeled customers
+2026-04-18 07:29:19,247 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-18 07:29:19,267 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-18 07:54:27,194 - churn_api - INFO - Label statistics retrieved: 202/223 (90.6%)
+2026-04-18 07:54:27,206 - churn_api - INFO - Retrieved 21 unlabeled customers
+2026-04-18 07:54:27,225 - churn_api - INFO - Retrieved 202 labeled customers
+2026-04-18 07:54:27,241 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-18 07:54:43,743 - churn_api - INFO - Health check requested
+2026-04-18 07:55:04,812 - churn_api - INFO - Loading model from app/models/full_churn_pipeline_cloud.pkl
+2026-04-18 07:55:04,822 - churn_api - INFO - Model loaded successfully!
+2026-04-18 07:55:04,868 - churn_api - INFO - Updated existing record for customerID: 7590-VHVEG
+2026-04-18 07:55:04,883 - churn_api - INFO - Prediction successful for customer 7590-VHVEG
+2026-04-18 07:55:15,647 - churn_api - INFO - Listed 4 API keys
+2026-04-18 07:55:23,105 - churn_api - INFO - Active model retrieved: full_churn_pipeline_cloud.pkl
+2026-04-18 07:55:42,609 - churn_api - INFO - Listed 4 models
+2026-04-18 07:56:16,231 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl

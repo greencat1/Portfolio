@@ -1,0 +1,54 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Version control
+.git/
+.gitignore
+
+# Documentation
+*.md
+README.md
+
+# Environment
+.env
+.venv/
+venv/
+ENV/
+
+# Logs
+*.log
+logs/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+tests/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# ============================================
+# BIG FILES - MOST IMPORTANT!
+# ============================================
+
+# Models (100-500 MB)
+*.pkl
+*.joblib
+app/models/*.pkl
+app/models/*.joblib
+
+# Databases (10-100 MB)
+*.db
+*.sqlite
+*.sqlite3
+app/data/DB/*.db
+
+# IDE
+.vscode/
+.idea/
+*.swp

@@ -4,18 +4,6 @@
 
 services:
   # ============================================
-  # TEST RUNNER SERVICE
-  # ============================================
-  # Runs pytest before starting API
-  # If tests fail, API won't start
-  test-runner:
-    build:
-      context: .
-      dockerfile: Dockerfile.api
-    command: pytest app/tests/ -v              # Override default CMD
-    restart: "no"                          # Run once and exit
-
-  # ============================================
   # FASTAPI BACKEND SERVICE
   # ============================================
   api:
@@ -24,16 +12,13 @@ services:
       dockerfile: Dockerfile.api
     container_name: churn-api
     ports:
-      - "8000:8000"                        # Host:Container port mapping
+      - "8000:8000"
     volumes:
-      - ./app/data:/app/app/data           # Persist database
-      - ./app/models:/app/app/models       # Persist models
-      - ./app/logs:/app/app/logs           # Persist logs
-      - ./app/metrics:/app/app/metrics     # Persist metrics
-    depends_on:
-      test-runner:
-        condition: service_completed_successfully  # Wait for tests to pass
-    restart: unless-stopped                # Auto-restart on crash
+      - ./app/data:/app/app/data
+      - ./app/models:/app/app/models
+      - ./app/logs:/app/app/logs
+      - ./app/metrics:/app/app/metrics
+    restart: unless-stopped
 
   # ============================================
   # STREAMLIT DASHBOARD SERVICE
@@ -46,7 +31,7 @@ services:
     ports:
       - "8501:8501"
     depends_on:
-      - api                                # Wait for API to be healthy
+      - api
     environment:
-      - API_URL=http://api:8000            # Internal Docker network address
+      - API_URL=http://api:8000
     restart: unless-stopped
