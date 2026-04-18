@@ -13,7 +13,8 @@ from dotenv import load_dotenv
 
 # Load environment variables from .env file (only for local development)
 # This line looks for .env file in the parent directory
-env_path = Path(__file__).parent.parent / '.env'
+env_path = Path(__file__).parent.parent / 'app/.env'
+print(env_path)
 load_dotenv(dotenv_path=env_path)
 
 

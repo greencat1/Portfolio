@@ -450,3 +450,14 @@ KeyError: 'Churn'
 2026-04-17 16:29:44,678 - churn_api - INFO - Retrieved 23 unlabeled customers
 2026-04-17 16:29:44,729 - churn_api - INFO - Retrieved 200 labeled customers
 2026-04-17 16:29:44,756 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-17 20:37:51,757 - churn_api - INFO - Loading model from app/models/full_churn_pipeline_cloud.pkl
+2026-04-17 20:37:51,769 - churn_api - INFO - Model loaded successfully!
+2026-04-17 20:37:51,862 - churn_api - INFO - Updated existing record for customerID: 7590-VHVEG
+2026-04-17 20:37:51,862 - churn_api - INFO - Prediction successful for customer 7590-VHVEG
+2026-04-17 13:58:43,066 - churn_api - INFO - Health check requested
+2026-04-17 13:59:03,020 - churn_api - INFO - Label statistics retrieved: 200/223 (89.7%)
+2026-04-18 06:05:24,843 - churn_api - INFO - Health check requested
+2026-04-18 06:13:15,193 - churn_api - INFO - Label statistics retrieved: 200/223 (89.7%)
+2026-04-18 06:13:15,211 - churn_api - INFO - Retrieved 23 unlabeled customers
+2026-04-18 06:13:15,236 - churn_api - INFO - Retrieved 200 labeled customers
+2026-04-18 06:13:15,271 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl

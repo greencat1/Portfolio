@@ -110,13 +110,34 @@ def startup_event():
     from app.core.database import init_db, get_db
     init_db()
     
-    # 2. Prompt for API keys (will block until entered)
-    from app.core.key_input import input_and_save_keys
-    try:
-        input_and_save_keys()
-    except ValueError as e:
-        print(f"❌ Startup failed: {e}")
-        raise
+    # 2. Get API keys from environment or prompt
+    import os
+    from app.core.key_input import hash_key
+    
+    user_key = os.getenv("USER_API_KEY")
+    admin_key = os.getenv("ADMIN_API_KEY")
+    
+    if user_key and admin_key:
+        print("🔑 Using API keys from environment variables")
+        with get_db() as conn:
+            conn.execute('''
+                INSERT OR REPLACE INTO api_keys (key_hash, name, role, rate_limit, is_active)
+                VALUES (?, ?, ?, ?, ?)
+            ''', (hash_key(user_key), "env_user", "user", 100, 1))
+            
+            conn.execute('''
+                INSERT OR REPLACE INTO api_keys (key_hash, name, role, rate_limit, is_active)
+                VALUES (?, ?, ?, ?, ?)
+            ''', (hash_key(admin_key), "env_admin", "admin", 1000, 1))
+            conn.commit()
+        print("✅ API keys loaded from environment")
+    else:
+        from app.core.key_input import input_and_save_keys
+        try:
+            input_and_save_keys()
+        except ValueError as e:
+            print(f"❌ Startup failed: {e}")
+            raise
     
     # 3. Refresh auth cache
     from app.auth import refresh_key_cache

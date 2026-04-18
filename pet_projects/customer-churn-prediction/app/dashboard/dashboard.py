@@ -4,10 +4,12 @@ import requests
 import pandas as pd
 import plotly.express as px
 import numpy as np
+import os
 
 st.set_page_config(page_title="Churn Dashboard", layout="wide")
 
-API_URL = "http://127.0.0.1:8000"
+API_URL = os.getenv("API_URL", "http://127.0.0.1:8000")
+
 
 # Session initialization
 if "api_key" not in st.session_state:
