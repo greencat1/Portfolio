@@ -539,3 +539,9 @@ KeyError: 'Churn'
 2026-04-18 07:55:23,105 - churn_api - INFO - Active model retrieved: full_churn_pipeline_cloud.pkl
 2026-04-18 07:55:42,609 - churn_api - INFO - Listed 4 models
 2026-04-18 07:56:16,231 - churn_api - INFO - Metrics retrieved for model full_churn_pipeline_cloud.pkl
+2026-04-20 20:41:35,124 - churn_api - INFO - Health check requested
+2026-04-20 20:41:35,133 - churn_api - INFO - Loading model from app/models/full_churn_pipeline_cloud.pkl
+2026-04-20 20:41:35,162 - churn_api - INFO - Model loaded successfully!
+2026-04-20 20:41:35,233 - churn_api - INFO - Added new record for customerID: TEST-001
+2026-04-20 20:41:35,236 - churn_api - INFO - Prediction successful for customer TEST-001
+2026-04-20 20:41:35,267 - churn_api - WARNING - Rate limit exceeded for API key test_key...
