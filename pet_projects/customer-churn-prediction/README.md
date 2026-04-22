@@ -65,20 +65,20 @@ It provides:
 ---
 
 ## 📁 Project Structure
-.
-├── app/ # Main application (FastAPI backend)
-├── data/ # Database and data files (SQLite, datasets)
-├── documentation/ # Full technical documentation
-├── models/ # Trained ML models (.pkl pipelines)
-├── notebooks/ # EDA, experiments, model development
-├── presentation/ # Slides / demo materials
-├── Dockerfile.api # FastAPI container
-├── Dockerfile.dashboard # Streamlit container
-├── docker-compose.yml # Multi-container orchestration
-├── requirements.txt # Dependencies
-├── .dockerignore # Ignore rules for Docker
-└── README.md # Project description
 
+    .
+    ├── app/                  # Main application (FastAPI backend)
+    ├── data/                 # Database and data files (SQLite, datasets)
+    ├── documentation/        # Full technical documentation
+    ├── models/               # Trained ML models (.pkl pipelines)
+    ├── notebooks/            # EDA, experiments, model development
+    ├── presentation/         # Slides / demo materials
+    ├── Dockerfile.api        # FastAPI container
+    ├── Dockerfile.dashboard  # Streamlit container
+    ├── docker-compose.yml    # Multi-container orchestration
+    ├── requirements.txt      # Dependencies
+    ├── .dockerignore         # Ignore rules for Docker
+    └── README.md             # Project description
 
 ---
 
