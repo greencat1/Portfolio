@@ -20,8 +20,8 @@ Portfolio/
 │   ├── IBM Generative AI Engineering Professional Certificate/  
 │   └── Certificates/  
 │  
-├── Pet_Projects/  
-│   ├── 1/
+├── Pet_Projects/ # Hands-on ML projects
+│ └── customer-churn-prediction/ # Churn prediction service (FastAPI + Docker+)
 │  
 ├── scientific publications/
 │   ├── Traffic_Sign_Detection_SSD/
@@ -29,6 +29,28 @@ Portfolio/
 │  
 └── README.md  
 ```
+
+---
+
+
+## 🚀 Featured Project
+
+### Customer Churn Prediction Service
+
+[![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115-green.svg)](https://fastapi.tiangolo.com/)
+[![CatBoost](https://img.shields.io/badge/CatBoost-1.2-orange.svg)](https://catboost.ai/)
+[![Docker](https://img.shields.io/badge/Docker-24.x-blue.svg)](https://www.docker.com/)
+
+**Production-ready ML service** that predicts customer churn for telecom companies — enabling proactive retention before customers leave.
+
+- **84.5% recall** in production
+- REST API with authentication + rate limiting
+- Interactive Streamlit dashboard
+- Docker deployment (2 containers)
+- 15 unit tests (100% pass)
+
+**Live Demo:** [API Docs](http://207.231.105.113:8000/docs) | [Dashboard](http://207.231.105.113:8501)
 
 ---
 
@@ -97,11 +119,15 @@ Pet projects highlight **initiative**, **curiosity**, and **hands-on machine lea
 - Feature engineering  
 - Data cleaning and preprocessing  
 - Exploratory Data Analysis (EDA)  
+- Handling missing values with domain logic
+- Correlation analysis and multicollinearity reduction
 
 ### 📈 Data Visualization
 - Matplotlib, Seaborn  
 - Clear and interpretable visualizations  
 - Data-driven storytelling  
+- Plotly interactive visualizations 
+- Dashboard development (Streamlit)
 
 ### 🤖 Machine Learning
 - Regression and classification  
@@ -109,6 +135,10 @@ Pet projects highlight **initiative**, **curiosity**, and **hands-on machine lea
 - Model evaluation and validation  
 - Cross-validation and metrics  
 - Scikit-learn pipelines  
+- Gradient boosting (CatBoost, XGBoost, LightGBM)
+- Class imbalance handling (class weights, stratified sampling)
+- Hyperparameter tuning (GridSearchCV, RandomizedSearchCV) 
+- Incremental / continued learning
 
 ### 🧩 Advanced & Unsupervised Methods
 - Clustering techniques  
@@ -123,6 +153,8 @@ Pet projects highlight **initiative**, **curiosity**, and **hands-on machine lea
 - Non-Maximum Suppression (NMS)
 - Mean Average Precision (mAP)
 - Confusion matrix analysis
+- YOLOv7 architecture
+- SSD (Single Shot Detector)
 
 ### 🤖 Deep Learning
 - Convolutional Neural Networks (CNNs)
@@ -136,6 +168,8 @@ Pet projects highlight **initiative**, **curiosity**, and **hands-on machine lea
 - Cross-validation
 - Overfitting detection
 - Metric-driven optimization
+- Recall as primary metric for imbalanced data
+- Precision-Recall tradeoff
 
 ### 📝 NLP & Information Extraction
 - Text preprocessing  
@@ -152,7 +186,7 @@ Pet projects highlight **initiative**, **curiosity**, and **hands-on machine lea
 ### 🌐 Data Collection
 - Web scraping with BeautifulSoup  
 - HTTP requests with Requests
-  
+
 ### 🗄 SQL & Relational Databases
 - Writing complex SQL queries (SELECT, WHERE, JOIN)
 - Aggregations and GROUP BY
@@ -160,30 +194,68 @@ Pet projects highlight **initiative**, **curiosity**, and **hands-on machine lea
 - Window functions (ROW_NUMBER, RANK)
 - Data filtering and transformation
 - Connecting Python to SQL databases
+- SQLite for embedded applications
+- Database design (3 tables: api_keys, new_data, raw_data)
 
-  ## 📐 Statistics & Probability
+### 🚀 API Development & Backend
+- REST API design (FastAPI)
+- API key authentication (SHA-256 hashing)
+- Role-Based Access Control (user/admin/dashboard)
+- Rate limiting (sliding window algorithm)
+- Request/response validation (Pydantic)
+- Automatic API documentation (Swagger UI / OpenAPI)
+- Batch processing endpoints
 
-### Descriptive Statistics
+### 📊 Dashboard & Monitoring
+- Interactive dashboard development (Streamlit)
+- Real-time data visualization
+- Business metric tracking (MRR, revenue at risk)
+- Retention recommendations UI
+
+### 🐳 DevOps & Deployment
+- Containerization with Docker
+- Multi-container orchestration (Docker Compose)
+- Volume mounting for data persistence
+- VPS deployment (Ubuntu)
+
+### 🧪 Testing & Quality Assurance
+- Unit testing with pytest
+
+### 📝 Logging & Monitoring
+- Application logging (Python logging module)
+- Rotating file handlers
+- JSON log format
+- Console + file logging
+
+### 🔐 Security
+- SHA-256 hashing
+- Soft deletion (is_active flag)
+- Role-based endpoint protection
+- Header-based authentication (X-API-Key)
+
+### 📐 Statistics & Probability
+
+#### Descriptive Statistics
 - Mean, median, mode  
 - Variance and standard deviation  
 - Quantiles, percentiles, interquartile range (IQR)  
 - Distribution shape analysis (skewness, kurtosis)
 
-### Probability Theory
+#### Probability Theory
 - Random variables  
 - Probability distributions  
 - Bernoulli, Binomial, Poisson, Normal distributions  
 - Probability mass and density functions (PMF, PDF)  
 - Cumulative distribution functions (CDF)
 
-### Statistical Inference
+#### Statistical Inference
 - Sampling techniques and sampling bias  
 - Point estimation  
 - Confidence intervals  
 - Central Limit Theorem (CLT)  
 - Bootstrapping and resampling methods
 
-### Hypothesis Testing
+#### Hypothesis Testing
 - Null and alternative hypotheses  
 - p-values and significance levels  
 - One-sample and two-sample tests  
@@ -191,24 +263,24 @@ Pet projects highlight **initiative**, **curiosity**, and **hands-on machine lea
 - Chi-square test  
 - Non-parametric tests (Mann–Whitney U, Wilcoxon)
 
-### Correlation & Dependency Analysis
+#### Correlation & Dependency Analysis
 - Pearson correlation  
 - Spearman rank correlation  
 - Covariance analysis  
 - Multicollinearity detection
 
-### Statistical Modeling Fundamentals
+#### Statistical Modeling Fundamentals
 - Linear regression assumptions  
 - Residual analysis  
 - Bias–variance tradeoff  
 - Statistical interpretation of machine learning models
 
-### Exploratory Statistical Analysis
+#### Exploratory Statistical Analysis
 - Distribution visualization (histograms, KDE, boxplots)  
 - Outlier detection  
 - Statistical comparison of groups
 
-### Applied Statistics for Data Science
+#### Applied Statistics for Data Science
 - A/B testing fundamentals  
 - Data-driven decision making  
 - Statistical validation of model results
@@ -221,27 +293,43 @@ Pet projects highlight **initiative**, **curiosity**, and **hands-on machine lea
 - Text embeddings and semantic search
 - Building LLM-based applications
 
+### 💼 Business & Product Skills
+- ROI calculation for ML models
+- Economic impact analysis (MRR, revenue saved)
+- Technical documentation (100+ pages)
+- Presentation and stakeholder communication
+- Project portfolio management
+
 ---
 
 ## 🛠 Tools & Technologies
 
-Category | Tools  
--------- | -----  
-Programming | Python  
-Data Libraries | NumPy, Pandas, SciPy  
-Visualization | Matplotlib, Seaborn  
-Machine Learning | Scikit-learn, MLXtend  
-Deep Learning | PyTorch  
-Computer Vision | OpenCV  
-NLP | NLTK, re(regular expressions) 
-Graph Analysis | NetworkX  
-Web Scraping | BeautifulSoup4, Requests  
-Experimentation | Google Colab  
-Workflow | Jupyter Notebook, Git, GitHub  
-Databases | SQL
-Generative AI | Hugging Face Transformers, LangChain, Prompt Engineering, RAG
-Vector Databases | FAISS / Chroma / Pinecone
-LLM Engineering | Fine-tuning, PEFT (LoRA), embeddings
+| Category | Tools |
+|----------|-------|
+| Programming | Python |
+| Data Libraries | NumPy, Pandas, SciPy |
+| Visualization | Matplotlib, Seaborn, Plotly |
+| Machine Learning | Scikit-learn, MLXtend, CatBoost, XGBoost |
+| Deep Learning | PyTorch |
+| Computer Vision | OpenCV, YOLOv7, SSD |
+| NLP | NLTK, re (regular expressions) |
+| Graph Analysis | NetworkX |
+| Web Scraping | BeautifulSoup4, Requests |
+| API Development | FastAPI, Uvicorn, REST API |
+| Dashboard & UI | Streamlit |
+| Databases | SQL, SQLite |
+| Model Serialization | cloudpickle, pickle |
+| Authentication | API Keys, SHA-256 hashing, RBAC |
+| Rate Limiting | Sliding window algorithm |
+| Containerization | Docker, Docker Compose |
+| Workflow | Jupyter Notebook, Git, GitHub |
+| Testing | pytest, unit testing, integration testing |
+| Logging | Python logging, RotatingFileHandler |
+| Deployment | Ubuntu VPS, Docker Compose |
+| Experimentation | Google Colab |
+| Generative AI | Hugging Face Transformers, LangChain, Prompt Engineering, RAG |
+| Vector Databases | FAISS, Chroma, Pinecone |
+| LLM Engineering | Fine-tuning, PEFT (LoRA), embeddings |
 
 ---
 
