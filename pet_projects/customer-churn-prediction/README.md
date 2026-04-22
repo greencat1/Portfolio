@@ -65,6 +65,7 @@ It provides:
 ---
 
 ## 📁 Project Structure
+.
 ├── app/ # Main application (FastAPI backend)
 ├── data/ # Database and data files (SQLite, datasets)
 ├── documentation/ # Full technical documentation
