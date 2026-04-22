@@ -195,7 +195,7 @@ git clone https://github.com/greencat1/Portfolio.git
 cd pet_projects/customer-churn-prediction
 
 docker-compose up --build
-
+```
 ---
 
 🔑 Example API Request
