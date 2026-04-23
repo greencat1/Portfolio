@@ -1,6 +1,6 @@
-train: ..data/raw/Traffic Signs/train/images
-val: ..data/raw/Traffic Signs/valid/images
-test: ..data/raw/Traffic Signs/valid/images
+train: ../traffic-sign-detection/data/raw/Traffic Signs/train/images
+val: ../traffic-sign-detection/data/raw/Traffic Signs/valid/images
+test: ../traffic-sign-detection/data/raw/Traffic Signs/valid/images
 
 nc: 55
 names: ['forb_ahead', 'forb_left', 'forb_overtake', 'forb_right', 'forb_speed_over_10', 'forb_speed_over_100', 'forb_speed_over_130', 'forb_speed_over_20', 'forb_speed_over_30', 'forb_speed_over_40', 'forb_speed_over_5', 'forb_speed_over_50', 'forb_speed_over_60', 'forb_speed_over_70', 'forb_speed_over_80', 'forb_speed_over_90', 'forb_stopping', 'forb_trucks', 'forb_u_turn', 'forb_weight_over_3.5t', 'forb_weight_over_7.5t', 'info_bus_station', 'info_crosswalk', 'info_highway', 'info_one_way_traffic', 'info_parking', 'info_taxi_parking', 'mand_bike_lane', 'mand_left', 'mand_left_right', 'mand_pass_left', 'mand_pass_left_right', 'mand_pass_right', 'mand_right', 'mand_roundabout', 'mand_straigh_left', 'mand_straight', 'mand_straight_right', 'prio_give_way', 'prio_priority_road', 'prio_stop', 'warn_children', 'warn_construction', 'warn_crosswalk', 'warn_cyclists', 'warn_domestic_animals', 'warn_other_dangers', 'warn_poor_road_surface', 'warn_roundabout', 'warn_slippery_road', 'warn_speed_bumper', 'warn_traffic_light', 'warn_tram', 'warn_two_way_traffic', 'warn_wild_animals']
