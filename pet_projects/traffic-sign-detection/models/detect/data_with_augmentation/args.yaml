@@ -1,6 +1,6 @@
 task: detect
 mode: train
-model: yolov8n.pt
+model: yolo11m.pt
 data: ..\data\data_with_augmentation.yaml
 epochs: 100
 time: null
