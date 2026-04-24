@@ -1,7 +1,20 @@
-import cv2
 import random
+import os
+import yaml
+import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
+from ultralytics import YOLO
+from IPython.display import Image as IPImage
+import cv2
+
+# Set plot style for professional lookplt.style.use('seaborn-v0_8-darkgrid')
+plt.rcParams['figure.figsize'] = (12, 8)
+plt.rcParams['font.size'] = 12
+plt.rcParams['axes.titlesize'] = 14
+plt.rcParams['axes.labelsize'] = 12
+
 
 # ============================================================================
 # Random training images with bboxes
@@ -90,3 +103,135 @@ def visualize_random_samples(image_dir, label_dir, num_samples=9, class_names=No
     plt.show()
     
     print(f" Saved: ../outputs/sample_visualization.png")
+
+
+# ============================================
+# SIMPLE YOLO VISUALIZATION FUNCTIONS
+# For Traffic Sign Detection Project
+# ============================================
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from pathlib import Path
+from ultralytics import YOLO
+import cv2
+
+
+def load_results(exp_name, base_dir="../models/detect"):
+    """Load training results CSV"""
+    path = Path(base_dir) / exp_name / "results.csv"
+    df = pd.read_csv(path)
+    df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
+    print(f"Loaded {len(df)} epochs from {exp_name}")
+    return df
+
+
+def plot_losses(df):
+    """Plot training losses"""
+    plt.figure(figsize=(12, 4))
+    
+    plt.subplot(1, 3, 1)
+    plt.plot(df['epoch'], df['train/box_loss'], label='Box', linewidth=2)
+    plt.plot(df['epoch'], df['train/cls_loss'], label='Cls', linewidth=2)
+    plt.xlabel('Epoch')
+    plt.ylabel('Loss')
+    plt.title('Training Losses')
+    plt.legend()
+    plt.grid(True, alpha=0.3)
+    
+    plt.subplot(1, 3, 2)
+    plt.plot(df['epoch'], df['metrics/mAP50(B)'], label='mAP50', color='green', linewidth=2)
+    plt.plot(df['epoch'], df['metrics/mAP50-95(B)'], label='mAP50-95', color='blue', linewidth=2)
+    plt.xlabel('Epoch')
+    plt.ylabel('Score')
+    plt.title('Validation Metrics')
+    plt.legend()
+    plt.grid(True, alpha=0.3)
+    
+    plt.subplot(1, 3, 3)
+    plt.plot(df['epoch'], df['metrics/precision(B)'], label='Precision', color='red', linewidth=2)
+    plt.plot(df['epoch'], df['metrics/recall(B)'], label='Recall', color='orange', linewidth=2)
+    plt.xlabel('Epoch')
+    plt.ylabel('Score')
+    plt.title('Precision & Recall')
+    plt.legend()
+    plt.grid(True, alpha=0.3)
+    
+    plt.tight_layout()
+    plt.show()
+
+
+def plot_map_progress(df):
+    """Plot mAP50-95 progress with peak annotation"""
+    plt.figure(figsize=(10, 5))
+    
+    best_epoch = df['metrics/mAP50-95(B)'].idxmax()
+    best_value = df.loc[best_epoch, 'metrics/mAP50-95(B)']
+    
+    plt.plot(df['epoch'], df['metrics/mAP50-95(B)'], label='mAP50-95', color='blue', linewidth=2)
+    plt.fill_between(df['epoch'], 0, df['metrics/mAP50-95(B)'], alpha=0.3)
+    plt.axhline(y=best_value, color='green', linestyle='--', label=f'Best: {best_value:.4f}')
+    plt.axvline(x=best_epoch, color='orange', linestyle='--', alpha=0.5)
+    
+    plt.xlabel('Epoch')
+    plt.ylabel('mAP50-95')
+    plt.title(f'Best mAP50-95: {best_value:.4f} at epoch {best_epoch}')
+    plt.legend()
+    plt.grid(True, alpha=0.3)
+    plt.show()
+    
+    return best_epoch, best_value
+
+
+def plot_confusion_matrix(exp_name, base_dir="../models/detect"):
+    """Display confusion matrix"""
+    path = Path(base_dir) / exp_name / "confusion_matrix.png"
+    if path.exists():
+        from IPython.display import Image
+        display(Image(filename=str(path), width=800))
+    else:
+        print("Confusion matrix not found")
+
+
+
+def print_summary(df):
+    """Print key metrics summary"""
+    best_epoch = df['metrics/mAP50-95(B)'].idxmax()
+    best_map = df.loc[best_epoch, 'metrics/mAP50-95(B)']
+    final_map = df['metrics/mAP50-95(B)'].iloc[-1]
+    
+    print("\n" + "="*50)
+    print("TRAINING SUMMARY")
+    print("="*50)
+    print(f"Best mAP50-95:  {best_map:.4f} (epoch {best_epoch})")
+    print(f"Final mAP50-95: {final_map:.4f}")
+    print(f"Best mAP50:     {df['metrics/mAP50(B)'].max():.4f}")
+    print(f"Best Precision: {df['metrics/precision(B)'].max():.4f}")
+    print(f"Best Recall:    {df['metrics/recall(B)'].max():.4f}")
+    print("="*50)
+    
+    # Early stopping suggestion
+    epochs_since_best = len(df) - best_epoch
+    if epochs_since_best > 20:
+        print(f"\n  {epochs_since_best} epochs wasted after peak!")
+        print(f"   Try: patience={epochs_since_best + 5} or lower")
+    else:
+        print(f"\n Good! Only {epochs_since_best} epochs after peak")
+
+
+def quick_analyze(exp_name):
+    """Run all basic visualizations at once"""
+    print(f"\n🔍 Analyzing: {exp_name}")
+    print("="*50)
+    
+    df = load_results(exp_name)
+    plot_losses(df)
+    plot_map_progress(df)
+    print_summary(df)
+    
+    # Try to show confusion matrix
+    plot_confusion_matrix(exp_name)
+
+
+
