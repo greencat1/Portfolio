@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Road Sign Detector</title>
+    <style>
+        body {
+            font-family: monospace;
+            margin: 20px;
+            text-align: center;
+        }
+        button {
+            font-size: 16px;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        #status {
+            color: green;
+            font-weight: bold;
+        }
+        .controls {
+            margin-bottom: 20px;
+        }
+        #video-container {
+            position: relative;
+            display: inline-block;
+        }
+        #video {
+            border: 2px solid #333;
+            background: #000;
+        }
+        #overlay-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: left;
+            max-width: 600px;
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h1>🚦 Road Sign Detector</h1>
+    <div class="controls">
+        <button id="startCameraBtn">📷 Enable Camera</button>
+        <button id="startDetectionBtn" disabled>🔄 Start Detection</button>
+    </div>
+    <p>Status: <span id="status">Ready</span></p>
+    
+    <div id="video-container">
+        <video id="video" autoplay playsinline></video>
+        <canvas id="overlay-canvas"></canvas>
+    </div>
+    
+    <div id="result"></div>
+</div>
+
+<script>
+    // ============================================================
+    // Road Sign Detector - Real-time detection via WebSocket
+    // ============================================================
+    
+    // DOM element references
+    const video = document.getElementById('video');
+    const overlayCanvas = document.getElementById('overlay-canvas');
+    const overlayCtx = overlayCanvas.getContext('2d');
+    const statusSpan = document.getElementById('status');
+    const startCameraBtn = document.getElementById('startCameraBtn');
+    const startDetectionBtn = document.getElementById('startDetectionBtn');
+    
+    // State variables
+    let stream = null;          // Camera stream
+    let ws = null;              // WebSocket connection
+    let intervalId = null;      // Frame sending interval
+    
+    // ============================================================
+    // 1. Enable Camera - Request access to user's webcam
+    // ============================================================
+    startCameraBtn.onclick = async () => {
+        try {
+            statusSpan.innerText = 'Requesting camera access...';
+            
+            // Get user media stream from webcam
+            stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            video.srcObject = stream;
+            
+            // Wait for video metadata to load to get actual dimensions
+            await new Promise((resolve) => {
+                video.onloadedmetadata = () => {
+                    const width = video.videoWidth;
+                    const height = video.videoHeight;
+                    
+                    // Set video dimensions
+                    video.style.width = width + 'px';
+                    video.style.height = height + 'px';
+                    
+                    // Set overlay canvas dimensions to match video
+                    overlayCanvas.width = width;
+                    overlayCanvas.height = height;
+                    overlayCanvas.style.width = width + 'px';
+                    overlayCanvas.style.height = height + 'px';
+                    
+                    resolve();
+                };
+            });
+            
+            // Start playing the video stream
+            await video.play();
+            
+            statusSpan.innerText = '✅ Camera is working';
+            startCameraBtn.disabled = true;
+            startDetectionBtn.disabled = false;
+            
+        } catch (err) {
+            statusSpan.innerText = '❌ Camera error: ' + err.message;
+            console.error(err);
+        }
+    };
+    
+    // ============================================================
+    // 2. Start Detection - Connect WebSocket and send frames
+    // ============================================================
+    startDetectionBtn.onclick = () => {
+        // Clear existing interval if any
+        if (intervalId) {
+            clearInterval(intervalId);
+        }
+        
+        statusSpan.innerText = 'Connecting to WebSocket...';
+        
+        // Auto-select WebSocket protocol (ws:// or wss:// based on page protocol)
+        const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+        const wsUrl = `${protocol}//${window.location.host}/ws/detect`;
+        
+        // Create WebSocket connection
+        ws = new WebSocket(wsUrl);
+        
+        // WebSocket event handlers
+        ws.onopen = () => {
+            statusSpan.innerText = '🟢 WebSocket connected, sending frames...';
+            startDetectionBtn.disabled = true;
+        };
+        
+        ws.onmessage = (event) => {
+            try {
+                // Parse detection results from server
+                const detections = JSON.parse(event.data);
+                statusSpan.innerText = `🎯 Signs detected: ${detections.length || 0}`;
+                
+                // Display raw detection data as formatted JSON
+                document.getElementById('result').innerHTML = '<pre>' + JSON.stringify(detections, null, 2) + '</pre>';
+                
+                // Draw bounding boxes on the video overlay
+                drawBoxesOnOverlay(detections);
+                
+            } catch (err) {
+                console.error('Parse error:', err);
+            }
+        };
+        
+        ws.onerror = (error) => {
+            statusSpan.innerText = '❌ WebSocket error - check if server is running';
+            console.error('WebSocket error:', error);
+        };
+        
+        ws.onclose = () => {
+            statusSpan.innerText = '🔴 WebSocket closed';
+            startDetectionBtn.disabled = false;
+            // Clear overlay when connection closes
+            overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+        };
+        
+        // ============================================================
+        // Send frames to server at regular intervals
+        // ============================================================
+        const sendFrame = () => {
+            // Only send if WebSocket is open and video has valid dimensions
+            if (ws && ws.readyState === WebSocket.OPEN && video.videoWidth > 0) {
+                try {
+                    // Create temporary canvas to capture current video frame
+                    const tempCanvas = document.createElement('canvas');
+                    tempCanvas.width = video.videoWidth;
+                    tempCanvas.height = video.videoHeight;
+                    const tempCtx = tempCanvas.getContext('2d');
+                    
+                    // Draw current video frame onto temporary canvas
+                    tempCtx.drawImage(video, 0, 0);
+                    
+                    // Convert canvas to JPEG blob
+                    tempCanvas.toBlob((blob) => {
+                        const reader = new FileReader();
+                        reader.onloadend = () => {
+                            // Extract base64 data (remove "data:image/jpeg;base64," prefix)
+                            const base64data = reader.result.split(',')[1];
+                            if (ws.readyState === WebSocket.OPEN) {
+                                // Send frame to server via WebSocket
+                                ws.send(base64data);
+                            }
+                        };
+                        reader.readAsDataURL(blob);
+                    }, 'image/jpeg', 0.6); // 60% quality for performance
+                    
+                } catch (err) {
+                    console.error('Send frame error:', err);
+                }
+            }
+        };
+        
+        // Send frame every 300ms (~3-4 FPS, good balance for real-time detection)
+        intervalId = setInterval(sendFrame, 300);
+    };
+    
+    // ============================================================
+    // 3. Draw Bounding Boxes - Render detections on video overlay
+    // ============================================================
+    function drawBoxesOnOverlay(detections) {
+        // Clear previous drawings from canvas
+        overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+        
+        // Nothing to draw if no detections
+        if (!detections || detections.length === 0) return;
+        
+        // Calculate scaling factors in case canvas and video dimensions differ
+        const scaleX = overlayCanvas.width / video.videoWidth;
+        const scaleY = overlayCanvas.height / video.videoHeight;
+        
+        // Iterate through all detected objects
+        for (const det of detections) {
+            const bbox = det.bbox;  // [x1, y1, x2, y2] format
+            
+            if (bbox && bbox.length === 4) {
+                // Scale coordinates to match canvas size
+                const x1 = bbox[0] * scaleX;
+                const y1 = bbox[1] * scaleY;
+                const x2 = bbox[2] * scaleX;
+                const y2 = bbox[3] * scaleY;
+                
+                // Draw green bounding box rectangle
+                overlayCtx.strokeStyle = '#00ff00';
+                overlayCtx.lineWidth = 3;
+                overlayCtx.strokeRect(x1, y1, x2 - x1, y2 - y1);
+                
+                // Prepare label text
+                const label = det.class_name || `class_${det.class_id}`;
+                
+                // Draw label background (green rectangle behind text)
+                overlayCtx.font = 'bold 14px Arial';
+                const textWidth = overlayCtx.measureText(label).width;
+                overlayCtx.fillStyle = '#00ff00';
+                overlayCtx.fillRect(x1, y1 - 20, textWidth + 10, 20);
+                
+                // Draw label text (black on green background)
+                overlayCtx.fillStyle = '#000000';
+                overlayCtx.fillText(label, x1 + 5, y1 - 5);
+            }
+        }
+    }
+</script>
+</body>
+</html>

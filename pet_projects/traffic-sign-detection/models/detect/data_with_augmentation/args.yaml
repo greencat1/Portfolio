@@ -4,7 +4,7 @@ model: yolo11m.pt
 data: ..\data\data_with_augmentation.yaml
 epochs: 100
 time: null
-patience: 15
+patience: 50
 batch: -1
 imgsz: 640
 save: true
