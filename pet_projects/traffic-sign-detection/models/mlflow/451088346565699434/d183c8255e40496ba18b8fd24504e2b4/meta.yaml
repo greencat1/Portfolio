@@ -1,5 +1,5 @@
 artifact_uri: file:C:/Users/isazo/OneDrive/Рабочий стол/courses/partfolio/pet_projects/traffic-sign-detection/notebooks/../models/mlflow/451088346565699434/d183c8255e40496ba18b8fd24504e2b4/artifacts
-end_time: null
+end_time: 1777114752936
 entry_point_name: ''
 experiment_id: '451088346565699434'
 lifecycle_stage: active
@@ -10,6 +10,6 @@ source_name: ''
 source_type: 4
 source_version: ''
 start_time: 1777112309325
-status: 1
+status: 3
 tags: []
 user_id: isazo
