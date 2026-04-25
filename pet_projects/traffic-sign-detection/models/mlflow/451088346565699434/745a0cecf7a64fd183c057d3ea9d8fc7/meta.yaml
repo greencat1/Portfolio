@@ -1,0 +1,15 @@
+artifact_uri: file:C:/Users/isazo/OneDrive/Рабочий стол/courses/partfolio/pet_projects/traffic-sign-detection/notebooks/../models/mlflow/451088346565699434/745a0cecf7a64fd183c057d3ea9d8fc7/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '451088346565699434'
+lifecycle_stage: active
+run_id: 745a0cecf7a64fd183c057d3ea9d8fc7
+run_name: data_with_augmentation
+run_uuid: 745a0cecf7a64fd183c057d3ea9d8fc7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1777119965225
+status: 1
+tags: []
+user_id: isazo
