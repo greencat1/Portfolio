@@ -47,21 +47,7 @@ def predict_yolo_sync(yolo, img):
     return detections
 
 
-def predict_resnet_sync(model, crop):
-    """
-    Synchronous ResNet inference for fine-grained classification.
-    
-    Args:
-        model: Loaded ResNet model for specific category
-        crop: Cropped image region containing the sign
-    
-    Returns:
-        int: Refined class ID within the category (e.g., 0-10 for 11 specific signs)
-    """
-    # TODO: Add preprocessing (resize to 224x224, normalize, convert to tensor)
-    # TODO: Run model inference
-    # TODO: Return predicted class ID
-    return 0  # Placeholder - implement with actual model logic
+
 
 
 def extract_crop(img, bbox):
@@ -111,36 +97,3 @@ def format_detections(boxes, refined_classes):
         })
     return detections
 
-
-async def detect_two_stage(yolo, resnets, img):
-    """
-    Two-stage detection pipeline:
-    1. YOLO detects signs and predicts 5 categories (Stage 1)
-    2. Category-specific ResNet refines to precise sign class (Stage 2)
-    
-    Args:
-        yolo: Loaded YOLO model (first stage)
-        resnets: Dictionary of 5 ResNet models (second stage), keyed by category ID
-        img: Input image as numpy array
-    
-    Returns:
-        List of detections with final refined class IDs
-    """
-    loop = asyncio.get_event_loop()
-    
-    # Stage 1: YOLO inference (CPU/GPU bound, run in thread pool)
-    yolo_detections = await loop.run_in_executor(
-        None, predict_yolo_sync, yolo, img
-    )
-    
-    # Extract boxes from YOLO results
-    if not yolo_detections:
-        return []
-    
-    # For simplicity in this two-stage function, we need the original box objects
-    # Note: This implementation expects yolo_results with .boxes attribute.
-    # For production, refactor to work with dictionary format.
-    
-    # Alternative approach: integrate with actual YOLO results object
-    # The following is placeholder logic - adapt to your actual data structures
-    return yolo_detections  # Return YOLO results (stage 2 not yet implemented)
