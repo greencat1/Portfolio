@@ -228,38 +228,43 @@
         // Nothing to draw if no detections
         if (!detections || detections.length === 0) return;
         
-        // Calculate scaling factors in case canvas and video dimensions differ
-        const scaleX = overlayCanvas.width / video.videoWidth;
-        const scaleY = overlayCanvas.height / video.videoHeight;
+        // Canvas dimensions in pixels
+        const canvasWidth = overlayCanvas.width;
+        const canvasHeight = overlayCanvas.height;
         
         // Iterate through all detected objects
         for (const det of detections) {
-            const bbox = det.bbox;  // [x1, y1, x2, y2] format
+            const bbox = det.bbox;  // [x1, y1, x2, y2] - NORMALIZED (0-1)
             
             if (bbox && bbox.length === 4) {
-                // Scale coordinates to match canvas size
-                const x1 = bbox[0] * scaleX;
-                const y1 = bbox[1] * scaleY;
-                const x2 = bbox[2] * scaleX;
-                const y2 = bbox[3] * scaleY;
+                // Convert normalized coordinates (0-1) to pixel coordinates
+                const x1 = bbox[0] * canvasWidth;
+                const y1 = bbox[1] * canvasHeight;
+                const x2 = bbox[2] * canvasWidth;
+                const y2 = bbox[3] * canvasHeight;
+                
+                const width = x2 - x1;
+                const height = y2 - y1;
                 
                 // Draw green bounding box rectangle
                 overlayCtx.strokeStyle = '#00ff00';
                 overlayCtx.lineWidth = 3;
-                overlayCtx.strokeRect(x1, y1, x2 - x1, y2 - y1);
+                overlayCtx.strokeRect(x1, y1, width, height);
                 
-                // Prepare label text
-                const label = det.class_name || `class_${det.class_id}`;
+                // Prepare label text with confidence
+                const label = det.class_name || `class_${det.class_number}`;
+                const confidence = det.confidence ? ` (${(det.confidence * 100).toFixed(0)}%)` : '';
+                const fullLabel = label + confidence;
                 
                 // Draw label background (green rectangle behind text)
                 overlayCtx.font = 'bold 14px Arial';
-                const textWidth = overlayCtx.measureText(label).width;
+                const textWidth = overlayCtx.measureText(fullLabel).width;
                 overlayCtx.fillStyle = '#00ff00';
-                overlayCtx.fillRect(x1, y1 - 20, textWidth + 10, 20);
+                overlayCtx.fillRect(x1, Math.max(0, y1 - 22), textWidth + 10, 20);
                 
                 // Draw label text (black on green background)
                 overlayCtx.fillStyle = '#000000';
-                overlayCtx.fillText(label, x1 + 5, y1 - 5);
+                overlayCtx.fillText(fullLabel, x1 + 5, Math.max(0, y1 - 5));
             }
         }
     }

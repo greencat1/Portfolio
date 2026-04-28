@@ -7,17 +7,28 @@ from fastapi import FastAPI, File, UploadFile, WebSocket, WebSocketDisconnect
 from fastapi.responses import HTMLResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from PIL import Image, ImageDraw
+import torch
+from ultralytics import YOLO
+from typing import List, Tuple, Dict
+import torch.nn as nn
+from pathlib import Path
+import torchvision.models as models
 
 # Import custom modules
-from app.models import load_models
-from app.detector import detect_two_stage, predict_yolo_sync
-from app.utils import read_image, base64_to_numpy, draw_boxes_on_image 
+from app.models import load_models, load_trained_resnets, load_all_models, create_resnet_model
+from app.detector import predict_yolo_sync, predict_signs
+from app.utils import read_image, base64_to_numpy, draw_boxes_on_image
 
 # Initialize FastAPI application
 app = FastAPI(title="Two-Stage Road Sign Detector")
 
 # Load models at startup
-yolo = load_models()
+#yolo = load_models()
+
+
+
+yolo, resnets = load_all_models(best_model_path = '../app/weights/prod/yolo/best.pt', resnet_dir = '../traffic-sign-detection/app/weights/prod/resnet')
+
 
 # Path to static HTML file
 INDEX_PATH = os.path.join(os.path.dirname(__file__), "static", "index.html")
@@ -61,7 +72,7 @@ async def websocket_detect(websocket: WebSocket):
                 continue
             
             # Run single-stage YOLO detection
-            detections = predict_yolo_sync(yolo, img)
+            detections = predict_signs(yolo, resnets, img, 'cpu', 0.5)
             
             # Send detection results back to client as JSON
             await websocket.send_json(detections)

@@ -29,7 +29,7 @@ CATEGORY_NAMES = {
 }
 
 # Device configuration: Use CUDA GPU if available, otherwise fall back to CPU
-DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+DEVICE = "cpu"
 
 # Confidence threshold for YOLO detections
 # Only detections with confidence >= 0.5 will be kept

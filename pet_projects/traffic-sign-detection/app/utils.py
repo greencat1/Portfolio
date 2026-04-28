@@ -7,6 +7,13 @@ from fastapi import FastAPI, File, UploadFile, WebSocket, WebSocketDisconnect
 from fastapi.responses import HTMLResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from PIL import Image, ImageDraw
+import torch
+from ultralytics import YOLO
+from typing import List, Tuple, Dict
+import torch.nn as nn
+from pathlib import Path
+import torchvision.models as models
+
 
 
 # ============================================================
@@ -75,5 +82,6 @@ def draw_boxes_on_image(img: np.ndarray, detections: list) -> bytes:
     img_byte_arr = io.BytesIO()
     pil_img.save(img_byte_arr, format='JPEG')
     return img_byte_arr.getvalue()
+
 
 
