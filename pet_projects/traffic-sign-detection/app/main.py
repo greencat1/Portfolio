@@ -13,6 +13,8 @@ from typing import List, Tuple, Dict
 import torch.nn as nn
 from pathlib import Path
 import torchvision.models as models
+import os
+
 
 # Import custom modules
 from app.models import load_models, load_trained_resnets, load_all_models, create_resnet_model
@@ -27,7 +29,8 @@ app = FastAPI(title="Two-Stage Road Sign Detector")
 
 
 
-yolo, resnets = load_all_models(best_model_path = '../app/weights/prod/yolo/best.pt', resnet_dir = '../traffic-sign-detection/app/weights/prod/resnet')
+
+yolo, resnets = load_all_models(best_model_path = f'{os.getcwd()}/app/weights/prod/yolo/best.pt', resnet_dir = f'{os.getcwd()}/app/weights/prod/resnet')
 
 
 # Path to static HTML file
