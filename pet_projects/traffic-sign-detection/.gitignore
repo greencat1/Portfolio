@@ -2,4 +2,11 @@
 *.pth
 *.onnx
 
-!app/
+!app/weights/best.pt
+!app/weights/prod/yolo/best.pt
+!app/weights/prod/resnet/best_resnet_cat_0.pt
+!app/weights/prod/resnet/best_resnet_cat_1.pt
+!app/weights/prod/resnet/best_resnet_cat_2.pt
+!app/weights/prod/resnet/best_resnet_cat_3.pt
+!app/weights/prod/resnet/best_resnet_cat_4.pt
+
