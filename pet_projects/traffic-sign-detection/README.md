@@ -162,23 +162,23 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
 📁 Project Structure
 
-traffic-sign-detection/
-├── app/
-│   ├── main.py              # FastAPI + WebSocket
-│   ├── detector.py          # Two-stage pipeline
-│   ├── models.py            # Model loading
-│   ├── utils.py             # Utilities
-│   ├── config.py            # config
-│   ├── weights/
-│   │   ├── yolo/
-│   │   └── resnet/
-│   └── static/index.html    # Frontend
-├── data/
-├── models/
-├── notebooks/
-├── Dockerfile
-├── requirements.txt
-└── README.md
+    traffic-sign-detection/
+    ├── app/
+    │   ├── main.py              # FastAPI + WebSocket
+    │   ├── detector.py          # Two-stage pipeline
+    │   ├── models.py            # Model loading
+    │   ├── utils.py             # Utilities
+    │   ├── config.py            # config
+    │   ├── weights/
+    │   │   ├── yolo/
+    │   │   └── resnet/
+    │   └── static/index.html    # Frontend
+    ├── data/
+    ├── models/
+    ├── notebooks/
+    ├── Dockerfile
+    ├── requirements.txt
+    └── README.md
 
 --- 
 
