@@ -1,57 +1,146 @@
-# Pet Projects Portfolio
+# 🧠 Data Science & ML Portfolio
 
-Collection of my data science and machine learning projects.
+Collection of production-ready and research-oriented machine learning projects.
 
 ---
 
-## 📁 Projects
+## 📁 Projects Overview
 
 | Project | Description | Tech Stack | Status |
-|---------|-------------|------------|--------|
-| **customer-churn-prediction** | Production-ready churn prediction service for telecom companies | FastAPI, CatBoost, Streamlit, Docker, SQLite | ✅ Complete |
-| **traffic-sign-detection** | Traffic sign detection with YOLOv8 — 55 classes, cascade architecture, imbalance handling | YOLOv8, Python, Ultralytics, Albumentations | 🚧 In Progress |
+|--------|------------|------------|--------|
+| **customer-churn-prediction** | End-to-end churn prediction system with API, dashboard, and deployment | FastAPI, CatBoost, Streamlit, Docker, SQLite | ✅ Production |
+| **traffic-sign-detection** | Real-time traffic sign detection using YOLO + ResNet cascade (55 classes) | YOLO, PyTorch, Albumentations, FastAPI, WebSocket | ✅ Production |
 
 ---
-
 
 ## 🚀 Live Demo
 
-- **Churn Prediction API:** [http://207.231.105.113:8000/docs](http://207.231.105.113:8000/docs)
-- **Dashboard:** [http://207.231.105.113:8501](http://207.231.105.113:8501)
+### 🚦 Traffic Sign Detection
+- **Live Demo:** https://greencat1.tech/  
+- **Video Guide:** https://www.youtube.com/watch?v=XS1jED6fzpY  
+
+> Real-time detection via browser camera (WebSocket streaming)
+
+---
+
+### 📊 Customer Churn Prediction
+- **API Docs (Swagger):** http://207.231.105.113:8000/docs  
+- **Dashboard (Streamlit):** http://207.231.105.113:8501  
+- **Video Guide:** https://www.youtube.com/watch?v=zrF0L2pznhU  
+
+> Fully deployed ML service with REST API + interactive UI
 
 ---
 
 ## 📊 Project Details
 
-### 1. Customer Churn Prediction ✅
+---
 
-**Goal:** Predict which telecom customers are likely to churn.
+### 🔹 1. Customer Churn Prediction (Production)
 
-**Key Results:**
-- 84.5% recall in production
-- 23 API endpoints with role-based auth
-- Docker deployment (2 containers)
+**Goal:**  
+Predict telecom customer churn and provide actionable insights for retention.
+
+**Key Features:**
+- End-to-end pipeline: training → API → UI → deployment
+- REST API with **23 endpoints**
+- **Role-based authentication**
+- Interactive dashboard for business users
+
+**Model Performance:**
+- **Recall: 84.5%** (optimized for churn detection)
+
+**Engineering Highlights:**
+- Modular FastAPI backend
+- Dockerized multi-service architecture
+- SQLite for lightweight persistence
+- Streamlit dashboard for visualization
+
+**Impact:**
+- Full **production-ready ML system**
+- Covers complete ML lifecycle (MLOps mindset)
 
 **Repository:** `customer-churn-prediction/`
 
 ---
 
-### 2. Traffic Sign Detection 🚧
+### 🔹 2. Traffic Sign Detection (Production)
 
-**Goal:** Detect and classify 55 types of traffic signs using YOLOv8.
+**Goal:**  
+Build a **high-accuracy real-time detection system** for 55 traffic sign classes.
 
-**Experiments Planned:**
-- Baseline on 55 classes
-- Category-level detection (4 groups)
-- Cascade architecture (category → specialized models)
-- Oversampling + augmentations for rare classes
+**Final Architecture:**
+- **Stage 1:** YOLO (5 categories)
+- **Stage 2:** 5× ResNet-18 (category-specific classification)
 
-**Expected Results:**
-- Compare 6 model configurations
-- Analyze class imbalance impact
-- Measure generalization gap (processed vs original test)
+**Key Results:**
+- **94.07% mAP50**
+- **91.71% Recall**
+- **+12.7% mAP improvement vs baseline YOLO**
+- Real-time inference via WebSocket
 
-**Repository:** `traffic-sign-detection/` *(coming soon)*
+**Key Challenges Solved:**
+- Extreme class imbalance (**163:1**) → fixed via oversampling + augmentation
+- Confusing classes → solved via **model specialization**
+- Real-time constraints → optimized pipeline
+
+**Engineering Highlights:**
+- Two-stage cascade architecture
+- FastAPI + WebSocket streaming
+- Browser-based UI (camera input)
+- Docker deployment
+
+**Impact:**
+- Significant quality boost over single-stage detector
+- Demonstrates **ML system design, not just modeling**
+
+**Repository:** `traffic-sign-detection/`
+
+---
+
+## 🧰 Tech Stack
+
+**Machine Learning**
+- PyTorch, CatBoost
+- Scikit-learn
+- Ultralytics YOLO
+
+**Backend & Deployment**
+- FastAPI
+- Docker
+- WebSocket
+
+**Data Processing**
+- Pandas, NumPy
+- Albumentations
+
+**Visualization**
+- Streamlit
+- Matplotlib / Seaborn
+
+---
+
+## 💡 What This Portfolio Demonstrates
+
+- Building **end-to-end ML systems**
+- Strong understanding of:
+  - model vs system trade-offs
+  - real-time constraints
+  - class imbalance handling
+- Experience with:
+  - production APIs
+  - deployment (Docker)
+  - interactive ML interfaces
+- Focus on **practical impact over toy models**
+
+---
+
+## 🔮 Future Work
+
+- CI/CD for ML services  
+- Model monitoring & logging  
+- Experiment tracking (W&B / MLflow)  
+- Edge / mobile deployment  
 
 ---
 
@@ -59,7 +148,9 @@ Collection of my data science and machine learning projects.
 
 **Ivan Sazontov**
 
-- GitHub: [@greencat1](https://github.com/greencat1)
-- Email: isazontov1@gmail.com
+- GitHub: https://github.com/greencat1  
+- Email: isazontov1@gmail.com  
 
 ---
+
+⭐ If you find this portfolio interesting, feel free to explore the repositories and give feedback!
