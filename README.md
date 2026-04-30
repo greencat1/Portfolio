@@ -22,6 +22,7 @@ Portfolio/
 │  
 ├── Pet_Projects/ # Hands-on ML projects
 │ └── customer-churn-prediction/ # Churn prediction service (FastAPI + Docker+)
+│ └── traffic-sign-detection// # Road signs detection service (FastAPI + Docker+)
 │  
 ├── scientific publications/
 │   ├── Traffic_Sign_Detection_SSD/
@@ -32,25 +33,36 @@ Portfolio/
 
 ---
 
+## 🚀 Featured Projects
 
-## 🚀 Featured Project
+### 🚦 Traffic Sign Detection (Production)
 
-### Customer Churn Prediction Service
+Real-time traffic sign recognition system using **YOLO + ResNet cascade architecture (55 classes)**
 
-[![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.115-green.svg)](https://fastapi.tiangolo.com/)
-[![CatBoost](https://img.shields.io/badge/CatBoost-1.2-orange.svg)](https://catboost.ai/)
-[![Docker](https://img.shields.io/badge/Docker-24.x-blue.svg)](https://www.docker.com/)
+- **94.07% mAP50 / 91.71% Recall**
+- **+12.7% improvement vs baseline YOLO**
+- Real-time detection via **WebSocket + browser camera**
+- Two-stage architecture:
+  - YOLO → category detection
+  - 5× ResNet → fine classification
 
-**Production-ready ML service** that predicts customer churn for telecom companies — enabling proactive retention before customers leave.
+🌐 **Live Demo:** https://greencat1.tech/  
+▶️ **Video Guide:** https://www.youtube.com/watch?v=XS1jED6fzpY  
 
-- **84.5% recall** in production
-- REST API with authentication + rate limiting
-- Interactive Streamlit dashboard
-- Docker deployment (2 containers)
-- 15 unit tests (100% pass)
+---
 
-**Live Demo:** [API Docs](http://207.231.105.113:8000/docs) | [Dashboard](http://207.231.105.113:8501)
+### 📊 Customer Churn Prediction (Production)
+
+End-to-end ML system for predicting telecom churn.
+
+- **84.5% recall** (optimized for business impact)
+- REST API (**23 endpoints**) with authentication & rate limiting
+- Interactive **Streamlit dashboard**
+- Dockerized multi-container deployment
+
+🌐 **API Docs:** http://207.231.105.113:8000/docs  
+📊 **Dashboard:** http://207.231.105.113:8501  
+▶️ **Video Guide:** https://www.youtube.com/watch?v=zrF0L2pznhU  
 
 ---
 
@@ -285,14 +297,6 @@ Pet projects highlight **initiative**, **curiosity**, and **hands-on machine lea
 - Data-driven decision making  
 - Statistical validation of model results
 
-### 🧠 Generative AI & LLM Engineering
-- Large Language Models (LLMs) fundamentals
-- Transformer architectures (GPT, BERT concepts)
-- Prompt engineering and prompt design
-- Retrieval-Augmented Generation (RAG) concepts
-- Text embeddings and semantic search
-- Building LLM-based applications
-
 ### 💼 Business & Product Skills
 - ROI calculation for ML models
 - Economic impact analysis (MRR, revenue saved)
@@ -327,9 +331,7 @@ Pet projects highlight **initiative**, **curiosity**, and **hands-on machine lea
 | Logging | Python logging, RotatingFileHandler |
 | Deployment | Ubuntu VPS, Docker Compose |
 | Experimentation | Google Colab |
-| Generative AI | Hugging Face Transformers, LangChain, Prompt Engineering, RAG |
-| Vector Databases | FAISS, Chroma, Pinecone |
-| LLM Engineering | Fine-tuning, PEFT (LoRA), embeddings |
+
 
 ---
 
