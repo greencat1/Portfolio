@@ -10866,16 +10866,101 @@
     "type": "ipynb",
     "content": [
       {
+        "type": "markdown",
+        "text": "### Imports"
+      },
+      {
         "type": "code",
-        "text": ""
-      }
-    ]
-  },
-  {
-    "file": "../../..\\pet_projects\\llm-portfolio-assistant\\notebooks\\03_chunking_experiments.ipynb",
-    "project": "unknown",
-    "type": "ipynb",
-    "content": [
+        "text": "import json\nimport re\nimport ast\nfrom tqdm import tqdm"
+      },
+      {
+        "type": "markdown",
+        "text": "### Load parsed data"
+      },
+      {
+        "type": "code",
+        "text": "# Load parsed data from previous step\nINPUT_PATH = \"../data/processed/parsed_data.json\"\n\nwith open(INPUT_PATH, \"r\", encoding=\"utf-8\") as f:\n    parsed_data = json.load(f)\n\nprint(f\"Loaded {len(parsed_data)} files\")"
+      },
+      {
+        "type": "markdown",
+        "text": "### Text cleaning"
+      },
+      {
+        "type": "code",
+        "text": "def clean_text(text):\n    \"\"\"\n    Basic text cleaning:\n    - remove extra spaces\n    - normalize newlines\n    \"\"\"\n    text = re.sub(r\"\\n+\", \"\\n\", text)\n    text = re.sub(r\"\\s+\", \" \", text)\n    return text.strip()"
+      },
+      {
+        "type": "markdown",
+        "text": "### Extract meaning from Python code"
+      },
+      {
+        "type": "code",
+        "text": "def extract_python_semantics(code):\n    \"\"\"\n    Extracts meaningful information from Python code:\n    - function names\n    - docstrings\n    \n    Returns human-readable summary\n    \"\"\"\n    try:\n        tree = ast.parse(code)\n    except:\n        return \"\"\n\n    results = []\n\n    for node in ast.walk(tree):\n        if isinstance(node, ast.FunctionDef):\n            name = node.name\n            doc = ast.get_docstring(node)\n\n            summary = f\"Function: {name}\"\n\n            if doc:\n                summary += f\"\\nDescription: {doc}\"\n\n            results.append(summary)\n\n    return \"\\n\".join(results)"
+      },
+      {
+        "type": "markdown",
+        "text": "### Process notebook cells"
+      },
+      {
+        "type": "code",
+        "text": "def process_ipynb(content):\n    \"\"\"\n    Converts notebook cells into semantic text\n    \n    Strategy:\n    - keep markdown\n    - summarize code\n    - merge everything into one text block\n    \"\"\"\n    text_blocks = []\n\n    for cell in content:\n        if cell[\"type\"] == \"markdown\":\n            text_blocks.append(cell[\"text\"])\n\n        elif cell[\"type\"] == \"code\":\n            summary = extract_python_semantics(cell[\"text\"])\n            if summary:\n                text_blocks.append(summary)\n\n    return \"\\n\".join(text_blocks)"
+      },
+      {
+        "type": "markdown",
+        "text": "### Process Python files"
+      },
+      {
+        "type": "code",
+        "text": "def process_py(content):\n    \"\"\"\n    Extract semantic info from Python file\n    \"\"\"\n    return extract_python_semantics(content)"
+      },
+      {
+        "type": "markdown",
+        "text": "### Process plain text files"
+      },
+      {
+        "type": "code",
+        "text": "def process_text(content):\n    \"\"\"\n    Clean markdown / pdf text\n    \"\"\"\n    return clean_text(content)"
+      },
+      {
+        "type": "markdown",
+        "text": "### Chunking"
+      },
+      {
+        "type": "code",
+        "text": "def chunk_text(text, chunk_size=500, overlap=100):\n    \"\"\"\n    Splits text into overlapping chunks\n    \"\"\"\n    chunks = []\n    \n    for i in range(0, len(text), chunk_size - overlap):\n        chunk = text[i:i + chunk_size]\n        chunks.append(chunk)\n    \n    return chunks"
+      },
+      {
+        "type": "code",
+        "text": "def smart_chunk_text(text, chunk_size=500, overlap=100):\n    \"\"\"Split by sentence/paragraph boundaries\"\"\"\n    sentences = re.split(r'(?<=[.!?])\\s+', text)\n    \n    chunks = []\n    current = []\n    current_len = 0\n    \n    for sent in sentences:\n        sent_len = len(sent)\n        if current_len + sent_len > chunk_size and current:\n            chunks.append(' '.join(current))\n            # Overlap: take last 1-2 sentences\n            overlap_text = ' '.join(current[-2:]) if len(current) > 2 else ' '.join(current)\n            current = [overlap_text]\n            current_len = len(overlap_text)\n        \n        current.append(sent)\n        current_len += sent_len\n    \n    if current:\n        chunks.append(' '.join(current))\n    \n    return chunks"
+      },
+      {
+        "type": "markdown",
+        "text": "### Simple classification"
+      },
+      {
+        "type": "code",
+        "text": "def classify_text(text):\n    \"\"\"\n    Assigns semantic type to chunk\n    \"\"\"\n    text = text.lower()\n\n    if \"model\" in text:\n        return \"model\"\n    elif \"pipeline\" in text:\n        return \"pipeline\"\n    elif \"feature\" in text:\n        return \"feature_engineering\"\n    else:\n        return \"general\""
+      },
+      {
+        "type": "markdown",
+        "text": "### Main pipeline"
+      },
+      {
+        "type": "code",
+        "text": "chunks = []\n\nfor item in tqdm(parsed_data):\n    \n    file_type = item[\"type\"]\n    project = item[\"project\"]\n    content = item[\"content\"]\n    \n    # Process based on type\n    if file_type == \"ipynb\":\n        text = process_ipynb(content)\n    \n    elif file_type == \"py\":\n        text = process_py(content)\n    \n    elif file_type in [\"md\", \"pdf\"]:\n        text = process_text(content)\n    \n    else:\n        continue\n\n    text = clean_text(text)\n\n    if not text:\n        continue\n\n    # Chunking\n    text_chunks = smart_chunk_text(text)\n\n    for chunk in text_chunks:\n        chunks.append({\n            \"text\": chunk,\n            \"project\": project,\n            \"type\": classify_text(chunk)\n        })"
+      },
+      {
+        "type": "markdown",
+        "text": "### Save result"
+      },
+      {
+        "type": "code",
+        "text": "OUTPUT_PATH = \"../data/chunks/chunks.json\"\n\nimport os\nos.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)\n\nwith open(OUTPUT_PATH, \"w\", encoding=\"utf-8\") as f:\n    json.dump(chunks, f, ensure_ascii=False, indent=2)\n\nprint(f\"Saved {len(chunks)} chunks\")"
+      },
+      {
+        "type": "markdown",
+        "text": "### Summary\n\n- Loaded parsed data from the previous step (`parsed_data.json`)  \n- Converted raw content into **semantic text representations**  \n  - extracted meaning from Python code (functions, docstrings)  \n  - combined notebook markdown + code into unified text  \n- Cleaned and normalized text  \n- Split text into **overlapping chunks** (chunking)  \n- Added metadata (project, type) to each chunk  \n\n👉 Result: structured **semantic chunks** ready for embeddings and retrieval (RAG pipeline)"
+      },
       {
         "type": "code",
         "text": ""
@@ -10883,10 +10968,86 @@
     ]
   },
   {
-    "file": "../../..\\pet_projects\\llm-portfolio-assistant\\notebooks\\04_embeddings_eval.ipynb",
+    "file": "../../..\\pet_projects\\llm-portfolio-assistant\\notebooks\\03_embeddings.ipynb",
     "project": "unknown",
     "type": "ipynb",
     "content": [
+      {
+        "type": "markdown",
+        "text": "### Imports"
+      },
+      {
+        "type": "code",
+        "text": "import json\nimport numpy as np\n\nfrom tqdm import tqdm\nfrom sentence_transformers import SentenceTransformer\n\nimport faiss\nimport os"
+      },
+      {
+        "type": "markdown",
+        "text": "### Load chunks"
+      },
+      {
+        "type": "code",
+        "text": "# Load semantic chunks from previous step\nINPUT_PATH = \"../data/chunks/chunks.json\"\n\nwith open(INPUT_PATH, \"r\", encoding=\"utf-8\") as f:\n    chunks = json.load(f)\n\nprint(f\"Loaded {len(chunks)} chunks\")"
+      },
+      {
+        "type": "markdown",
+        "text": "### Initialize embedding model"
+      },
+      {
+        "type": "code",
+        "text": "# Lightweight and fast model (good default)\nmodel = SentenceTransformer(\"all-MiniLM-L6-v2\")"
+      },
+      {
+        "type": "markdown",
+        "text": "### Generate embeddings (batch mode)"
+      },
+      {
+        "type": "code",
+        "text": "# Extract all texts\ntexts = [chunk[\"text\"] for chunk in chunks]\n\n# Encode in batch (much faster than loop)\nembeddings = model.encode(\n    texts,\n    show_progress_bar=True,\n    convert_to_numpy=True\n)\n\nprint(\"Embeddings shape:\", embeddings.shape)"
+      },
+      {
+        "type": "markdown",
+        "text": "### Create FAISS index"
+      },
+      {
+        "type": "code",
+        "text": "# FAISS requires float32\nvectors = embeddings.astype(\"float32\")\n\n# Create index (L2 distance)\nindex = faiss.IndexFlatL2(vectors.shape[1])\n\n# Add vectors to index\nindex.add(vectors)\n\nprint(\"Total vectors in index:\", index.ntotal)"
+      },
+      {
+        "type": "markdown",
+        "text": "### Save index"
+      },
+      {
+        "type": "code",
+        "text": "INDEX_PATH = \"../data/embeddings/faiss.index\"\nos.makedirs(os.path.dirname(INDEX_PATH), exist_ok=True)\n\nfaiss.write_index(index, INDEX_PATH)\n\nprint(\"Index saved\")"
+      },
+      {
+        "type": "markdown",
+        "text": "### Save metadata (IMPORTANT)"
+      },
+      {
+        "type": "code",
+        "text": "# Save chunks separately (without embeddings)\nMETA_PATH = \"../data/embeddings/metadata.json\"\n\nwith open(META_PATH, \"w\", encoding=\"utf-8\") as f:\n    json.dump(chunks, f, ensure_ascii=False, indent=2)\n\nprint(\"Metadata saved\")"
+      },
+      {
+        "type": "markdown",
+        "text": "### Search function (test retrieval)"
+      },
+      {
+        "type": "code",
+        "text": "def search(query, k=20):\n    \"\"\"\n    Performs semantic search:\n    - encodes query\n    - finds nearest vectors\n    - returns top-k chunks\n    \"\"\"\n    # Encode query\n    q_emb = model.encode([query]).astype(\"float32\")\n    \n    # Search in FAISS\n    distances, indices = index.search(q_emb, k)\n    \n    results = []\n    \n    for i in indices[0]:\n        results.append(chunks[i])\n    \n    return results"
+      },
+      {
+        "type": "code",
+        "text": "query = \"churn prediction model CatBoost used\"\nresults = search(query)\n\nfor i, r in enumerate(results):\n    print(f\"\\n--- Result {i+1} ---\")\n    print(r[\"text\"][:300])"
+      },
+      {
+        "type": "markdown",
+        "text": "### Summary\n\n- Loaded semantic chunks from previous step  \n- Converted text into **vector embeddings** using a pre-trained model  \n- Built a **FAISS index** for efficient similarity search  \n- Stored vectors and metadata separately  \n- Implemented a basic **semantic search function**  \n\n👉 Result: working vector search system for retrieving relevant chunks in a RAG pipeline"
+      },
+      {
+        "type": "code",
+        "text": ""
+      },
       {
         "type": "code",
         "text": ""
@@ -10894,32 +11055,150 @@
     ]
   },
   {
-    "file": "../../..\\pet_projects\\llm-portfolio-assistant\\notebooks\\05_rag_prototype.ipynb",
+    "file": "../../..\\pet_projects\\llm-portfolio-assistant\\notebooks\\04_rag_pipeline.ipynb",
     "project": "unknown",
     "type": "ipynb",
     "content": [
       {
-        "type": "code",
-        "text": ""
-      }
-    ]
-  },
-  {
-    "file": "../../..\\pet_projects\\llm-portfolio-assistant\\notebooks\\06_prompt_engineering.ipynb",
-    "project": "unknown",
-    "type": "ipynb",
-    "content": [
+        "type": "markdown",
+        "text": "### Imports"
+      },
       {
         "type": "code",
-        "text": ""
-      }
-    ]
-  },
-  {
-    "file": "../../..\\pet_projects\\llm-portfolio-assistant\\notebooks\\07_eval.ipynb",
-    "project": "unknown",
-    "type": "ipynb",
-    "content": [
+        "text": "import json\nimport numpy as np\nimport faiss\nimport requests\nfrom sentence_transformers import CrossEncoder\n\nfrom sentence_transformers import SentenceTransformer"
+      },
+      {
+        "type": "markdown",
+        "text": "### Load FAISS + metadata"
+      },
+      {
+        "type": "code",
+        "text": "INDEX_PATH = \"../data/embeddings/faiss.index\"\nMETA_PATH = \"../data/embeddings/metadata.json\"\n\nindex = faiss.read_index(INDEX_PATH)\n\nwith open(META_PATH, \"r\", encoding=\"utf-8\") as f:\n    chunks = json.load(f)\n\nprint(f\"Loaded {len(chunks)} chunks\")"
+      },
+      {
+        "type": "markdown",
+        "text": "### Load embedding model"
+      },
+      {
+        "type": "code",
+        "text": "model = SentenceTransformer(\"BAAI/bge-small-en-v1.5\")"
+      },
+      {
+        "type": "markdown",
+        "text": "### Retrieval"
+      },
+      {
+        "type": "code",
+        "text": "def search(query, k=20):\n    q_emb = model.encode([query]).astype(\"float32\")\n    distances, indices = index.search(q_emb, k)\n    return [chunks[i] for i in indices[0]]"
+      },
+      {
+        "type": "markdown",
+        "text": "### Deduplication"
+      },
+      {
+        "type": "code",
+        "text": "def unique_results(results, max_results=5):\n    seen = set()\n    unique = []\n\n    for r in results:\n        text = r[\"text\"]\n\n        if text[:200] not in seen:\n            unique.append(r)\n            seen.add(text[:200])\n\n        if len(unique) >= max_results:\n            break\n\n    return unique"
+      },
+      {
+        "type": "markdown",
+        "text": "### Build context"
+      },
+      {
+        "type": "code",
+        "text": "def build_context(results):\n    return \"\\n\\n\".join([r[\"text\"] for r in results])"
+      },
+      {
+        "type": "markdown",
+        "text": "### Prompt (VERY IMPORTANT for local models)"
+      },
+      {
+        "type": "code",
+        "text": "def build_prompt(query, context):\n    return f\"\"\"<|begin_of_text|><|start_header_id|>system<|end_header_id|>\nYou are an ML project expert. Answer ONLY based on the context.\nIf the answer is not in the context, say \"I don't know\".\nBe specific, use numbers and facts from the context.\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\nContext (project documentation):\n---\n{context}\n---\n\nQuestion: {query}\n\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\"\"\""
+      },
+      {
+        "type": "markdown",
+        "text": "### Call local LLM (Ollama)"
+      },
+      {
+        "type": "code",
+        "text": "def ask_llm(prompt):\n    response = requests.post(\n        \"http://localhost:11434/api/generate\",\n        json={\n            \"model\": \"llama3\",\n            \"prompt\": prompt,\n            \"stream\": False\n        }\n    )\n    \n    return response.json()[\"response\"]"
+      },
+      {
+        "type": "markdown",
+        "text": "### Full RAG pipeline"
+      },
+      {
+        "type": "code",
+        "text": "def rag(query):\n    # 1. Retrieve\n    results = search(query, k=20)\n    \n    # 2. Deduplicate\n    results = unique_results(results, max_results=5)\n    \n    # 3. Build context\n    context = build_context(results)\n    \n    # 4. Prompt\n    prompt = build_prompt(query, context)\n    \n    # 5. LLM\n    answer = ask_llm(prompt)\n    \n    return answer, results"
+      },
+      {
+        "type": "markdown",
+        "text": "### Test"
+      },
+      {
+        "type": "code",
+        "text": "query = \"What model is used in churn prediction?\"\n\nanswer, results = rag(query)\n\nprint(\"ANSWER:\\n\")\nprint(answer)"
+      },
+      {
+        "type": "code",
+        "text": "query = \"What is the recall of the best churn prediction model, that is used in prod?\"\n\nanswer, results = rag(query)\n\nprint(\"ANSWER:\\n\")\nprint(answer)"
+      },
+      {
+        "type": "code",
+        "text": "# 3. Traffic system architecture\nquery = \"Describe the architecture of the traffic sign detection system.\"\nanswer, results = rag(query)\nprint(\"\\n--- Q3 ---\")\nprint(\"ANSWER:\\n\", answer)"
+      },
+      {
+        "type": "code",
+        "text": "# 4. Improvement vs baseline\nquery = \"How is the traffic sign detection system better than a baseline YOLO model?\"\nanswer, results = rag(query)\nprint(\"\\n--- Q4 ---\")\nprint(\"ANSWER:\\n\", answer)"
+      },
+      {
+        "type": "code",
+        "text": "# 5. Engineering challenges\nquery = \"What engineering challenges were solved in the traffic sign detection project?\"\nanswer, results = rag(query)\nprint(\"\\n--- Q5 ---\")\nprint(\"ANSWER:\\n\", answer)"
+      },
+      {
+        "type": "code",
+        "text": "# 6. Full pipeline\nquery = \"Describe the full pipeline of the churn prediction system.\"\nanswer, results = rag(query)\nprint(\"\\n--- Q6 ---\")\nprint(\"ANSWER:\\n\", answer)"
+      },
+      {
+        "type": "code",
+        "text": "# 7. Backend tech\nquery = \"What technologies were used to build the churn prediction API?\"\nanswer, results = rag(query)\nprint(\"\\n--- Q7 ---\")\nprint(\"ANSWER:\\n\", answer)"
+      },
+      {
+        "type": "code",
+        "text": "# 7. Backend tech\nquery = \"What technologies were used to build the sign detection API?\"\nanswer, results = rag(query)\nprint(\"\\n--- Q8 ---\")\nprint(\"ANSWER:\\n\", answer)"
+      },
+      {
+        "type": "code",
+        "text": "# 8. Skills\nquery = \"What machine learning skills does this portfolio demonstrate?\"\nanswer, results = rag(query)\nprint(\"\\n--- Q9 ---\")\nprint(\"ANSWER:\\n\", answer)"
+      },
+      {
+        "type": "code",
+        "text": "# 9. Deployment\nquery = \"How is the project deployed?\"\nanswer, results = rag(query)\nprint(\"\\n--- Q10 ---\")\nprint(\"ANSWER:\\n\", answer)"
+      },
+      {
+        "type": "code",
+        "text": "# 10. Production readiness\nquery = \"What makes this portfolio production-ready?\"\nanswer, results = rag(query)\nprint(\"\\n--- Q11 ---\")\nprint(\"ANSWER:\\n\", answer)"
+      },
+      {
+        "type": "code",
+        "text": "# 11. Why recall\nquery = \"Why was recall chosen as the main metric for churn prediction?\"\nanswer, results = rag(query)\nprint(\"\\n--- Q12 ---\")\nprint(\"ANSWER:\\n\", answer)"
+      },
+      {
+        "type": "code",
+        "text": "# 12. Summary\nquery = \"Summarize the churn project in 2 sentences.\"\nanswer, results = rag(query)\nprint(\"\\n--- Q13 ---\")\nprint(\"ANSWER:\\n\", answer)"
+      },
+      {
+        "type": "code",
+        "text": "# 13. Edge case\nquery = \"Is there any information about the churn model algorithm?\"\nanswer, results = rag(query)\nprint(\"\\n--- Q14 ---\")\nprint(\"ANSWER:\\n\", answer)"
+      },
+      {
+        "type": "code",
+        "text": "query = \"Who is portfolio author?\"\nanswer, results = rag(query)\nprint(\"\\n--- Q14 ---\")\nprint(\"ANSWER:\\n\", answer)"
+      },
+      {
+        "type": "code",
+        "text": "query = \"What's the documentation about? Tell me how the Churn prediction service works?\"\nanswer, results = rag(query)\nprint(\"\\n--- Q15 ---\")\nprint(\"ANSWER:\\n\", answer)"
+      },
       {
         "type": "code",
         "text": ""
@@ -10928,6 +11207,307 @@
   },
   {
     "file": "../../..\\pet_projects\\llm-portfolio-assistant\\notebooks\\.ipynb_checkpoints\\01_parsing_files-checkpoint.ipynb",
+    "project": "unknown",
+    "type": "ipynb",
+    "content": [
+      {
+        "type": "markdown",
+        "text": "### Imports"
+      },
+      {
+        "type": "code",
+        "text": "import os\nimport json\nfrom pypdf import PdfReader\nfrom tqdm import tqdm"
+      },
+      {
+        "type": "markdown",
+        "text": "### Path"
+      },
+      {
+        "type": "code",
+        "text": "DATA_ROOT = \"../../..\"\nOUTPUT_PATH = \"../data/processed/parsed_data.json\""
+      },
+      {
+        "type": "markdown",
+        "text": "### Collecting all files"
+      },
+      {
+        "type": "code",
+        "text": "def collect_files(root_dir):\n    \"\"\"\n    Recursively walks through a directory\n    and collects all file paths.\n    \"\"\"\n    all_files = []\n    \n    for root, _, files in os.walk(root_dir):\n    \n        for file in files:\n            full_path = os.path.join(root, file)\n            all_files.append(full_path)\n    \n    return all_files\n\n\nfiles = collect_files(DATA_ROOT)\n\nprint(f\"Total files found: {len(files)}\")\nprint(os.listdir(DATA_ROOT))"
+      },
+      {
+        "type": "markdown",
+        "text": "### Detect File Type"
+      },
+      {
+        "type": "code",
+        "text": "def get_file_type(path):\n    \"\"\"\n    Detect file type based on extension\n    \"\"\"\n    if path.endswith(\".md\"):\n        return \"md\"\n    elif path.endswith(\".ipynb\"):\n        return \"ipynb\"\n    elif path.endswith(\".py\"):\n        return \"py\"\n    elif path.endswith(\".pdf\"):\n        return \"pdf\"\n    else:\n        return \"other\""
+      },
+      {
+        "type": "markdown",
+        "text": "### Parse Markdown Files"
+      },
+      {
+        "type": "code",
+        "text": "def parse_md(path):\n    \"\"\"\n    Reads markdown file as plain text\n    \"\"\"\n    try:\n        with open(path, \"r\", encoding=\"utf-8\") as f:\n            return f.read()\n    except Exception as e:\n        print(f\"Error reading {path}: {e}\")\n        return \"\""
+      },
+      {
+        "type": "markdown",
+        "text": "### Parse Jupyter Notebooks"
+      },
+      {
+        "type": "code",
+        "text": "def parse_ipynb(path):\n    \"\"\"\n    Parses a Jupyter notebook and returns structured cells\n    \n    IMPORTANT:\n    - We do NOT merge markdown and code here\n    - We preserve the original structure\n    \"\"\"\n    try:\n        with open(path, \"r\", encoding=\"utf-8\") as f:\n            notebook = json.load(f)\n        \n        cells = []\n        \n        for cell in notebook.get(\"cells\", []):\n            cell_type = cell.get(\"cell_type\")\n            source = \"\".join(cell.get(\"source\", []))\n            \n            cells.append({\n                \"type\": cell_type,\n                \"text\": source\n            })\n        \n        return cells\n    \n    except Exception as e:\n        print(f\"Error parsing ipynb {path}: {e}\")\n        return []"
+      },
+      {
+        "type": "markdown",
+        "text": "### Parse Python Files"
+      },
+      {
+        "type": "code",
+        "text": "def parse_py(path):\n    \"\"\"\n    Reads Python file as raw text\n    \n    IMPORTANT:\n    No semantic analysis here — just extraction\n    \"\"\"\n    try:\n        with open(path, \"r\", encoding=\"utf-8\") as f:\n            return f.read()\n    except Exception as e:\n        print(f\"Error reading {path}: {e}\")\n        return \"\""
+      },
+      {
+        "type": "markdown",
+        "text": "### Parse PDF Files"
+      },
+      {
+        "type": "code",
+        "text": "def parse_pdf(path):\n    \"\"\"\n    Extracts text from PDF files\n    \"\"\"\n    try:\n        reader = PdfReader(path)\n        text = \"\"\n        \n        for page in reader.pages:\n            text += page.extract_text() or \"\"\n        \n        return text\n    \n    except Exception as e:\n        print(f\"Error parsing PDF {path}: {e}\")\n        return \"\""
+      },
+      {
+        "type": "markdown",
+        "text": "### Detect Project Name (Metadata)"
+      },
+      {
+        "type": "code",
+        "text": "def detect_project(path):\n    \"\"\"\n    Detects project name based on file path\n    \n    Example:\n    data/raw/churn/... → churn\n    \"\"\"\n    parts = path.split(os.sep)\n    \n    if \"churn\" in parts:\n        return \"churn\"\n    elif \"traffic\" in parts:\n        return \"traffic_sign\"\n    elif 'Courses' in parts:\n        return 'courses'\n    elif 'scientific publications' in parts:\n        return 'scientific_publications'\n    else:\n        return \"unknown\""
+      },
+      {
+        "type": "markdown",
+        "text": "### Main Parsing Pipeline"
+      },
+      {
+        "type": "code",
+        "text": "parsed_data = []\n\nfor path in tqdm(files):\n    \n    file_type = get_file_type(path)\n    \n    # skip irrelevant files\n    if file_type == \"other\":\n        continue\n    \n    project = detect_project(path)\n    \n    if file_type == \"md\":\n        content = parse_md(path)\n    \n    elif file_type == \"ipynb\":\n        content = parse_ipynb(path)\n    \n    elif file_type == \"py\":\n        content = parse_py(path)\n    \n    elif file_type == \"pdf\":\n        content = parse_pdf(path)\n    \n    else:\n        continue\n    \n    parsed_data.append({\n        \"file\": path,\n        \"project\": project,\n        \"type\": file_type,\n        \"content\": content\n    })"
+      },
+      {
+        "type": "code",
+        "text": "len(parsed_data)"
+      },
+      {
+        "type": "code",
+        "text": "parsed_data[0]"
+      },
+      {
+        "type": "markdown",
+        "text": "### Save to JSON"
+      },
+      {
+        "type": "code",
+        "text": "os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)\n\nwith open(OUTPUT_PATH, \"w\", encoding=\"utf-8\") as f:\n    json.dump(parsed_data, f, ensure_ascii=False, indent=2)\n\nprint(f\"Saved to {OUTPUT_PATH}\")"
+      },
+      {
+        "type": "markdown",
+        "text": "### Summary\n\n- Implemented a pipeline to **collect and process files** from the portfolio directory  \n- Supported multiple formats: `.md`, `.ipynb`, `.py`, `.pdf`  \n- Extracted raw content while preserving structure (especially for notebooks)  \n- Added basic metadata (project name, file type, path)  \n- Saved all parsed data into a **structured JSON file**  \n\nResult: unified raw dataset ready for semantic processing (next step in RAG pipeline)"
+      },
+      {
+        "type": "code",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "file": "../../..\\pet_projects\\llm-portfolio-assistant\\notebooks\\.ipynb_checkpoints\\02_semantic_extraction-checkpoint.ipynb",
+    "project": "unknown",
+    "type": "ipynb",
+    "content": [
+      {
+        "type": "markdown",
+        "text": "### Imports"
+      },
+      {
+        "type": "code",
+        "text": "import json\nimport re\nimport ast\nfrom tqdm import tqdm"
+      },
+      {
+        "type": "markdown",
+        "text": "### Load parsed data"
+      },
+      {
+        "type": "code",
+        "text": "# Load parsed data from previous step\nINPUT_PATH = \"../data/processed/parsed_data.json\"\n\nwith open(INPUT_PATH, \"r\", encoding=\"utf-8\") as f:\n    parsed_data = json.load(f)\n\nprint(f\"Loaded {len(parsed_data)} files\")"
+      },
+      {
+        "type": "markdown",
+        "text": "### Text cleaning"
+      },
+      {
+        "type": "code",
+        "text": "def clean_text(text):\n    \"\"\"\n    Basic text cleaning:\n    - remove extra spaces\n    - normalize newlines\n    \"\"\"\n    text = re.sub(r\"\\n+\", \"\\n\", text)\n    text = re.sub(r\"\\s+\", \" \", text)\n    return text.strip()"
+      },
+      {
+        "type": "markdown",
+        "text": "### Extract meaning from Python code"
+      },
+      {
+        "type": "code",
+        "text": "def extract_python_semantics(code):\n    \"\"\"\n    Extracts meaningful information from Python code:\n    - function names\n    - docstrings\n    \n    Returns human-readable summary\n    \"\"\"\n    try:\n        tree = ast.parse(code)\n    except:\n        return \"\"\n\n    results = []\n\n    for node in ast.walk(tree):\n        if isinstance(node, ast.FunctionDef):\n            name = node.name\n            doc = ast.get_docstring(node)\n\n            summary = f\"Function: {name}\"\n\n            if doc:\n                summary += f\"\\nDescription: {doc}\"\n\n            results.append(summary)\n\n    return \"\\n\".join(results)"
+      },
+      {
+        "type": "markdown",
+        "text": "### Process notebook cells"
+      },
+      {
+        "type": "code",
+        "text": "def process_ipynb(content):\n    \"\"\"\n    Converts notebook cells into semantic text\n    \n    Strategy:\n    - keep markdown\n    - summarize code\n    - merge everything into one text block\n    \"\"\"\n    text_blocks = []\n\n    for cell in content:\n        if cell[\"type\"] == \"markdown\":\n            text_blocks.append(cell[\"text\"])\n\n        elif cell[\"type\"] == \"code\":\n            summary = extract_python_semantics(cell[\"text\"])\n            if summary:\n                text_blocks.append(summary)\n\n    return \"\\n\".join(text_blocks)"
+      },
+      {
+        "type": "markdown",
+        "text": "### Process Python files"
+      },
+      {
+        "type": "code",
+        "text": "def process_py(content):\n    \"\"\"\n    Extract semantic info from Python file\n    \"\"\"\n    return extract_python_semantics(content)"
+      },
+      {
+        "type": "markdown",
+        "text": "### Process plain text files"
+      },
+      {
+        "type": "code",
+        "text": "def process_text(content):\n    \"\"\"\n    Clean markdown / pdf text\n    \"\"\"\n    return clean_text(content)"
+      },
+      {
+        "type": "markdown",
+        "text": "### Chunking"
+      },
+      {
+        "type": "code",
+        "text": "def chunk_text(text, chunk_size=500, overlap=100):\n    \"\"\"\n    Splits text into overlapping chunks\n    \"\"\"\n    chunks = []\n    \n    for i in range(0, len(text), chunk_size - overlap):\n        chunk = text[i:i + chunk_size]\n        chunks.append(chunk)\n    \n    return chunks"
+      },
+      {
+        "type": "markdown",
+        "text": "### Simple classification"
+      },
+      {
+        "type": "code",
+        "text": "def classify_text(text):\n    \"\"\"\n    Assigns semantic type to chunk\n    \"\"\"\n    text = text.lower()\n\n    if \"model\" in text:\n        return \"model\"\n    elif \"pipeline\" in text:\n        return \"pipeline\"\n    elif \"feature\" in text:\n        return \"feature_engineering\"\n    else:\n        return \"general\""
+      },
+      {
+        "type": "markdown",
+        "text": "### Main pipeline"
+      },
+      {
+        "type": "code",
+        "text": "chunks = []\n\nfor item in tqdm(parsed_data):\n    \n    file_type = item[\"type\"]\n    project = item[\"project\"]\n    content = item[\"content\"]\n    \n    # Process based on type\n    if file_type == \"ipynb\":\n        text = process_ipynb(content)\n    \n    elif file_type == \"py\":\n        text = process_py(content)\n    \n    elif file_type in [\"md\", \"pdf\"]:\n        text = process_text(content)\n    \n    else:\n        continue\n\n    text = clean_text(text)\n\n    if not text:\n        continue\n\n    # Chunking\n    text_chunks = chunk_text(text)\n\n    for chunk in text_chunks:\n        chunks.append({\n            \"text\": chunk,\n            \"project\": project,\n            \"type\": classify_text(chunk)\n        })"
+      },
+      {
+        "type": "markdown",
+        "text": "### Save result"
+      },
+      {
+        "type": "code",
+        "text": "OUTPUT_PATH = \"../data/chunks/chunks.json\"\n\nimport os\nos.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)\n\nwith open(OUTPUT_PATH, \"w\", encoding=\"utf-8\") as f:\n    json.dump(chunks, f, ensure_ascii=False, indent=2)\n\nprint(f\"Saved {len(chunks)} chunks\")"
+      },
+      {
+        "type": "markdown",
+        "text": "### Summary\n\n- Loaded parsed data from the previous step (`parsed_data.json`)  \n- Converted raw content into **semantic text representations**  \n  - extracted meaning from Python code (functions, docstrings)  \n  - combined notebook markdown + code into unified text  \n- Cleaned and normalized text  \n- Split text into **overlapping chunks** (chunking)  \n- Added metadata (project, type) to each chunk  \n\n👉 Result: structured **semantic chunks** ready for embeddings and retrieval (RAG pipeline)"
+      },
+      {
+        "type": "code",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "file": "../../..\\pet_projects\\llm-portfolio-assistant\\notebooks\\.ipynb_checkpoints\\03_embeddings-checkpoint.ipynb",
+    "project": "unknown",
+    "type": "ipynb",
+    "content": [
+      {
+        "type": "markdown",
+        "text": "### Imports"
+      },
+      {
+        "type": "code",
+        "text": "import json\nimport numpy as np\n\nfrom tqdm import tqdm\nfrom sentence_transformers import SentenceTransformer\n\nimport faiss\nimport os"
+      },
+      {
+        "type": "markdown",
+        "text": "### Load chunks"
+      },
+      {
+        "type": "code",
+        "text": "# Load semantic chunks from previous step\nINPUT_PATH = \"../data/chunks/chunks.json\"\n\nwith open(INPUT_PATH, \"r\", encoding=\"utf-8\") as f:\n    chunks = json.load(f)\n\nprint(f\"Loaded {len(chunks)} chunks\")"
+      },
+      {
+        "type": "markdown",
+        "text": "### Initialize embedding model"
+      },
+      {
+        "type": "code",
+        "text": "# Lightweight and fast model (good default)\nmodel = SentenceTransformer(\"all-MiniLM-L6-v2\")"
+      },
+      {
+        "type": "markdown",
+        "text": "### Generate embeddings (batch mode)"
+      },
+      {
+        "type": "code",
+        "text": "# Extract all texts\ntexts = [chunk[\"text\"] for chunk in chunks]\n\n# Encode in batch (much faster than loop)\nembeddings = model.encode(\n    texts,\n    show_progress_bar=True,\n    convert_to_numpy=True\n)\n\nprint(\"Embeddings shape:\", embeddings.shape)"
+      },
+      {
+        "type": "markdown",
+        "text": "### Create FAISS index"
+      },
+      {
+        "type": "code",
+        "text": "# FAISS requires float32\nvectors = embeddings.astype(\"float32\")\n\n# Create index (L2 distance)\nindex = faiss.IndexFlatL2(vectors.shape[1])\n\n# Add vectors to index\nindex.add(vectors)\n\nprint(\"Total vectors in index:\", index.ntotal)"
+      },
+      {
+        "type": "markdown",
+        "text": "### Save index"
+      },
+      {
+        "type": "code",
+        "text": "INDEX_PATH = \"../data/embeddings/faiss.index\"\nos.makedirs(os.path.dirname(INDEX_PATH), exist_ok=True)\n\nfaiss.write_index(index, INDEX_PATH)\n\nprint(\"Index saved\")"
+      },
+      {
+        "type": "markdown",
+        "text": "### Save metadata (IMPORTANT)"
+      },
+      {
+        "type": "code",
+        "text": "# Save chunks separately (without embeddings)\nMETA_PATH = \"../data/embeddings/metadata.json\"\n\nwith open(META_PATH, \"w\", encoding=\"utf-8\") as f:\n    json.dump(chunks, f, ensure_ascii=False, indent=2)\n\nprint(\"Metadata saved\")"
+      },
+      {
+        "type": "markdown",
+        "text": "### Search function (test retrieval)"
+      },
+      {
+        "type": "code",
+        "text": "def search(query, k=20):\n    \"\"\"\n    Performs semantic search:\n    - encodes query\n    - finds nearest vectors\n    - returns top-k chunks\n    \"\"\"\n    # Encode query\n    q_emb = model.encode([query]).astype(\"float32\")\n    \n    # Search in FAISS\n    distances, indices = index.search(q_emb, k)\n    \n    results = []\n    \n    for i in indices[0]:\n        results.append(chunks[i])\n    \n    return results"
+      },
+      {
+        "type": "code",
+        "text": "query = \"churn prediction model CatBoost used\"\nresults = search(query)\n\nfor i, r in enumerate(results):\n    print(f\"\\n--- Result {i+1} ---\")\n    print(r[\"text\"][:300])"
+      },
+      {
+        "type": "markdown",
+        "text": "### Summary\n\n- Loaded semantic chunks from previous step  \n- Converted text into **vector embeddings** using a pre-trained model  \n- Built a **FAISS index** for efficient similarity search  \n- Stored vectors and metadata separately  \n- Implemented a basic **semantic search function**  \n\n👉 Result: working vector search system for retrieving relevant chunks in a RAG pipeline"
+      },
+      {
+        "type": "code",
+        "text": ""
+      },
+      {
+        "type": "code",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "file": "../../..\\pet_projects\\llm-portfolio-assistant\\notebooks\\.ipynb_checkpoints\\04_rag_pipeline-checkpoint.ipynb",
     "project": "unknown",
     "type": "ipynb",
     "content": [
