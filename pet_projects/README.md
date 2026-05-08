@@ -59,7 +59,7 @@ Predict telecom customer churn and provide actionable insights for retention.
 - Interactive dashboard for business users
 
 **Model Performance:**
-- **Recall: 84.5%** (optimized for churn detection)
+- **Recall: 96%** (optimized for churn detection)
 
 **Engineering Highlights:**
 - Modular FastAPI backend
