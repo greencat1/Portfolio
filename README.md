@@ -23,7 +23,7 @@ Portfolio/
 ├── Pet_Projects/ # Hands-on ML projects
 │   ├── customer-churn-prediction/     # Churn prediction service (FastAPI + Docker)
 │   ├── traffic-sign-detection/        # Road signs detection service (FastAPI + Docker)
-│   └── llm-portfolio-assistant/       # RAG assistant for portfolio (NEW!)
+│   └── llm-portfolio-assistant/       # RAG assistant for portfolio (FastApi + Docker)
 │  
 ├── scientific publications/
 │   ├── Traffic_Sign_Detection_SSD/
