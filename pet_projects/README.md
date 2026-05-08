@@ -10,10 +10,20 @@ Collection of production-ready and research-oriented machine learning projects.
 |--------|------------|------------|--------|
 | **customer-churn-prediction** | End-to-end churn prediction system with API, dashboard, and deployment | FastAPI, CatBoost, Streamlit, Docker, SQLite | ✅ Production |
 | **traffic-sign-detection** | Real-time traffic sign detection using YOLO + ResNet cascade (55 classes) | YOLO, PyTorch, Albumentations, FastAPI, WebSocket | ✅ Production |
+| **rag-portfolio-assistant** | RAG system for semantic search over ML portfolio | FastAPI, FAISS, Sentence-Transformers, Ollama, Streamlit, Docker | ✅ Production |
 
 ---
 
 ## 🚀 Live Demo
+
+### 🤖 RAG Portfolio Assistant 
+- **Live Demo Dashboard:** http://207.231.105.113:8502/
+- **Swagger API Docs:** http://207.231.105.113:8002/docs
+- **GitHub:** [llm-portfolio-assistant](https://github.com/greencat1/Portfolio/tree/main/pet_projects/llm-portfolio-assistant)
+
+> Ask questions about my portfolio — gets answers via semantic search + local LLM.
+
+---
 
 ### 🚦 Traffic Sign Detection
 - **Live Demo:** https://greencat1.tech/  
@@ -98,17 +108,41 @@ Build a **high-accuracy real-time detection system** for 55 traffic sign classes
 
 ---
 
+### 🔹 3. RAG Portfolio Assistant (Production) — *NEW*
+
+**Goal:**  
+Build a **question-answering system** over my entire ML portfolio using RAG (Retrieval-Augmented Generation).
+
+**How It Works:**
+1. User asks a question
+2. System finds relevant chunks via semantic search (FAISS)
+3. LLM generates answer based **only** on retrieved context
+
+**Key Features:**
+- 8,361 semantic chunks from 291 files (`.md`, `.ipynb`, `.py`, `.pdf`)
+- **FAISS** vector search on CPU
+- **BGE embeddings** (`BAAI/bge-small-en-v1.5`)
+- **Local LLM** (`tinyllama` / `phi3:mini` via Ollama)
+- FastAPI backend + Streamlit chat UI
+- Docker Compose deployment (3 containers)
+
+
+**Repository:** `llm-portfolio-assistant/`
+
+---
+
 ## 🧰 Tech Stack
 
 **Machine Learning**
-- PyTorch, CatBoost
-- Scikit-learn
+- PyTorch, CatBoost, Sentence-Transformers
+- Scikit-learn, FAISS
 - Ultralytics YOLO
 
 **Backend & Deployment**
-- FastAPI
-- Docker
+- FastAPI, Uvicorn
+- Docker, Docker Compose
 - WebSocket
+- Ollama (local LLM)
 
 **Data Processing**
 - Pandas, NumPy
@@ -123,14 +157,17 @@ Build a **high-accuracy real-time detection system** for 55 traffic sign classes
 ## 💡 What This Portfolio Demonstrates
 
 - Building **end-to-end ML systems**
+- **RAG system design** (embeddings + vector search + LLM)
 - Strong understanding of:
   - model vs system trade-offs
   - real-time constraints
   - class imbalance handling
+  - CPU optimization for LLMs
 - Experience with:
   - production APIs
   - deployment (Docker)
   - interactive ML interfaces
+  - multi-format document parsing
 - Focus on **practical impact over toy models**
 
 ---
@@ -141,6 +178,7 @@ Build a **high-accuracy real-time detection system** for 55 traffic sign classes
 - Model monitoring & logging  
 - Experiment tracking (W&B / MLflow)  
 - Edge / mobile deployment  
+- RAG evaluation metrics (hit rate, MRR)
 
 ---
 
@@ -150,6 +188,7 @@ Build a **high-accuracy real-time detection system** for 55 traffic sign classes
 
 - GitHub: https://github.com/greencat1  
 - Email: isazontov1@gmail.com  
+- Telegram: @Hammerschmidt1
 
 ---
 
