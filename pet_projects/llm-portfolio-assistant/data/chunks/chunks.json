@@ -5,27 +5,32 @@
     "type": "general"
   },
   {
-    "text": "--- ## 📂 Repository Structure ```text Portfolio/ ├── Courses/ │ ├── Applied Data Science with Python/ │ ├── More Applied Data Science with Python/ │ ├── Data Science Foundations/ │ ├── Data Science Fundamentals with Python and SQL Specialization/ │ ├── IBM Generative AI Engineering Professional Certificate/ │ └── Certificates/ │ ├── Pet_Projects/ # Hands-on ML projects │ └── customer-churn-prediction/ # Churn prediction service (FastAPI + Docker+) │ └── traffic-sign-detection// # Road signs dete",
+    "text": "--- ## 📂 Repository Structure ```text Portfolio/ ├── Courses/ │ ├── Applied Data Science with Python/ │ ├── More Applied Data Science with Python/ │ ├── Data Science Foundations/ │ ├── Data Science Fundamentals with Python and SQL Specialization/ │ ├── IBM Generative AI Engineering Professional Certificate/ │ └── Certificates/ │ ├── Pet_Projects/ # Hands-on ML projects │ ├── customer-churn-prediction/ # Churn prediction service (FastAPI + Docker) │ ├── traffic-sign-detection/ # Road signs detect",
     "project": "unknown",
     "type": "general"
   },
   {
-    "text": ") │ └── traffic-sign-detection// # Road signs detection service (FastAPI + Docker+) │ ├── scientific publications/ │ ├── Traffic_Sign_Detection_SSD/ │ ├── YOLOv7_Traffic_Sign_Detection/ │ └── README.md ``` --- ## 🚀 Featured Projects ### 🚦 Traffic Sign Detection (Production) Real-time traffic sign recognition system using **YOLO + ResNet cascade architecture (55 classes)** - **94.07% mAP50 / 91.71% Recall** - **+12.7% improvement vs baseline YOLO** - Real-time detection via **WebSocket + browser ",
+    "text": " │ ├── traffic-sign-detection/ # Road signs detection service (FastAPI + Docker) │ └── llm-portfolio-assistant/ # RAG assistant for portfolio (NEW!) │ ├── scientific publications/ │ ├── Traffic_Sign_Detection_SSD/ │ ├── YOLOv7_Traffic_Sign_Detection/ │ └── README.md ``` --- ## 🚀 Featured Projects ### 🚦 Traffic Sign Detection (Production) Real-time traffic sign recognition system using **YOLO + ResNet cascade architecture (55 classes)** - **94.07% mAP50 / 91.71% Recall** - **+12.7% improvement vs",
     "project": "unknown",
     "type": "feature_engineering"
   },
   {
-    "text": "* - Real-time detection via **WebSocket + browser camera** - Two-stage architecture: - YOLO → category detection - 5× ResNet → fine classification 🌐 **Live Demo:** https://greencat1.tech/ ▶️ **Video Guide:** https://www.youtube.com/watch?v=XS1jED6fzpY --- ### 📊 Customer Churn Prediction (Production) End-to-end ML system for predicting telecom churn.",
+    "text": " mAP50 / 91.71% Recall** - **+12.7% improvement vs baseline YOLO** - Real-time detection via **WebSocket + browser camera** - Two-stage architecture: - YOLO → category detection - 5× ResNet → fine classification 🌐 **Live Demo:** https://greencat1.tech/ ▶️ **Video Guide:** https://www.youtube.com/watch?v=XS1jED6fzpY --- ### 📊 Customer Churn Prediction (Production) End-to-end ML system for predicting telecom churn.",
     "project": "unknown",
     "type": "general"
   },
   {
-    "text": "- **84.5% recall** (optimized for business impact) - REST API (**23 endpoints**) with authentication & rate limiting - Interactive **Streamlit dashboard** - Dockerized multi-container deployment 🌐 **API Docs:** http://207.231.105.113:8000/docs 📊 **Dashboard:** http://207.231.105.113:8501 ▶️ **Video Guide:** https://www.youtube.com/watch?v=zrF0L2pznhU --- ## 🎓 Courses The **Courses** folder contains coursework, assignments, and capstone projects completed as part of structured data science progra",
+    "text": "- **84.5% recall** (optimized for business impact) - REST API (**23 endpoints**) with authentication & rate limiting - Interactive **Streamlit dashboard** - Dockerized multi-container deployment 🌐 **API Docs:** http://207.231.105.113:8000/docs 📊 **Dashboard:** http://207.231.105.113:8501 ▶️ **Video Guide:** https://www.youtube.com/watch?v=zrF0L2pznhU --- ### 🤖 RAG Portfolio Assistant Question-answering system over my entire ML portfolio using Retrieval-Augmented Generation (RAG).",
     "project": "unknown",
     "type": "general"
   },
   {
-    "text": "ompleted as part of structured data science programs, including Python- and SQL-based analytics.",
+    "text": "- 8,361 semantic chunks from 291 files (.md, .ipynb, .py, .pdf) - FAISS vector search on CPU - Local LLM (tinyllama / phi3:mini via Ollama) - FastAPI backend + Streamlit chat interface - Fully local — no API calls to OpenAI/cloud 🌐 Live Demo: http://207.231.105.113:8502/ 📚 Swagger API: http://207.231.105.113:8002/ ▶️ Video Guide: (coming soon) --- ## 🎓 Courses The **Courses** folder contains coursework, assignments, and capstone projects completed as part of structured data science programs, inc",
+    "project": "unknown",
+    "type": "general"
+  },
+  {
+    "text": "d as part of structured data science programs, including Python- and SQL-based analytics.",
     "project": "unknown",
     "type": "general"
   },
@@ -75,57 +80,62 @@
     "type": "model"
   },
   {
-    "text": "ks (CNNs) - Single Shot Detector (SSD) - YOLOv7 - Transfer learning - Training and evaluation of deep models ### 🧪 Model Evaluation & Validation - Train / validation / test splits - Cross-validation - Overfitting detection - Metric-driven optimization - Recall as primary metric for imbalanced data - Precision-Recall tradeoff ### 📝 NLP & Information Extraction - Text preprocessing - Tokenization and normalization - NLTK-based workflows - Information extraction from text data ### 🕸 Graphs & Networ",
+    "text": "ks (CNNs) - Single Shot Detector (SSD) - YOLOv7 - Transfer learning - Training and evaluation of deep models ### 🧪 Model Evaluation & Validation - Train / validation / test splits - Cross-validation - Overfitting detection - Metric-driven optimization - Recall as primary metric for imbalanced data - Precision-Recall tradeoff ### 📝 NLP & Information Extraction - Text preprocessing - Tokenization and normalization - NLTK-based workflows - Information extraction from text data ### ✅ RAG (Retrieval-",
     "project": "unknown",
     "type": "model"
   },
   {
-    "text": "on extraction from text data ### 🕸 Graphs & Networks - Network analysis with NetworkX - Centrality measures - Community detection - Graph structure analysis ### 🌐 Data Collection - Web scraping with BeautifulSoup - HTTP requests with Requests ### 🗄 SQL & Relational Databases - Writing complex SQL queries (SELECT, WHERE, JOIN) - Aggregations and GROUP BY - Subqueries and Common Table Expressions (CTE) - Window functions (ROW_NUMBER, RANK) - Data filtering and transformation - Connecting Python to",
-    "project": "unknown",
-    "type": "general"
-  },
-  {
-    "text": "iltering and transformation - Connecting Python to SQL databases - SQLite for embedded applications - Database design (3 tables: api_keys, new_data, raw_data) ### 🚀 API Development & Backend - REST API design (FastAPI) - API key authentication (SHA-256 hashing) - Role-Based Access Control (user/admin/dashboard) - Rate limiting (sliding window algorithm) - Request/response validation (Pydantic) - Automatic API documentation (Swagger UI / OpenAPI) - Batch processing endpoints ### 📊 Dashboard & Mon",
-    "project": "unknown",
-    "type": "general"
-  },
-  {
-    "text": "- Batch processing endpoints ### 📊 Dashboard & Monitoring - Interactive dashboard development (Streamlit) - Real-time data visualization - Business metric tracking (MRR, revenue at risk) - Retention recommendations UI ### 🐳 DevOps & Deployment - Containerization with Docker - Multi-container orchestration (Docker Compose) - Volume mounting for data persistence - VPS deployment (Ubuntu) ### 🧪 Testing & Quality Assurance - Unit testing with pytest ### 📝 Logging & Monitoring - Application logging (",
-    "project": "unknown",
-    "type": "general"
-  },
-  {
-    "text": "### 📝 Logging & Monitoring - Application logging (Python logging module) - Rotating file handlers - JSON log format - Console + file logging ### 🔐 Security - SHA-256 hashing - Soft deletion (is_active flag) - Role-based endpoint protection - Header-based authentication (X-API-Key) ### 📐 Statistics & Probability #### Descriptive Statistics - Mean, median, mode - Variance and standard deviation - Quantiles, percentiles, interquartile range (IQR) - Distribution shape analysis (skewness, kurtosis) #",
-    "project": "unknown",
-    "type": "general"
-  },
-  {
-    "text": "Distribution shape analysis (skewness, kurtosis) #### Probability Theory - Random variables - Probability distributions - Bernoulli, Binomial, Poisson, Normal distributions - Probability mass and density functions (PMF, PDF) - Cumulative distribution functions (CDF) #### Statistical Inference - Sampling techniques and sampling bias - Point estimation - Confidence intervals - Central Limit Theorem (CLT) - Bootstrapping and resampling methods #### Hypothesis Testing - Null and alternative hypothes",
-    "project": "unknown",
-    "type": "general"
-  },
-  {
-    "text": "Hypothesis Testing - Null and alternative hypotheses - p-values and significance levels - One-sample and two-sample tests - t-test and z-test - Chi-square test - Non-parametric tests (Mann–Whitney U, Wilcoxon) #### Correlation & Dependency Analysis - Pearson correlation - Spearman rank correlation - Covariance analysis - Multicollinearity detection #### Statistical Modeling Fundamentals - Linear regression assumptions - Residual analysis - Bias–variance tradeoff - Statistical interpretation of m",
+    "text": "on extraction from text data ### ✅ RAG (Retrieval-Augmented Generation) - Semantic search with FAISS vector database - Local LLM (tinyllama / phi3:mini via Ollama) - Multi-format document parsing (`.md`, `.ipynb`, `.py`, `.pdf`) - Smart chunking (sentence-aware with overlap) - Embedding model (BGE-small-en-v1.5) - Full RAG pipeline (retrieve → deduplicate → context → generate) ### 🕸 Graphs & Networks - Network analysis with NetworkX - Centrality measures - Community detection - Graph structure a",
     "project": "unknown",
     "type": "model"
   },
   {
-    "text": "ariance tradeoff - Statistical interpretation of machine learning models #### Exploratory Statistical Analysis - Distribution visualization (histograms, KDE, boxplots) - Outlier detection - Statistical comparison of groups #### Applied Statistics for Data Science - A/B testing fundamentals - Data-driven decision making - Statistical validation of model results ### 💼 Business & Product Skills - ROI calculation for ML models - Economic impact analysis (MRR, revenue saved) - Technical documentation",
-    "project": "unknown",
-    "type": "model"
-  },
-  {
-    "text": "sis (MRR, revenue saved) - Technical documentation (100+ pages) - Presentation and stakeholder communication - Project portfolio management --- ## 🛠 Tools & Technologies | Category | Tools | |----------|-------| | Programming | Python | | Data Libraries | NumPy, Pandas, SciPy | | Visualization | Matplotlib, Seaborn, Plotly | | Machine Learning | Scikit-learn, MLXtend, CatBoost, XGBoost | | Deep Learning | PyTorch | | Computer Vision | OpenCV, YOLOv7, SSD | | NLP | NLTK, re (regular expressions) ",
+    "text": "measures - Community detection - Graph structure analysis ### 🌐 Data Collection - Web scraping with BeautifulSoup - HTTP requests with Requests ### 🗄 SQL & Relational Databases - Writing complex SQL queries (SELECT, WHERE, JOIN) - Aggregations and GROUP BY - Subqueries and Common Table Expressions (CTE) - Window functions (ROW_NUMBER, RANK) - Data filtering and transformation - Connecting Python to SQL databases - SQLite for embedded applications - Database design (3 tables: api_keys, new_data, ",
     "project": "unknown",
     "type": "general"
   },
   {
-    "text": "Ov7, SSD | | NLP | NLTK, re (regular expressions) | | Graph Analysis | NetworkX | | Web Scraping | BeautifulSoup4, Requests | | API Development | FastAPI, Uvicorn, REST API | | Dashboard & UI | Streamlit | | Databases | SQL, SQLite | | Model Serialization | cloudpickle, pickle | | Authentication | API Keys, SHA-256 hashing, RBAC | | Rate Limiting | Sliding window algorithm | | Containerization | Docker, Docker Compose | | Workflow | Jupyter Notebook, Git, GitHub | | Testing | pytest, unit testin",
+    "text": " - Database design (3 tables: api_keys, new_data, raw_data) ### 🚀 API Development & Backend - REST API design (FastAPI) - API key authentication (SHA-256 hashing) - Role-Based Access Control (user/admin/dashboard) - Rate limiting (sliding window algorithm) - Request/response validation (Pydantic) - Automatic API documentation (Swagger UI / OpenAPI) - Batch processing endpoints ### 📊 Dashboard & Monitoring - Interactive dashboard development (Streamlit) - Real-time data visualization - Business m",
+    "project": "unknown",
+    "type": "general"
+  },
+  {
+    "text": "amlit) - Real-time data visualization - Business metric tracking (MRR, revenue at risk) - Retention recommendations UI ### 🐳 DevOps & Deployment - Containerization with Docker - Multi-container orchestration (Docker Compose) - Volume mounting for data persistence - VPS deployment (Ubuntu) ### 🧪 Testing & Quality Assurance - Unit testing with pytest ### 📝 Logging & Monitoring - Application logging (Python logging module) - Rotating file handlers - JSON log format - Console + file logging ### 🔐 Se",
+    "project": "unknown",
+    "type": "general"
+  },
+  {
+    "text": " JSON log format - Console + file logging ### 🔐 Security - SHA-256 hashing - Soft deletion (is_active flag) - Role-based endpoint protection - Header-based authentication (X-API-Key) ### 📐 Statistics & Probability #### Descriptive Statistics - Mean, median, mode - Variance and standard deviation - Quantiles, percentiles, interquartile range (IQR) - Distribution shape analysis (skewness, kurtosis) #### Probability Theory - Random variables - Probability distributions - Bernoulli, Binomial, Poisso",
+    "project": "unknown",
+    "type": "general"
+  },
+  {
+    "text": "bility distributions - Bernoulli, Binomial, Poisson, Normal distributions - Probability mass and density functions (PMF, PDF) - Cumulative distribution functions (CDF) #### Statistical Inference - Sampling techniques and sampling bias - Point estimation - Confidence intervals - Central Limit Theorem (CLT) - Bootstrapping and resampling methods #### Hypothesis Testing - Null and alternative hypotheses - p-values and significance levels - One-sample and two-sample tests - t-test and z-test - Chi-s",
+    "project": "unknown",
+    "type": "general"
+  },
+  {
+    "text": "e and two-sample tests - t-test and z-test - Chi-square test - Non-parametric tests (Mann–Whitney U, Wilcoxon) #### Correlation & Dependency Analysis - Pearson correlation - Spearman rank correlation - Covariance analysis - Multicollinearity detection #### Statistical Modeling Fundamentals - Linear regression assumptions - Residual analysis - Bias–variance tradeoff - Statistical interpretation of machine learning models #### Exploratory Statistical Analysis - Distribution visualization (histogra",
     "project": "unknown",
     "type": "model"
   },
   {
-    "text": "ook, Git, GitHub | | Testing | pytest, unit testing, integration testing | | Logging | Python logging, RotatingFileHandler | | Deployment | Ubuntu VPS, Docker Compose | | Experimentation | Google Colab | --- ## 📜 Certificates The **Certificates** folder contains official certificates and statements of accomplishment confirming successful completion of courses and specializations.",
+    "text": "al Analysis - Distribution visualization (histograms, KDE, boxplots) - Outlier detection - Statistical comparison of groups #### Applied Statistics for Data Science - A/B testing fundamentals - Data-driven decision making - Statistical validation of model results ### 💼 Business & Product Skills - ROI calculation for ML models - Economic impact analysis (MRR, revenue saved) - Technical documentation (100+ pages) - Presentation and stakeholder communication - Project portfolio management --- ## 🛠 ",
+    "project": "unknown",
+    "type": "model"
+  },
+  {
+    "text": "unication - Project portfolio management --- ## 🛠 Tools & Technologies | Category | Tools | |----------|-------| | Programming | Python | | Data Libraries | NumPy, Pandas, SciPy | | Visualization | Matplotlib, Seaborn, Plotly | | Machine Learning | Scikit-learn, MLXtend, CatBoost, XGBoost | | Deep Learning | PyTorch | | Computer Vision | OpenCV, YOLOv7, SSD | | NLP | NLTK, re (regular expressions) | | **RAG & Vector Search** | **FAISS, Sentence-Transformers, BGE** | | **LLM** | **Ollama, tinylla",
+    "project": "unknown",
+    "type": "general"
+  },
+  {
+    "text": "ransformers, BGE** | | **LLM** | **Ollama, tinyllama, phi3:mini** | | Graph Analysis | NetworkX | | Web Scraping | BeautifulSoup4, Requests | | API Development | FastAPI, Uvicorn, REST API | | Dashboard & UI | Streamlit | | Databases | SQL, SQLite | | Model Serialization | cloudpickle, pickle | | Authentication | API Keys, SHA-256 hashing, RBAC | | Rate Limiting | Sliding window algorithm | | Containerization | Docker, Docker Compose | | Workflow | Jupyter Notebook, Git, GitHub | | Testing | pyt",
+    "project": "unknown",
+    "type": "model"
+  },
+  {
+    "text": " | Jupyter Notebook, Git, GitHub | | Testing | pytest, unit testing, integration testing | | Logging | Python logging, RotatingFileHandler | | Deployment | Ubuntu VPS, Docker Compose | | Experimentation | Google Colab | --- ## 📜 Certificates The **Certificates** folder contains official certificates and statements of accomplishment confirming successful completion of courses and specializations.",
     "project": "unknown",
     "type": "general"
   },
@@ -30125,22 +30135,27 @@
     "type": "general"
   },
   {
-    "text": "--- ## 📁 Projects Overview | Project | Description | Tech Stack | Status | |--------|------------|------------|--------| | **customer-churn-prediction** | End-to-end churn prediction system with API, dashboard, and deployment | FastAPI, CatBoost, Streamlit, Docker, SQLite | ✅ Production | | **traffic-sign-detection** | Real-time traffic sign detection using YOLO + ResNet cascade (55 classes) | YOLO, PyTorch, Albumentations, FastAPI, WebSocket | ✅ Production | --- ## 🚀 Live Demo ### 🚦 Traffic Sig",
+    "text": "--- ## 📁 Projects Overview | Project | Description | Tech Stack | Status | |--------|------------|------------|--------| | **customer-churn-prediction** | End-to-end churn prediction system with API, dashboard, and deployment | FastAPI, CatBoost, Streamlit, Docker, SQLite | ✅ Production | | **traffic-sign-detection** | Real-time traffic sign detection using YOLO + ResNet cascade (55 classes) | YOLO, PyTorch, Albumentations, FastAPI, WebSocket | ✅ Production | | **rag-portfolio-assistant** | RAG ",
     "project": "unknown",
     "type": "general"
   },
   {
-    "text": " Production | --- ## 🚀 Live Demo ### 🚦 Traffic Sign Detection - **Live Demo:** https://greencat1.tech/ - **Video Guide:** https://www.youtube.com/watch?v=XS1jED6fzpY > Real-time detection via browser camera (WebSocket streaming) --- ### 📊 Customer Churn Prediction - **API Docs (Swagger):** http://207.231.105.113:8000/docs - **Dashboard (Streamlit):** http://207.231.105.113:8501 - **Video Guide:** https://www.youtube.com/watch?v=zrF0L2pznhU > Fully deployed ML service with REST API + interactive ",
+    "text": " Production | | **rag-portfolio-assistant** | RAG system for semantic search over ML portfolio | FastAPI, FAISS, Sentence-Transformers, Ollama, Streamlit, Docker | ✅ Production | --- ## 🚀 Live Demo ### 🚦 Traffic Sign Detection - **Live Demo:** https://greencat1.tech/ - **Video Guide:** https://www.youtube.com/watch?v=XS1jED6fzpY > Real-time detection via browser camera (WebSocket streaming) --- ### 📊 Customer Churn Prediction - **API Docs (Swagger):** http://207.231.105.113:8000/docs - **Dashboa",
     "project": "unknown",
     "type": "general"
   },
   {
-    "text": "y deployed ML service with REST API + interactive UI --- ## 📊 Project Details --- ### 🔹 1.",
+    "text": "r):** http://207.231.105.113:8000/docs - **Dashboard (Streamlit):** http://207.231.105.113:8501 - **Video Guide:** https://www.youtube.com/watch?v=zrF0L2pznhU > Fully deployed ML service with REST API + interactive UI --- ### 🤖 RAG Portfolio Assistant - **Live Demo Dashboard:** http://207.231.105.113:8502/ - **Swagger API Docs:** http://207.231.105.113:8002/docs - **GitHub:** [llm-portfolio-assistant](https://github.com/greencat1/Portfolio/tree/main/pet_projects/llm-portfolio-assistant) > Ask qu",
     "project": "unknown",
     "type": "general"
   },
   {
-    "text": "Customer Churn Prediction (Production) **Goal:** Predict telecom customer churn and provide actionable insights for retention.",
+    "text": "ain/pet_projects/llm-portfolio-assistant) > Ask questions about my portfolio — gets answers via semantic search + local LLM.",
+    "project": "unknown",
+    "type": "general"
+  },
+  {
+    "text": "--- ## 📊 Project Details --- ### 🔹 1. Customer Churn Prediction (Production) **Goal:** Predict telecom customer churn and provide actionable insights for retention.",
     "project": "unknown",
     "type": "general"
   },
@@ -30165,19 +30180,34 @@
     "type": "model"
   },
   {
-    "text": "ptimized pipeline **Engineering Highlights:** - Two-stage cascade architecture - FastAPI + WebSocket streaming - Browser-based UI (camera input) - Docker deployment **Impact:** - Significant quality boost over single-stage detector - Demonstrates **ML system design, not just modeling** **Repository:** `traffic-sign-detection/` --- ## 🧰 Tech Stack **Machine Learning** - PyTorch, CatBoost - Scikit-learn - Ultralytics YOLO **Backend & Deployment** - FastAPI - Docker - WebSocket **Data Processing** ",
+    "text": "ptimized pipeline **Engineering Highlights:** - Two-stage cascade architecture - FastAPI + WebSocket streaming - Browser-based UI (camera input) - Docker deployment **Impact:** - Significant quality boost over single-stage detector - Demonstrates **ML system design, not just modeling** **Repository:** `traffic-sign-detection/` --- ### 🔹 3.",
     "project": "unknown",
     "type": "model"
   },
   {
-    "text": " FastAPI - Docker - WebSocket **Data Processing** - Pandas, NumPy - Albumentations **Visualization** - Streamlit - Matplotlib / Seaborn --- ## 💡 What This Portfolio Demonstrates - Building **end-to-end ML systems** - Strong understanding of: - model vs system trade-offs - real-time constraints - class imbalance handling - Experience with: - production APIs - deployment (Docker) - interactive ML interfaces - Focus on **practical impact over toy models** --- ## 🔮 Future Work - CI/CD for ML service",
+    "text": "RAG Portfolio Assistant (Production) **Goal:** Build a **question-answering system** over my entire ML portfolio using RAG (Retrieval-Augmented Generation). **How It Works:** 1. User asks a question 2. System finds relevant chunks via semantic search (FAISS) 3.",
+    "project": "unknown",
+    "type": "general"
+  },
+  {
+    "text": "LLM generates answer based **only** on retrieved context **Key Features:** - 8,361 semantic chunks from 291 files (`.md`, `.ipynb`, `.py`, `.pdf`) - **FAISS** vector search on CPU - **BGE embeddings** (`BAAI/bge-small-en-v1.5`) - **Local LLM** (`tinyllama` / `phi3:mini` via Ollama) - FastAPI backend + Streamlit chat UI - Docker Compose deployment (3 containers) **Repository:** `llm-portfolio-assistant/` --- ## 🧰 Tech Stack **Machine Learning** - PyTorch, CatBoost, Sentence-Transformers - Scikit-",
+    "project": "unknown",
+    "type": "feature_engineering"
+  },
+  {
+    "text": "PyTorch, CatBoost, Sentence-Transformers - Scikit-learn, FAISS - Ultralytics YOLO **Backend & Deployment** - FastAPI, Uvicorn - Docker, Docker Compose - WebSocket - Ollama (local LLM) **Data Processing** - Pandas, NumPy - Albumentations **Visualization** - Streamlit - Matplotlib / Seaborn --- ## 💡 What This Portfolio Demonstrates - Building **end-to-end ML systems** - **RAG system design** (embeddings + vector search + LLM) - Strong understanding of: - model vs system trade-offs - real-time cons",
     "project": "unknown",
     "type": "model"
   },
   {
-    "text": "dels** --- ## 🔮 Future Work - CI/CD for ML services - Model monitoring & logging - Experiment tracking (W&B / MLflow) - Edge / mobile deployment --- ## 👨‍💻 Author **Ivan Sazontov** - GitHub: https://github.com/greencat1 - Email: isazontov1@gmail.com --- ⭐ If you find this portfolio interesting, feel free to explore the repositories and give feedback!",
+    "text": " of: - model vs system trade-offs - real-time constraints - class imbalance handling - CPU optimization for LLMs - Experience with: - production APIs - deployment (Docker) - interactive ML interfaces - multi-format document parsing - Focus on **practical impact over toy models** --- ## 🔮 Future Work - CI/CD for ML services - Model monitoring & logging - Experiment tracking (W&B / MLflow) - Edge / mobile deployment - RAG evaluation metrics (hit rate, MRR) --- ## 👨‍💻 Author **Ivan Sazontov** - Git",
     "project": "unknown",
     "type": "model"
+  },
+  {
+    "text": "te, MRR) --- ## 👨‍💻 Author **Ivan Sazontov** - GitHub: https://github.com/greencat1 - Email: isazontov1@gmail.com - Telegram: @Hammerschmidt1 --- ⭐ If you find this portfolio interesting, feel free to explore the repositories and give feedback!",
+    "project": "unknown",
+    "type": "general"
   },
   {
     "text": "# 🚀 Churn Prediction Service Production-ready machine learning service for predicting customer churn in telecom companies. Built with **FastAPI**, **CatBoost**, **Streamlit**, and fully containerized with **Docker**. --- ## 🔗 Live Demo - API Docs (Swagger): http://207.231.105.113:8000/docs - Dashboard: http://207.231.105.113:8501 ### Test API Keys user admin dashboard --- ## 📌 Overview This project predicts whether a customer will churn using machine learning.",
@@ -36485,6 +36515,116 @@
     "type": "model"
   },
   {
+    "text": "# 🚀 RAG Portfolio Assistant A production-ready **RAG (Retrieval-Augmented Generation)** system that answers questions about my Data Science & Machine Learning portfolio. The system uses semantic search over 8,000+ document chunks and a local LLM to generate accurate, factual answers.",
+    "project": "unknown",
+    "type": "general"
+  },
+  {
+    "text": "**🌐 Live Demo dashboard:** http://207.231.105.113:8502/ **🌐 Live Demo swagger:** http://207.231.105.113:8002/docs --- ## 📊 What It Does | Feature | Description | |---------|-------------| | **Semantic Search** | FAISS vector search over 8,361 text chunks (BGE embeddings) | | **Local LLM** | Runs `tinyllama` or `phi3:mini` via Ollama (CPU-only, no GPU needed) | | **REST API** | FastAPI endpoints for asking questions | | **Chat Interface** | Streamlit dashboard for interactive conversations | | **",
+    "project": "unknown",
+    "type": "feature_engineering"
+  },
+  {
+    "text": "lit dashboard for interactive conversations | | **Multi-format Parsing** | Supports `.md`, `.ipynb`, `.py`, `.pdf` files | | **Docker Compose** | 3-container setup (Ollama + API + Dashboard) | --- ## 🔧 Architecture User Question → Embedding (BGE) → FAISS Search → Deduplicate (top-5) → Context → LLM (tinyllama) → Answer + Sources ### Container Services | Container | Port | Purpose | |-----------|------|---------| | **rag-ollama** | 11435 | Local LLM server (tinyllama) | | **rag-api** | 8002 | Fas",
+    "project": "unknown",
+    "type": "general"
+  },
+  {
+    "text": "LM server (tinyllama) | | **rag-api** | 8002 | FastAPI RAG backend | | **rag-dashboard** | 8502 | Streamlit chat UI | --- ## 💡 Example Questions ### Churn Prediction - *\"What model is used in churn prediction?\"* → CatBoost with 95.7% recall - *\"Why was recall chosen as the main metric?\"* → Critical to identify customers likely to leave, minimizes false negatives ### Traffic Sign Detection - *\"Describe the traffic sign detection architecture\"* → Two-stage hybrid: YOLO → ResNet-18, 94.07% mAP50 - ",
+    "project": "unknown",
+    "type": "model"
+  },
+  {
+    "text": "wo-stage hybrid: YOLO → ResNet-18, 94.07% mAP50 - *\"How is it better than baseline YOLO?\"* → +12.7% improvement (94.07% vs 81.3% mAP50) ### Portfolio - *\"What technologies were used in the API?\"* → FastAPI, CatBoost, Docker, Streamlit - *\"What makes this production-ready?\"* → Dashboard, labeling system, ML pipeline, Docker, zero downtime --- ## 🚀 Quick Start (Local) ### Prerequisites - Docker Desktop ### 1.",
+    "project": "unknown",
+    "type": "pipeline"
+  },
+  {
+    "text": "Clone and run ```bash git clone https://github.com/greencat1/Portfolio.git cd Portfolio/pet_projects/llm-portfolio-assistant docker compose up -d ``` ### 2. Pull the model (first run only) ```bash docker exec -it rag-ollama ollama pull tinyllama ``` ### 3.",
+    "project": "unknown",
+    "type": "model"
+  },
+  {
+    "text": "🌐 Open in Browser | Interface | URL | |-----------|-----| | **Chat Dashboard** | http://localhost:8502 | | **API Docs (Swagger)** | http://localhost:8002/docs | | **Health Check** | http://localhost:8002/health | --- ## 📁 Project Structure lm-portfolio-assistant/ ├── app/ # FastAPI backend │ ├── main.py # API routes │ ├── config.py # Configuration │ ├── rag_pipeline.py # RAG logic │ └── schemes.py # Pydantic models ├── data/ # FAISS index & chunks │ ├── chunks/ │ └── embeddings/ ├── frontend/ # ",
+    "project": "unknown",
+    "type": "model"
+  },
+  {
+    "text": "s │ ├── chunks/ │ └── embeddings/ ├── frontend/ # Streamlit UI │ └── streamlit_app.py ├── notebooks # Jupiter notebooks ├── Dockerfile.api # FastAPI container ├── Dockerfile.dashboard # Streamlit container ├── docker-compose.yml # Orchestration └── requirements.txt # Python dependencies --- ## 🛠️ Technologies | Category | Tools | |----------|-------| | **Backend** | FastAPI, Uvicorn | | **ML** | Sentence-Transformers, FAISS | | **LLM** | Ollama, tinyllama | | **Frontend** | Streamlit | | **Conta",
+    "project": "unknown",
+    "type": "general"
+  },
+  {
+    "text": "tinyllama | | **Frontend** | Streamlit | | **Containerization** | Docker, Docker Compose | | **Deployment** | Ubuntu VPS, Nginx (optional) | --- ## 📬 Contact - **GitHub:** [greencat1](https://github.com/greencat1) - **Email:** isazontov1@gmail.com - **Telegram:** [@Hammerschmidt1](https://t.me/Hammerschmidt1) --- ## 📚 Source Code [GitHub Repository](https://github.com/greencat1/Portfolio/tree/main/pet_projects/llm-portfolio-assistant)",
+    "project": "unknown",
+    "type": "general"
+  },
+  {
+    "text": "=== IMPORTS === Import: os Import: from dotenv import load_dotenv Import: from pathlib import Path Class: Config === CONSTANTS === Constant: INDEX_PATH = 'app/data/embeddings/faiss.index' Constant: METADATA_PATH = 'app/data/embeddings/metadata.json' Constant: EMBEDDING_MODEL Constant: LLM_MODEL Constant: OLLAMA_URL Constant: SEARCH_K Constant: MAX_RESULTS Constant: TEMPERATURE Constant: MAX_TOKENS Constant: API_TITLE === COMMENTS === # Model settings # RAG settings # API settings",
+    "project": "unknown",
+    "type": "model"
+  },
+  {
+    "text": "=== IMPORTS === Import: from fastapi import FastAPI Import: from fastapi import HTTPException Import: from fastapi.middleware.cors import CORSMiddleware Import: from contextlib import asynccontextmanager Import: from config import config Import: from schemes import QueryRequest Import: from schemes import QueryResponse Import: from schemes import HealthResponse Import: from schemes import SourceResponse Import: from rag_pipeline import get_rag === COMMENTS === # Initialize RAG pipeline # Create ",
+    "project": "unknown",
+    "type": "pipeline"
+  },
+  {
+    "text": "= COMMENTS === # Initialize RAG pipeline # Create FastAPI app",
+    "project": "unknown",
+    "type": "pipeline"
+  },
+  {
+    "text": "=== IMPORTS === Import: json Import: numpy Import: faiss Import: requests Import: from typing import List Import: from typing import Dict Import: from typing import Any Import: from sentence_transformers import SentenceTransformer Import: from config import config Import: from schemes import ChunkInfo Class: RAGPipeline Description: Main RAG pipeline class Methods: Method: __init__ Method: search Method: deduplicate Method: build_context Method: build_prompt Function: get_rag() Description: Sing",
+    "project": "unknown",
+    "type": "pipeline"
+  },
+  {
+    "text": "build_prompt Function: get_rag() Description: Singleton pattern for RAG pipeline Function: search(self, query: str, k: int) -> List[Dict[str, Any]] Description: Retrieve top-k chunks from FAISS Function: deduplicate(self, results: List[Dict], max_results: int) -> List[Dict] Description: Remove duplicate chunks Function: build_context(self, results: List[Dict]) -> str Description: Build context string from results Function: build_prompt(self, query: str, context: str) -> str Description: Build pr",
+    "project": "unknown",
+    "type": "pipeline"
+  },
+  {
+    "text": "y: str, context: str) -> str Description: Build prompt for LLM with strict rules Function: ask_llm(self, prompt: str) -> str Description: Call local Ollama LLM Function: answer(self, question: str, k: int, max_results: int) -> tuple Description: Full RAG pipeline Function: get_stats(self) -> dict Description: Get statistics about loaded chunks === COMMENTS === # First 200 chars as key # 1.",
+    "project": "unknown",
+    "type": "pipeline"
+  },
+  {
+    "text": "Search # 2. Deduplicate # 3. Build context # 4. Build prompt # 5. Get answer # 6. Format sources # Truncate for response # Global instance (load once at startup)",
+    "project": "unknown",
+    "type": "general"
+  },
+  {
+    "text": "=== IMPORTS === Import: from pydantic import BaseModel Import: from pydantic import Field Import: from typing import Optional Import: from typing import List Import: from typing import Dict Import: from typing import Any Class: QueryRequest Description: Request model for /ask endpoint Class: ChunkInfo Description: Information about a retrieved chunk Class: QueryResponse Description: Response model for /ask endpoint Class: HealthResponse Description: Response model for /health endpoint Class: Sou",
+    "project": "unknown",
+    "type": "model"
+  },
+  {
+    "text": "on: Response model for /health endpoint Class: SourceResponse Description: Response model for /sources endpoint",
+    "project": "unknown",
+    "type": "model"
+  },
+  {
+    "text": "=== IMPORTS === Import: io Import: base64 Import: cv2 Import: numpy Import: os Import: from fastapi import FastAPI Import: from fastapi import File Import: from fastapi import UploadFile Import: from fastapi import WebSocket Import: from fastapi import WebSocketDisconnect === CONSTANTS === Constant: INDEX_PATH === COMMENTS === # Import custom modules # Initialize FastAPI application # Load models at startup #yolo = load_models() # Path to static HTML file # ======================================",
+    "project": "unknown",
+    "type": "model"
+  },
+  {
+    "text": "HTML file # ============================================================ # Root endpoint - serves the web interface # ============================================================ # ============================================================ # WebSocket endpoint for real-time video detection # ============================================================ # Receive base64 image string from client # Convert base64 string back to numpy array (OpenCV format) # Validate image # Run single-stage YOLO d",
+    "project": "unknown",
+    "type": "general"
+  },
+  {
+    "text": "format) # Validate image # Run single-stage YOLO detection",
+    "project": "unknown",
+    "type": "general"
+  },
+  {
+    "text": "=== IMPORTS === Import: streamlit Import: requests Import: os === CONSTANTS === Constant: API_URL === COMMENTS === # streamlit_app.py # Session state # Display chat history # Handle user input",
+    "project": "unknown",
+    "type": "general"
+  },
+  {
     "text": "### Imports === IMPORTS === Import: os Import: json Import: from pypdf import PdfReader Import: from tqdm import tqdm ### Path === CONSTANTS === Constant: DATA_ROOT = '../../..' Constant: OUTPUT_PATH = '../data/processed/parsed_data.json' ### Collecting all files Function: collect_files(root_dir) Description: Recursively walks through a directory ### Detect File Type Function: get_file_type(path) Description: Detect file type based on extension ### Parse Markdown Files Function: parse_md(path) D",
     "project": "unknown",
     "type": "general"
@@ -36505,29 +36645,54 @@
     "type": "pipeline"
   },
   {
-    "text": "### Imports === IMPORTS === Import: json Import: re Import: ast Import: from tqdm import tqdm ### Load parsed data === CONSTANTS === Constant: INPUT_PATH = '../data/processed/parsed_data.json' === COMMENTS === # Load parsed data from previous step ### Text cleaning Function: clean_text(text) Description: Basic text cleaning: ### Extract meaning from Python code Function: extract_python_semantics(code) Description: Extracts meaningful information from Python code: ### Process notebook cells Funct",
+    "text": "### Imports === IMPORTS === Import: json Import: re Import: ast Import: from tqdm import tqdm Import: tokenize Import: from io import StringIO Import: ast Import: inspect ### Load parsed data === CONSTANTS === Constant: INPUT_PATH = '../data/processed/parsed_data.json' === COMMENTS === # Load parsed data from previous step ### Text cleaning Function: clean_text(text) Description: Basic text cleaning: ### Extract meaning from Python code Function: extract_python_semantics_advanced(code) Descripti",
     "project": "unknown",
     "type": "general"
   },
   {
-    "text": "from Python code: ### Process notebook cells Function: process_ipynb(content) Description: Converts notebook cells into semantic text ### Process Python files Function: process_py(content) Description: Extract semantic info from Python file ### Process plain text files Function: process_text(content) Description: Clean markdown / pdf text ### Chunking Function: chunk_text(text, chunk_size, overlap) Description: Splits text into overlapping chunks Function: smart_chunk_text(text, chunk_size, over",
+    "text": " extract_python_semantics_advanced(code) Description: Extracts rich information from Python code: Function: extract_comments(code) Description: Extracts all comments from Python code Function: extract_python_semantics_full(code) Description: Combines advanced code semantics + comments for maximum information === COMMENTS === # 1.",
     "project": "unknown",
     "type": "general"
   },
   {
-    "text": " Function: smart_chunk_text(text, chunk_size, overlap) Description: Split by sentence/paragraph boundaries === COMMENTS === # Overlap: take last 1-2 sentences ### Simple classification Function: classify_text(text) Description: Assigns semantic type to chunk ### Main pipeline === COMMENTS === # Process based on type ### Save result === IMPORTS === Import: os === CONSTANTS === Constant: OUTPUT_PATH = '../data/chunks/chunks.json' ### Summary - Loaded parsed data from the previous step (`parsed_dat",
+    "text": "Extract imports # limit to 10 imports # 2. Extract classes and their methods # Find class methods # 3. Extract functions with full signatures # Skip dunder methods (__init__, __str__, etc.) - optional # Extract parameters # Type annotation if present # Return type annotation # Docstring # Decorators # Build result # Take only first line of docstring for brevity # 4.",
+    "project": "unknown",
+    "type": "general"
+  },
+  {
+    "text": "Extract important variables/constants (ALL_CAPS) # Constants are typically in UPPER_CASE ### Process notebook cells Function: process_ipynb(content) Description: Converts notebook cells into semantic text ### Process Python files Function: process_py(content) Description: Extract semantic info from Python file ### Process plain text files Function: process_text(content) Description: Clean markdown / pdf text ### Chunking === IMPORTS === Import: re Function: chunk_text_fallback(text, chunk_size, ",
+    "project": "unknown",
+    "type": "general"
+  },
+  {
+    "text": "e Function: chunk_text_fallback(text, chunk_size, overlap) Description: Fallback: splits text into overlapping chunks by characters Function: smart_chunk_text(text, chunk_size, overlap) Description: Primary: splits text by sentence boundaries (.",
+    "project": "unknown",
+    "type": "general"
+  },
+  {
+    "text": "!",
+    "project": "unknown",
+    "type": "general"
+  },
+  {
+    "text": "?) Function: chunk_text(text, chunk_size, overlap) Description: Unified chunking function - automatically chooses best method === COMMENTS === # If text is short, return as single chunk # Step 1: Split by sentence boundaries # Step 2: Check if semantic splitting is possible # If very few sentences or sentences are too short -> use fallback # +1 for trailing space # Handle single sentence that's longer than chunk_size # Save current accumulated chunk if exists # Split the long sentence using fall",
+    "project": "unknown",
+    "type": "general"
+  },
+  {
+    "text": "unk if exists # Split the long sentence using fallback method # Check if adding this sentence would exceed chunk_size # Save current chunk # Add overlap (last 1-2 sentences) # Add sentence to current chunk # Add the last chunk # Clean text first (remove extra whitespace) # Try smart chunking first ### Simple classification Function: classify_text(text) Description: Assigns semantic type to chunk ### Main pipeline === COMMENTS === # Process based on type ### Save result === IMPORTS === Import: os",
     "project": "unknown",
     "type": "pipeline"
   },
   {
-    "text": "ed parsed data from the previous step (`parsed_data.json`) - Converted raw content into **semantic text representations** - extracted meaning from Python code (functions, docstrings) - combined notebook markdown + code into unified text - Cleaned and normalized text - Split text into **overlapping chunks** (chunking) - Added metadata (project, type) to each chunk 👉 Result: structured **semantic chunks** ready for embeddings and retrieval (RAG pipeline)",
-    "project": "unknown",
-    "type": "pipeline"
-  },
-  {
-    "text": "eline)",
+    "text": "on type ### Save result === IMPORTS === Import: os === CONSTANTS === Constant: OUTPUT_PATH = '../data/chunks/chunks.json' ### Summary - Loaded parsed data from the previous step (`parsed_data.json`) - Converted raw content into **semantic text representations** - extracted meaning from Python code (functions, docstrings) - combined notebook markdown + code into unified text - Cleaned and normalized text - Split text into **overlapping chunks** (chunking) - Added metadata (project, type) to each ",
     "project": "unknown",
     "type": "general"
+  },
+  {
+    "text": "hunking) - Added metadata (project, type) to each chunk 👉 Result: structured **semantic chunks** ready for embeddings and retrieval (RAG pipeline)",
+    "project": "unknown",
+    "type": "pipeline"
   },
   {
     "text": "### Imports === IMPORTS === Import: json Import: numpy Import: from tqdm import tqdm Import: from sentence_transformers import SentenceTransformer Import: faiss Import: os ### Load chunks === CONSTANTS === Constant: INPUT_PATH = '../data/chunks/chunks.json' === COMMENTS === # Load semantic chunks from previous step ### Initialize embedding model === COMMENTS === # Lightweight and fast model (good default) ### Generate embeddings (batch mode) === COMMENTS === # Extract all texts # Encode in batch",
@@ -36535,17 +36700,17 @@
     "type": "model"
   },
   {
-    "text": "COMMENTS === # Extract all texts # Encode in batch (much faster than loop) ### Create FAISS index === COMMENTS === # FAISS requires float32 # Create index (L2 distance) # Add vectors to index ### Save index === CONSTANTS === Constant: INDEX_PATH = '../data/embeddings/faiss.index' ### Save metadata (IMPORTANT) === CONSTANTS === Constant: META_PATH = '../data/embeddings/metadata.json' === COMMENTS === # Save chunks separately (without embeddings) ### Search function (test retrieval) Function: sear",
+    "text": "COMMENTS === # Extract all texts # Encode in batch (much faster than loop) ### Create FAISS index === COMMENTS === # FAISS requires float32 # Create index # Add vectors to index ### Save index === CONSTANTS === Constant: INDEX_PATH = '../data/embeddings/faiss.index' ### Save metadata === CONSTANTS === Constant: META_PATH = '../data/embeddings/metadata.json' === COMMENTS === # Save chunks separately (without embeddings) ### Search function (test retrieval) Function: search(query, k) Description: ",
     "project": "unknown",
     "type": "general"
   },
   {
-    "text": "## Search function (test retrieval) Function: search(query, k) Description: Performs semantic search: === COMMENTS === # Encode query # Search in FAISS ### Summary - Loaded semantic chunks from previous step - Converted text into **vector embeddings** using a pre-trained model - Built a **FAISS index** for efficient similarity search - Stored vectors and metadata separately - Implemented a basic **semantic search function** 👉 Result: working vector search system for retrieving relevant chunks in",
+    "text": "etrieval) Function: search(query, k) Description: Performs semantic search: === COMMENTS === # Encode query # Search in FAISS ### Summary - Loaded semantic chunks from previous step - Converted text into **vector embeddings** using a pre-trained model - Built a **FAISS index** for efficient similarity search - Stored vectors and metadata separately - Implemented a basic **semantic search function** 👉 Result: working vector search system for retrieving relevant chunks in a RAG pipeline",
     "project": "unknown",
     "type": "model"
   },
   {
-    "text": "or search system for retrieving relevant chunks in a RAG pipeline",
+    "text": "eving relevant chunks in a RAG pipeline",
     "project": "unknown",
     "type": "pipeline"
   },
@@ -36560,12 +36725,37 @@
     "type": "model"
   },
   {
-    "text": "Retrieve # 2. Deduplicate # 3. Build context # 4. Prompt ### Test === COMMENTS === # 3. Traffic system architecture === COMMENTS === # 4. Improvement vs baseline === COMMENTS === # 5. Engineering challenges === COMMENTS === # 6. Full pipeline === COMMENTS === # 7. Backend tech === COMMENTS === # 7. Backend tech === COMMENTS === # 8. Skills === COMMENTS === # 9. Deployment === COMMENTS === # 10. Production readiness === COMMENTS === # 11. Why recall === COMMENTS === # 12.",
+    "text": "Retrieve # 2. Deduplicate # 3. Build context # 4. Prompt ### Test === COMMENTS === # 3. Traffic system architecture === COMMENTS === # 4. Improvement vs baseline === COMMENTS === # 5. Why resnet === COMMENTS === # 6. Full pipeline === COMMENTS === # 7. Backend tech === COMMENTS === # 7. Backend tech === COMMENTS === # 8. Skills === COMMENTS === # 9. Deployment === COMMENTS === # 10. Production readiness === COMMENTS === # 11. Why recall === COMMENTS === # 12.",
     "project": "unknown",
     "type": "pipeline"
   },
   {
-    "text": "Production readiness === COMMENTS === # 11. Why recall === COMMENTS === # 12. Summary === COMMENTS === # 13. Edge case",
+    "text": "Production readiness === COMMENTS === # 11. Why recall === COMMENTS === # 12. Summary === COMMENTS === ## Summary This notebook implements a **complete RAG (Retrieval-Augmented Generation) pipeline** for querying an ML portfolio.",
+    "project": "unknown",
+    "type": "pipeline"
+  },
+  {
+    "text": "--- ### Main Components | Component | What it does | |-----------|---------------| | **FAISS + metadata** | Loads pre-computed embeddings and 8,361 text chunks | | **BGE embedding model** | Encodes user queries into vectors (`BAAI/bge-small-en-v1.5`) | | **Semantic search** | Finds top-20 relevant chunks using cosine similarity | | **Deduplication** | Removes duplicate chunks (keeps top-5 unique) | | **LLM (phi3:mini)** | Generates concise answers via local Ollama | | **Strict prompt** | Forces ",
+    "project": "unknown",
+    "type": "model"
+  },
+  {
+    "text": "s via local Ollama | | **Strict prompt** | Forces factual answers from context only | --- ### Pipeline Flow Query → Embed → FAISS Search (k=20) → Deduplicate (top-5) → Build Context → LLM (phi3:mini) → Answer --- ### Key Functions | Function | Purpose | |----------|---------| | `search(query, k=20)` | Retrieves chunks from FAISS index | | `unique_results(results, max_results=5)` | Removes near-duplicate chunks | | `build_context(results)` | Joins chunks into a single context string | | `build_pr",
+    "project": "unknown",
+    "type": "pipeline"
+  },
+  {
+    "text": " chunks into a single context string | | `build_prompt(query, context)` | Creates a strict, fact-based prompt | | `ask_llm(prompt)` | Calls local Ollama with phi3:mini | | `rag(query)` | Orchestrates the full pipeline | --- ### Prompt Rules (Critical) 1.",
+    "project": "unknown",
+    "type": "pipeline"
+  },
+  {
+    "text": "Answer ONLY using context 2. Give direct, concise answers 3. If \"best\" or \"final\" is mentioned — state that one 4. Use exact numbers and model names 5. Keep answers to 1-3 sentences 6. If not in context → \"I don't know\" 7. Never say \"the documentation does not specify\" --- ### Summary This notebook turns the portfolio into a **question-answering system**. User asks a question → system finds relevant chunks → LLM answers based ONLY on those chunks.",
+    "project": "unknown",
+    "type": "model"
+  },
+  {
+    "text": "Never say \"the documentation does not specify\" --- ### Summary This notebook turns the portfolio into a **question-answering system**. User asks a question → system finds relevant chunks → LLM answers based ONLY on those chunks. Results are factual, concise, and grounded in the actual portfolio content.",
     "project": "unknown",
     "type": "general"
   },
@@ -36615,19 +36805,64 @@
     "type": "model"
   },
   {
-    "text": "COMMENTS === # Extract all texts # Encode in batch (much faster than loop) ### Create FAISS index === COMMENTS === # FAISS requires float32 # Create index (L2 distance) # Add vectors to index ### Save index === CONSTANTS === Constant: INDEX_PATH = '../data/embeddings/faiss.index' ### Save metadata (IMPORTANT) === CONSTANTS === Constant: META_PATH = '../data/embeddings/metadata.json' === COMMENTS === # Save chunks separately (without embeddings) ### Search function (test retrieval) Function: sear",
+    "text": "COMMENTS === # Extract all texts # Encode in batch (much faster than loop) ### Create FAISS index === COMMENTS === # FAISS requires float32 # Create index # Add vectors to index ### Save index === CONSTANTS === Constant: INDEX_PATH = '../data/embeddings/faiss.index' ### Save metadata === CONSTANTS === Constant: META_PATH = '../data/embeddings/metadata.json' === COMMENTS === # Save chunks separately (without embeddings) ### Search function (test retrieval) Function: search(query, k) Description: ",
     "project": "unknown",
     "type": "general"
   },
   {
-    "text": "## Search function (test retrieval) Function: search(query, k) Description: Performs semantic search: === COMMENTS === # Encode query # Search in FAISS ### Summary - Loaded semantic chunks from previous step - Converted text into **vector embeddings** using a pre-trained model - Built a **FAISS index** for efficient similarity search - Stored vectors and metadata separately - Implemented a basic **semantic search function** 👉 Result: working vector search system for retrieving relevant chunks in",
+    "text": "etrieval) Function: search(query, k) Description: Performs semantic search: === COMMENTS === # Encode query # Search in FAISS ### Summary - Loaded semantic chunks from previous step - Converted text into **vector embeddings** using a pre-trained model - Built a **FAISS index** for efficient similarity search - Stored vectors and metadata separately - Implemented a basic **semantic search function** 👉 Result: working vector search system for retrieving relevant chunks in a RAG pipeline",
     "project": "unknown",
     "type": "model"
   },
   {
-    "text": "or search system for retrieving relevant chunks in a RAG pipeline",
+    "text": "eving relevant chunks in a RAG pipeline",
     "project": "unknown",
     "type": "pipeline"
+  },
+  {
+    "text": "### Imports === IMPORTS === Import: json Import: numpy Import: faiss Import: requests Import: from sentence_transformers import CrossEncoder Import: from sentence_transformers import SentenceTransformer ### Load FAISS + metadata === CONSTANTS === Constant: INDEX_PATH = '../data/embeddings/faiss.index' Constant: META_PATH = '../data/embeddings/metadata.json' ### Load embedding model ### Retrieval Function: search(query, k) ### Deduplication Function: unique_results(results, max_results) ### Build",
+    "project": "unknown",
+    "type": "model"
+  },
+  {
+    "text": "on: unique_results(results, max_results) ### Build context Function: build_context(results) ### Prompt (VERY IMPORTANT for local models) Function: build_prompt(query, context) ### Call local LLM (Ollama) Function: ask_llm(prompt) ### Full RAG pipeline Function: rag(query) === COMMENTS === # 1.",
+    "project": "unknown",
+    "type": "model"
+  },
+  {
+    "text": "Retrieve # 2. Deduplicate # 3. Build context # 4. Prompt ### Test === COMMENTS === # 3. Traffic system architecture === COMMENTS === # 4. Improvement vs baseline === COMMENTS === # 5. Why resnet === COMMENTS === # 6. Full pipeline === COMMENTS === # 7. Backend tech === COMMENTS === # 7. Backend tech === COMMENTS === # 8. Skills === COMMENTS === # 9. Deployment === COMMENTS === # 10. Production readiness === COMMENTS === # 11. Why recall === COMMENTS === # 12.",
+    "project": "unknown",
+    "type": "pipeline"
+  },
+  {
+    "text": "Production readiness === COMMENTS === # 11. Why recall === COMMENTS === # 12. Summary === COMMENTS === ## Summary This notebook implements a **complete RAG (Retrieval-Augmented Generation) pipeline** for querying an ML portfolio.",
+    "project": "unknown",
+    "type": "pipeline"
+  },
+  {
+    "text": "--- ### Main Components | Component | What it does | |-----------|---------------| | **FAISS + metadata** | Loads pre-computed embeddings and 8,361 text chunks | | **BGE embedding model** | Encodes user queries into vectors (`BAAI/bge-small-en-v1.5`) | | **Semantic search** | Finds top-20 relevant chunks using cosine similarity | | **Deduplication** | Removes duplicate chunks (keeps top-5 unique) | | **LLM (phi3:mini)** | Generates concise answers via local Ollama | | **Strict prompt** | Forces ",
+    "project": "unknown",
+    "type": "model"
+  },
+  {
+    "text": "s via local Ollama | | **Strict prompt** | Forces factual answers from context only | --- ### Pipeline Flow Query → Embed → FAISS Search (k=20) → Deduplicate (top-5) → Build Context → LLM (phi3:mini) → Answer --- ### Key Functions | Function | Purpose | |----------|---------| | `search(query, k=20)` | Retrieves chunks from FAISS index | | `unique_results(results, max_results=5)` | Removes near-duplicate chunks | | `build_context(results)` | Joins chunks into a single context string | | `build_pr",
+    "project": "unknown",
+    "type": "pipeline"
+  },
+  {
+    "text": " chunks into a single context string | | `build_prompt(query, context)` | Creates a strict, fact-based prompt | | `ask_llm(prompt)` | Calls local Ollama with phi3:mini | | `rag(query)` | Orchestrates the full pipeline | --- ### Prompt Rules (Critical) 1.",
+    "project": "unknown",
+    "type": "pipeline"
+  },
+  {
+    "text": "Answer ONLY using context 2. Give direct, concise answers 3. If \"best\" or \"final\" is mentioned — state that one 4. Use exact numbers and model names 5. Keep answers to 1-3 sentences 6. If not in context → \"I don't know\" 7. Never say \"the documentation does not specify\" --- ### Summary This notebook turns the portfolio into a **question-answering system**. User asks a question → system finds relevant chunks → LLM answers based ONLY on those chunks.",
+    "project": "unknown",
+    "type": "model"
+  },
+  {
+    "text": "Never say \"the documentation does not specify\" --- ### Summary This notebook turns the portfolio into a **question-answering system**. User asks a question → system finds relevant chunks → LLM answers based ONLY on those chunks. Results are factual, concise, and grounded in the actual portfolio content.",
+    "project": "unknown",
+    "type": "general"
   },
   {
     "text": "# 🚦 Two-Stage Traffic Sign Detection System (YOLO + ResNet) Real-time traffic sign recognition system using a **two-stage hybrid architecture**: **YOLO (detection) → ResNet (classification)** 🌐 **Live Demo:** https://greencat1.tech ▶️ **Video Guide:** https://www.youtube.com/watch?v=XS1jED6fzpY --- ## ✨ Key Features - **Two-stage cascade architecture** - YOLO detects 5 coarse categories - 5 specialized ResNet-18 models classify 55 signs - **High accuracy** - **94.07% mAP50** - **91.71% Recall** ",
