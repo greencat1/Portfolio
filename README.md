@@ -77,9 +77,9 @@ Question-answering system over my entire ML portfolio using Retrieval-Augmented 
 - FastAPI backend + Streamlit chat interface
 - Fully local — no API calls to OpenAI/cloud
 
-🌐 Live Demo: http://207.231.105.113:8502/
-📚 Swagger API: http://207.231.105.113:8002/
-▶️ Video Guide: (coming soon)
+🌐 **Live Demo**: http://207.231.105.113:8502/
+📚 **Swagger API**: http://207.231.105.113:8002/docs 
+▶️ **Video Guide**: (coming soon)
 
 ---
 
