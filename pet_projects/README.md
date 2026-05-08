@@ -16,14 +16,6 @@ Collection of production-ready and research-oriented machine learning projects.
 
 ## 🚀 Live Demo
 
-### 🤖 RAG Portfolio Assistant 
-- **Live Demo Dashboard:** http://207.231.105.113:8502/
-- **Swagger API Docs:** http://207.231.105.113:8002/docs
-- **GitHub:** [llm-portfolio-assistant](https://github.com/greencat1/Portfolio/tree/main/pet_projects/llm-portfolio-assistant)
-
-> Ask questions about my portfolio — gets answers via semantic search + local LLM.
-
----
 
 ### 🚦 Traffic Sign Detection
 - **Live Demo:** https://greencat1.tech/  
@@ -39,6 +31,15 @@ Collection of production-ready and research-oriented machine learning projects.
 - **Video Guide:** https://www.youtube.com/watch?v=zrF0L2pznhU  
 
 > Fully deployed ML service with REST API + interactive UI
+
+--- 
+
+### 🤖 RAG Portfolio Assistant 
+- **Live Demo Dashboard:** http://207.231.105.113:8502/
+- **Swagger API Docs:** http://207.231.105.113:8002/docs
+- **GitHub:** [llm-portfolio-assistant](https://github.com/greencat1/Portfolio/tree/main/pet_projects/llm-portfolio-assistant)
+
+> Ask questions about my portfolio — gets answers via semantic search + local LLM.
 
 ---
 
