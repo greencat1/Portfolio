@@ -21,14 +21,15 @@ Portfolio/
 │   └── Certificates/  
 │  
 ├── Pet_Projects/ # Hands-on ML projects
-│ └── customer-churn-prediction/ # Churn prediction service (FastAPI + Docker+)
-│ └── traffic-sign-detection// # Road signs detection service (FastAPI + Docker+)
+│   ├── customer-churn-prediction/     # Churn prediction service (FastAPI + Docker)
+│   ├── traffic-sign-detection/        # Road signs detection service (FastAPI + Docker)
+│   └── llm-portfolio-assistant/       # RAG assistant for portfolio (NEW!)
 │  
 ├── scientific publications/
 │   ├── Traffic_Sign_Detection_SSD/
 │   ├── YOLOv7_Traffic_Sign_Detection/
 │  
-└── README.md  
+└── README.md
 ```
 
 ---
@@ -63,6 +64,22 @@ End-to-end ML system for predicting telecom churn.
 🌐 **API Docs:** http://207.231.105.113:8000/docs  
 📊 **Dashboard:** http://207.231.105.113:8501  
 ▶️ **Video Guide:** https://www.youtube.com/watch?v=zrF0L2pznhU  
+
+--- 
+
+### 🤖 RAG Portfolio Assistant 
+
+Question-answering system over my entire ML portfolio using Retrieval-Augmented Generation (RAG).
+
+- 8,361 semantic chunks from 291 files (.md, .ipynb, .py, .pdf)
+- FAISS vector search on CPU
+- Local LLM (tinyllama / phi3:mini via Ollama)
+- FastAPI backend + Streamlit chat interface
+- Fully local — no API calls to OpenAI/cloud
+
+🌐 Live Demo: http://207.231.105.113:8502/
+📚 Swagger API: http://207.231.105.113:8002/
+▶️ Video Guide: (coming soon)
 
 ---
 
@@ -187,7 +204,15 @@ Pet projects highlight **initiative**, **curiosity**, and **hands-on machine lea
 - Text preprocessing  
 - Tokenization and normalization  
 - NLTK-based workflows  
-- Information extraction from text data  
+- Information extraction from text data
+
+### ✅ RAG (Retrieval-Augmented Generation)
+- Semantic search with FAISS vector database
+- Local LLM (tinyllama / phi3:mini via Ollama)
+- Multi-format document parsing (`.md`, `.ipynb`, `.py`, `.pdf`)
+- Smart chunking (sentence-aware with overlap)
+- Embedding model (BGE-small-en-v1.5)
+- Full RAG pipeline (retrieve → deduplicate → context → generate)
 
 ### 🕸 Graphs & Networks
 - Network analysis with NetworkX  
@@ -317,6 +342,8 @@ Pet projects highlight **initiative**, **curiosity**, and **hands-on machine lea
 | Deep Learning | PyTorch |
 | Computer Vision | OpenCV, YOLOv7, SSD |
 | NLP | NLTK, re (regular expressions) |
+| **RAG & Vector Search** | **FAISS, Sentence-Transformers, BGE** |
+| **LLM** | **Ollama, tinyllama, phi3:mini** |
 | Graph Analysis | NetworkX |
 | Web Scraping | BeautifulSoup4, Requests |
 | API Development | FastAPI, Uvicorn, REST API |
