@@ -32,302 +32,144 @@ Portfolio/
 └── README.md
 ```
 
----
-
 ## 🚀 Featured Projects
+
+---
 
 ### 🚦 Traffic Sign Detection (Production)
 
-Real-time traffic sign recognition system using **YOLO + ResNet cascade architecture (55 classes)**
+**Real-time traffic sign recognition | YOLO + ResNet cascade | 55 classes**
 
+Real-time traffic sign recognition system using **YOLO + ResNet cascade architecture**. Two-stage design solves class imbalance (163:1) and confusing categories.
+
+**🔥 Key Highlights:**
 - **94.07% mAP50 / 91.71% Recall**
 - **+12.7% improvement vs baseline YOLO**
 - Real-time detection via **WebSocket + browser camera**
 - Two-stage architecture:
-  - YOLO → category detection
-  - 5× ResNet → fine classification
+  - YOLO → category detection (5 groups)
+  - 5× ResNet → fine-grained classification
 
-🌐 **Live Demo:** https://greencat1.tech/  
-▶️ **Video Guide:** https://www.youtube.com/watch?v=XS1jED6fzpY  
+**🛠️ Tech Stack:** YOLOv7, PyTorch, Albumentations, FastAPI, WebSocket, Docker
+
+**🔗 Links:**
+- 🌐 [Live Demo](https://greencat1.tech/)
+- ▶️ [Video Guide](https://www.youtube.com/watch?v=XS1jED6fzpY)
 
 ---
 
 ### 📊 Customer Churn Prediction (Production)
 
-End-to-end ML system for predicting telecom churn.
+**End-to-end ML system | 23 REST endpoints | Production-ready**
 
+Complete MLOps pipeline for telecom churn prediction: training → labeling → retraining → API → dashboard.
+
+**🔥 Key Highlights:**
 - **84.5% recall** (optimized for business impact)
-- REST API (**23 endpoints**) with authentication & rate limiting
-- Interactive **Streamlit dashboard**
-- Dockerized multi-container deployment
+- **23 REST endpoints** with role-based access (user/admin/dashboard)
+- **Sliding window rate limiting** (100-1000 requests/minute)
+- **Incremental + full retraining** (model CI/CD)
+- **Manual labeling system** with SQLite persistence
+- **Interactive Streamlit dashboard** for business users
 
-🌐 **API Docs:** http://207.231.105.113:8000/docs  
-📊 **Dashboard:** http://207.231.105.113:8501  
-▶️ **Video Guide:** https://www.youtube.com/watch?v=zrF0L2pznhU  
+**🛠️ Tech Stack:** FastAPI, CatBoost, Streamlit, SQLite, Docker Compose, pytest
 
---- 
-
-### 🤖 RAG Portfolio Assistant 
-
-Question-answering system over my entire ML portfolio using Retrieval-Augmented Generation (RAG).
-
-- 8,361 semantic chunks from 291 files (.md, .ipynb, .py, .pdf)
-- FAISS vector search on CPU
-- Local LLM (tinyllama / phi3:mini via Ollama)
-- FastAPI backend + Streamlit chat interface
-- Fully local — no API calls to OpenAI/cloud
-
-🌐 **Live Demo**: http://207.231.105.113:8502/
-📚 **Swagger API**: http://207.231.105.113:8002/docs 
-▶️ **Video Guide**: (coming soon)
+**🔗 Links:**
+- 📚 [API Docs](http://207.231.105.113:8000/docs)
+- 📊 [Dashboard](http://207.231.105.113:8501)
+- ▶️ [Video Guide](https://www.youtube.com/watch?v=zrF0L2pznhU)
 
 ---
 
-## 🎓 Courses
+### 🤖 RAG Portfolio Assistant
 
-The **Courses** folder contains coursework, assignments, and capstone projects completed as part of structured data science programs, including Python- and SQL-based analytics.
+**Question-answering over ML portfolio | 8,361 chunks | 100% local**
 
-These materials demonstrate hands-on experience with real-world datasets, relational data sources, and end-to-end analytical workflows — from raw data extraction to insight generation, model development, and evaluation.
+Full RAG pipeline: parse → chunk → embed → search → generate. No cloud APIs — everything runs locally.
 
-The projects typically follow a structured **data science workflow**, including:
+**🔥 Key Highlights:**
+- **8,361 semantic chunks** from **291 files** (.md, .ipynb, .py, .pdf)
+- **AST extraction** for Python code (functions, classes, imports, docstrings)
+- **FAISS vector search** on CPU (cosine similarity)
+- **Local LLM** (tinyllama / phi3:mini via Ollama)
+- **Smart chunking** (sentence-aware, 500 chars, 10% overlap)
+- **FastAPI backend** + **Streamlit chat interface**
+- **Docker Compose** (3 containers: Ollama + API + Dashboard)
 
-- Data collection and ingestion  
-- Data cleaning and preprocessing  
-- Exploratory data analysis (EDA)  
-- Feature engineering  
-- Model development and evaluation  
-- Result interpretation and visualization  
 
-### Topics & Competencies Covered
+**🛠️ Tech Stack:** FastAPI, FAISS, Sentence-Transformers (BGE), Ollama, tinyllama, Streamlit, Docker
 
-- **Data analysis with Python** (Pandas, NumPy, data cleaning, feature engineering)  
-- **Relational data analysis with SQL** (SELECT queries, JOINs, aggregations, subqueries, basic window functions)  
-- **Exploratory data analysis (EDA) & visualization** (Matplotlib, Seaborn, insight-driven storytelling)  
-- **Machine learning** (supervised & unsupervised methods, model selection, validation, and evaluation metrics such as accuracy, precision, recall, and F1-score)  
-- **Natural Language Processing (NLP)** (text preprocessing, tokenization, feature extraction)  
-- **Network & graph analysis** (graph construction, centrality measures, community detection)  
-- **Information extraction from unstructured data** (regex-based parsing, structured data generation)  
-- **Generative AI fundamentals** (large language models, transformer-based NLP, and prompt-based workflows)
+**🔗 Links:**
+- 🌐 [Live Demo](http://207.231.105.113:8502/)
+- 📚 [Swagger API](http://207.231.105.113:8002/docs)
 
-### Additional Focus Areas
+---
 
-- Working with **real-world datasets**, including structured and semi-structured data sources  
-- Integration of **SQL and Python** within analytical workflows  
-- Reproducible research using **Jupyter notebooks** and structured project organization  
-- Experiment-driven model development and performance evaluation  
-- Clear documentation of assumptions, analytical decisions, and limitations  
+## 🎓 Courses & Training
 
-### Project Principles
+Completed structured data science programs with hands-on projects covering the full data science workflow:
 
-These projects emphasize:
+**Core competencies:**
+- **Data analysis:** Python (Pandas/NumPy) + SQL (JOINs, aggregations, window functions)
+- **Machine learning:** Supervised/unsupervised, model validation, metrics (precision, recall, F1)
+- **Advanced topics:** NLP (NLTK), graph analysis (NetworkX), Generative AI fundamentals
+- **Best practices:** Clean code, reproducibility, experiment-driven development
 
-- Clear problem formulation and analytical thinking  
-- Metric-driven and reproducible analysis  
-- Integration of SQL and Python in data workflows  
-- Clean, well-documented, and reproducible code  
+📁 All coursework, assignments, and capstones are in the `Courses/` folder.
 
 ---
 
 ## 🧪 Pet Projects
 
-The **Pet_Projects** folder contains independent projects and experiments where I:
+Independent projects demonstrating **initiative** and **applied ML skills**:
 
-- Work with real-world datasets  
-- Build end-to-end data science pipelines  
-- Experiment with models and techniques beyond coursework  
-- Focus on practical, applied problem-solving  
+- Work with real-world datasets
+- Build end-to-end data science pipelines
+- Experiment beyond coursework
+- Focus on practical problem-solving
 
-Pet projects highlight **initiative**, **curiosity**, and **hands-on machine learning skills**.
+All pet projects are in the `Pet_Projects/` folder.
 
 ---
 
 ## 🧠 Core Skills & Competencies
 
-### 📊 Data Analysis & Processing
-- Advanced Pandas data manipulation  
-- Feature engineering  
-- Data cleaning and preprocessing  
-- Exploratory Data Analysis (EDA)  
-- Handling missing values with domain logic
-- Correlation analysis and multicollinearity reduction
-
-### 📈 Data Visualization
-- Matplotlib, Seaborn  
-- Clear and interpretable visualizations  
-- Data-driven storytelling  
-- Plotly interactive visualizations 
-- Dashboard development (Streamlit)
+### 📊 Data & Analytics
+- **Processing:** Pandas, NumPy, EDA, feature engineering, missing values
+- **Visualization:** Matplotlib, Seaborn, Plotly, Streamlit dashboards
+- **SQL:** Complex queries, JOINs, aggregations, window functions, SQLite
 
 ### 🤖 Machine Learning
-- Regression and classification  
-- Unsupervised learning (clustering, dimensionality reduction)  
-- Model evaluation and validation  
-- Cross-validation and metrics  
-- Scikit-learn pipelines  
-- Gradient boosting (CatBoost, XGBoost, LightGBM)
-- Class imbalance handling (class weights, stratified sampling)
-- Hyperparameter tuning (GridSearchCV, RandomizedSearchCV) 
-- Incremental / continued learning
+- **Core:** Regression, classification, clustering, dimensionality reduction
+- **Models:** CatBoost, XGBoost, LightGBM, scikit-learn
+- **Techniques:** Cross-validation, hyperparameter tuning, class imbalance, incremental learning
 
-### 🧩 Advanced & Unsupervised Methods
-- Clustering techniques  
-- Pattern discovery  
-- Dimensionality reduction  
-- Network-based modeling
+### 🖼 Computer Vision & Deep Learning
+- **Object detection:** YOLOv7, SSD, bounding boxes, IoU, NMS, mAP
+- **Deep learning:** CNNs, transfer learning, PyTorch
 
-### 🖼 Computer Vision & Object Detection
-- Object detection pipelines
-- Bounding box regression
-- Intersection over Union (IoU)
-- Non-Maximum Suppression (NMS)
-- Mean Average Precision (mAP)
-- Confusion matrix analysis
-- YOLOv7 architecture
-- SSD (Single Shot Detector)
+### ✅ RAG & LLM
+- **RAG pipeline:** FAISS vector search, BGE embeddings, semantic chunking
+- **LLM:** Ollama, tinyllama, phi3:mini (100% local, no cloud)
+- **Parsing:** AST extraction, multi-format (`.md`, `.ipynb`, `.py`, `.pdf`)
 
-### 🤖 Deep Learning
-- Convolutional Neural Networks (CNNs)
-- Single Shot Detector (SSD)
-- YOLOv7
-- Transfer learning
-- Training and evaluation of deep models
+### 🚀 Backend & DevOps
+- **API:** FastAPI, authentication (API keys + RBAC), rate limiting (sliding window)
+- **Containerization:** Docker, Docker Compose, multi-container orchestration
+- **Deployment:** Ubuntu VPS, reverse proxy, zero-downtime updates
 
-### 🧪 Model Evaluation & Validation
-- Train / validation / test splits
-- Cross-validation
-- Overfitting detection
-- Metric-driven optimization
-- Recall as primary metric for imbalanced data
-- Precision-Recall tradeoff
-
-### 📝 NLP & Information Extraction
-- Text preprocessing  
-- Tokenization and normalization  
-- NLTK-based workflows  
-- Information extraction from text data
-
-### ✅ RAG (Retrieval-Augmented Generation)
-- Semantic search with FAISS vector database
-- Local LLM (tinyllama / phi3:mini via Ollama)
-- Multi-format document parsing (`.md`, `.ipynb`, `.py`, `.pdf`)
-- Smart chunking (sentence-aware with overlap)
-- Embedding model (BGE-small-en-v1.5)
-- Full RAG pipeline (retrieve → deduplicate → context → generate)
-
-### 🕸 Graphs & Networks
-- Network analysis with NetworkX  
-- Centrality measures  
-- Community detection  
-- Graph structure analysis  
-
-### 🌐 Data Collection
-- Web scraping with BeautifulSoup  
-- HTTP requests with Requests
-
-### 🗄 SQL & Relational Databases
-- Writing complex SQL queries (SELECT, WHERE, JOIN)
-- Aggregations and GROUP BY
-- Subqueries and Common Table Expressions (CTE)
-- Window functions (ROW_NUMBER, RANK)
-- Data filtering and transformation
-- Connecting Python to SQL databases
-- SQLite for embedded applications
-- Database design (3 tables: api_keys, new_data, raw_data)
-
-### 🚀 API Development & Backend
-- REST API design (FastAPI)
-- API key authentication (SHA-256 hashing)
-- Role-Based Access Control (user/admin/dashboard)
-- Rate limiting (sliding window algorithm)
-- Request/response validation (Pydantic)
-- Automatic API documentation (Swagger UI / OpenAPI)
-- Batch processing endpoints
-
-### 📊 Dashboard & Monitoring
-- Interactive dashboard development (Streamlit)
-- Real-time data visualization
-- Business metric tracking (MRR, revenue at risk)
-- Retention recommendations UI
-
-### 🐳 DevOps & Deployment
-- Containerization with Docker
-- Multi-container orchestration (Docker Compose)
-- Volume mounting for data persistence
-- VPS deployment (Ubuntu)
-
-### 🧪 Testing & Quality Assurance
-- Unit testing with pytest
-
-### 📝 Logging & Monitoring
-- Application logging (Python logging module)
-- Rotating file handlers
-- JSON log format
-- Console + file logging
-
-### 🔐 Security
-- SHA-256 hashing
-- Soft deletion (is_active flag)
-- Role-based endpoint protection
-- Header-based authentication (X-API-Key)
+### 📊 Monitoring & Testing
+- **Logging:** Python logging, JSON format, rotating files
+- **Testing:** pytest, unit tests, integration tests
+- **Dashboard:** Streamlit, real-time metrics, business KPIs
 
 ### 📐 Statistics & Probability
+- **Statistics:** Descriptive stats, hypothesis testing (t-test, chi-square), correlation analysis
+- **Probability:** Distributions (Normal, Poisson, Binomial), CLT, bootstrapping
+- **Modeling:** Linear regression assumptions, bias-variance tradeoff, A/B testing
 
-#### Descriptive Statistics
-- Mean, median, mode  
-- Variance and standard deviation  
-- Quantiles, percentiles, interquartile range (IQR)  
-- Distribution shape analysis (skewness, kurtosis)
-
-#### Probability Theory
-- Random variables  
-- Probability distributions  
-- Bernoulli, Binomial, Poisson, Normal distributions  
-- Probability mass and density functions (PMF, PDF)  
-- Cumulative distribution functions (CDF)
-
-#### Statistical Inference
-- Sampling techniques and sampling bias  
-- Point estimation  
-- Confidence intervals  
-- Central Limit Theorem (CLT)  
-- Bootstrapping and resampling methods
-
-#### Hypothesis Testing
-- Null and alternative hypotheses  
-- p-values and significance levels  
-- One-sample and two-sample tests  
-- t-test and z-test  
-- Chi-square test  
-- Non-parametric tests (Mann–Whitney U, Wilcoxon)
-
-#### Correlation & Dependency Analysis
-- Pearson correlation  
-- Spearman rank correlation  
-- Covariance analysis  
-- Multicollinearity detection
-
-#### Statistical Modeling Fundamentals
-- Linear regression assumptions  
-- Residual analysis  
-- Bias–variance tradeoff  
-- Statistical interpretation of machine learning models
-
-#### Exploratory Statistical Analysis
-- Distribution visualization (histograms, KDE, boxplots)  
-- Outlier detection  
-- Statistical comparison of groups
-
-#### Applied Statistics for Data Science
-- A/B testing fundamentals  
-- Data-driven decision making  
-- Statistical validation of model results
-
-### 💼 Business & Product Skills
-- ROI calculation for ML models
-- Economic impact analysis (MRR, revenue saved)
-- Technical documentation (100+ pages)
-- Presentation and stakeholder communication
-- Project portfolio management
+### 💼 Business Skills
+- ROI calculation, economic impact (MRR), technical documentation, stakeholder communication
 
 ---
 
