@@ -109,7 +109,7 @@ Build a **high-accuracy real-time detection system** for 55 traffic sign classes
 
 ---
 
-### 🔹 3. RAG Portfolio Assistant (Production) — *NEW*
+### 🔹 3. RAG Portfolio Assistant (Production) 
 
 **Goal:**  
 Build a **question-answering system** over my entire ML portfolio using RAG (Retrieval-Augmented Generation).
