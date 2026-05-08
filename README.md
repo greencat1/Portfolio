@@ -175,6 +175,9 @@ All pet projects are in the `Pet_Projects/` folder.
 
 ## 🛠 Tools & Technologies
 
+<details>
+<summary>📊 Click to expand: Core Skills (40+ items)</summary>
+
 | Category | Tools |
 |----------|-------|
 | Programming | Python |
@@ -201,6 +204,8 @@ All pet projects are in the `Pet_Projects/` folder.
 | Deployment | Ubuntu VPS, Docker Compose |
 | Experimentation | Google Colab |
 
+
+</details>
 
 ---
 
