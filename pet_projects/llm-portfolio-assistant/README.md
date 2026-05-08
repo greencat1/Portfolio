@@ -24,6 +24,10 @@ A production-ready **RAG (Retrieval-Augmented Generation)** system that answers 
 
 User Question → Embedding (BGE) → FAISS Search → Deduplicate (top-5) → Context → LLM (tinyllama) → Answer + Sources
 
+### Screenshot from the dashboard
+
+<img width="1636" height="1288" alt="image" src="https://github.com/user-attachments/assets/5b557bae-aec2-4639-9168-2b4be681be84" />
+
 
 ### Container Services
 
