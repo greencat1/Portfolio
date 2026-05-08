@@ -1,0 +1,35 @@
+# Dockerfile.api
+FROM python:3.12-slim
+
+WORKDIR /app
+
+# Install minimal system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    g++ \
+    libgomp1 \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
+
+# Copy only requirements first (better cache usage)
+COPY requirements.txt .
+
+# Install dependencies with CPU-only torch
+RUN pip install --no-cache-dir \
+    --extra-index-url https://download.pytorch.org/whl/cpu \
+    -r requirements.txt \
+    && rm -rf /root/.cache/pip
+
+# Download embedding model (cache this layer)
+RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('BAAI/bge-small-en-v1.5')"
+
+# Copy application code (changes often, keep last)
+COPY app/ ./app/
+COPY data/ ./data/
+
+# Run as non-root user (security)
+RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
+USER appuser
+
+EXPOSE 8000
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

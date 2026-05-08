@@ -1,0 +1,16 @@
+# Dockerfile.ollama
+FROM ollama/ollama:latest
+
+# Set Ollama to listen on all interfaces (0.0.0.0)
+ENV OLLAMA_HOST=0.0.0.0:11434
+
+# Pre-download tinyllama model
+RUN ollama serve & \
+    sleep 10 && \
+    ollama pull tinyllama && \
+    ollama list
+
+EXPOSE 11434
+
+CMD ["serve"]
+

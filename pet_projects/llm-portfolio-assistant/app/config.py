@@ -13,7 +13,7 @@ class Config:
     
     # Model settings
     EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "BAAI/bge-small-en-v1.5")
-    LLM_MODEL = os.getenv("LLM_MODEL", "phi3:mini")
+    LLM_MODEL = os.getenv("LLM_MODEL", "tinyllama")
     OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
     
     # RAG settings

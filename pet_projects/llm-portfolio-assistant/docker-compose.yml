@@ -1,0 +1,42 @@
+services:
+  ollama:
+    build:
+      context: .
+      dockerfile: Dockerfile.ollama
+    container_name: rag-ollama
+    ports:
+      - "11435:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+
+  rag-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: rag-api
+    ports:
+      - "8002:8000"
+    environment:
+      - OLLAMA_URL=http://ollama:11434
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - ollama
+    restart: unless-stopped
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.dashboard
+    container_name: rag-dashboard
+    ports:
+      - "8502:8501"
+    environment:
+      - API_URL=http://rag-api:8000
+    depends_on:
+      - rag-api
+    restart: unless-stopped
+
+volumes:
+  ollama_data:
