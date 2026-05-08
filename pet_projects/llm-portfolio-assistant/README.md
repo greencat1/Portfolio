@@ -3,7 +3,7 @@
 A production-ready **RAG (Retrieval-Augmented Generation)** system that answers questions about my Data Science & Machine Learning portfolio. The system uses semantic search over 8,000+ document chunks and a local LLM to generate accurate, factual answers.
 
 **🌐 Live Demo dashboard:** http://207.231.105.113:8502/
-**🌐 Live Demo swagger:** http://207.231.105.113:8002/
+**🌐 Live Demo swagger:** http://207.231.105.113:8002/docs
 
 ---
 
