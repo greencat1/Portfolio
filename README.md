@@ -50,7 +50,7 @@ Real-time traffic sign recognition system using **YOLO + ResNet cascade architec
   - YOLO → category detection (5 groups)
   - 5× ResNet → fine-grained classification
 
-**🛠️ Tech Stack:** YOLOv7, PyTorch, Albumentations, FastAPI, WebSocket, Docker
+**🛠️ Tech Stack:** YOLO, PyTorch, Albumentations, FastAPI, WebSocket, Docker
 
 **🔗 Links:**
 - 🌐 [Live Demo](https://greencat1.tech/)
