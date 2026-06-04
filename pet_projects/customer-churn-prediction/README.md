@@ -8,8 +8,8 @@ Built with **FastAPI**, **CatBoost**, **Streamlit**, and fully containerized wit
 
 ## 🔗 Live Demo
 
-- API Docs (Swagger): http://207.231.105.113:8000/docs  
-- Dashboard: http://207.231.105.113:8501  
+- API Docs (Swagger): https://churn-api.greencat1.tech/docs
+- Dashboard: https://churn.greencat1.tech/
 
 ### Test API Keys
 user
