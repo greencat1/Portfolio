@@ -55,7 +55,7 @@ Real-time traffic sign recognition system using **YOLO + ResNet cascade architec
 **🛠️ Tech Stack:** YOLO, PyTorch, Albumentations, FastAPI, WebSocket, Docker
 
 **🔗 Links:**
-- 🌐 [Live Demo](https://greencat1.tech/)
+- 🌐 [Live Demo](https://cv.greencat1.tech/)
 - ▶️ [Video Guide](https://www.youtube.com/watch?v=XS1jED6fzpY)
 
 ---
@@ -77,8 +77,8 @@ Complete MLOps pipeline for telecom churn prediction: training → labeling → 
 **🛠️ Tech Stack:** FastAPI, CatBoost, Streamlit, SQLite, Docker Compose, pytest
 
 **🔗 Links:**
-- 📚 [API Docs](http://207.231.105.113:8000/docs)
-- 📊 [Dashboard](http://207.231.105.113:8501)
+- 📚 [API Docs](https://churn-api.greencat1.tech/docs)
+- 📊 [Dashboard](https://churn.greencat1.tech/)
 - ▶️ [Video Guide](https://www.youtube.com/watch?v=zrF0L2pznhU)
 
 ---
@@ -102,8 +102,8 @@ Full RAG pipeline: parse → chunk → embed → search → generate. No cloud A
 **🛠️ Tech Stack:** FastAPI, FAISS, Sentence-Transformers (BGE), Ollama, tinyllama, Streamlit, Docker
 
 **🔗 Links:**
-- 🌐 [Live Demo](http://207.231.105.113:8502/)
-- 📚 [Swagger API](http://207.231.105.113:8002/docs)
+- 🌐 [Live Demo](https://rag.greencat1.tech/)
+- 📚 [Swagger API](https://rag-api.greencat1.tech/docs)
 
 ---
 
