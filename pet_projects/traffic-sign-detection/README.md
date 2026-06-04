@@ -3,7 +3,7 @@
 Real-time traffic sign recognition system using a **two-stage hybrid architecture**:
 **YOLO (detection) → ResNet (classification)**
 
-🌐 **Live Demo:** https://greencat1.tech  
+🌐 **Live Demo:** https://cv.greencat1.tech/
 ▶️ **Video Guide:** https://www.youtube.com/watch?v=XS1jED6fzpY  
 
 ---
