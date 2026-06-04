@@ -18,16 +18,16 @@ Collection of production-ready and research-oriented machine learning projects.
 
 
 ### 🚦 Traffic Sign Detection
-- **Live Demo:** https://greencat1.tech/  
+- **Live Demo:** https://cv.greencat1.tech/
 - **Video Guide:** https://www.youtube.com/watch?v=XS1jED6fzpY  
 
 > Real-time detection via browser camera (WebSocket streaming)
 
 ---
 
-### 📊 Customer Churn Prediction
-- **API Docs (Swagger):** http://207.231.105.113:8000/docs  
-- **Dashboard (Streamlit):** http://207.231.105.113:8501  
+### 📊 Customer Churn Prediction(keys = dashboard, user, admin)
+- **API Docs (Swagger):** https://churn-api.greencat1.tech/docs
+- **Dashboard (Streamlit):** https://churn.greencat1.tech/  
 - **Video Guide:** https://www.youtube.com/watch?v=zrF0L2pznhU  
 
 > Fully deployed ML service with REST API + interactive UI
@@ -35,8 +35,8 @@ Collection of production-ready and research-oriented machine learning projects.
 --- 
 
 ### 🤖 RAG Portfolio Assistant 
-- **Live Demo Dashboard:** http://207.231.105.113:8502/
-- **Swagger API Docs:** http://207.231.105.113:8002/docs
+- **Live Demo Dashboard:** https://rag.greencat1.tech/
+- **Swagger API Docs:** https://rag-api.greencat1.tech/docs
 - **GitHub:** [llm-portfolio-assistant](https://github.com/greencat1/Portfolio/tree/main/pet_projects/llm-portfolio-assistant)
 
 > Ask questions about my portfolio — gets answers via semantic search + local LLM.
