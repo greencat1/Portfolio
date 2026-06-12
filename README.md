@@ -6,6 +6,8 @@ This repository contains my coursework, applied projects, and independent pet pr
 
 The portfolio focuses on **practical problem-solving**, **clean analytical workflows**, and **reproducible Python-based data science**.
 
+My website - https://greencat1.tech/
+
 ---
 
 ## 📂 Repository Structure
