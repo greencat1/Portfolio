@@ -24,7 +24,7 @@ Portfolio/
 │   ├── IBM Generative AI Engineering Professional Certificate/  
 │   └── Certificates/  
 │  
-├── Pet_Projects/ # Hands-on ML projects
+├── Projects/ # Hands-on ML projects
 │   ├── customer-churn-prediction/     # Churn prediction service (FastAPI + Docker)
 │   ├── traffic-sign-detection/        # Road signs detection service (FastAPI + Docker)
 │   └── llm-portfolio-assistant/       # RAG assistant for portfolio (FastApi + Docker)
@@ -123,7 +123,7 @@ Completed structured data science programs with hands-on projects covering the f
 
 ---
 
-## 🧪 Pet Projects
+## 🧪 Projects
 
 Independent projects demonstrating **initiative** and **applied ML skills**:
 
@@ -132,7 +132,7 @@ Independent projects demonstrating **initiative** and **applied ML skills**:
 - Experiment beyond coursework
 - Focus on practical problem-solving
 
-All pet projects are in the `Pet_Projects/` folder.
+All  projects are in the `projects/` folder.
 
 ---
 
