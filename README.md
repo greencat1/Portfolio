@@ -140,77 +140,111 @@ All  projects are in the `projects/` folder.
 ## 🧠 Core Skills & Competencies
 
 ### 📊 Data & Analytics
-- **Processing:** Pandas, NumPy, EDA, feature engineering, missing values
-- **Visualization:** Matplotlib, Seaborn, Plotly, Streamlit dashboards
-- **SQL:** Complex queries, JOINs, aggregations, window functions, SQLite
+- **Processing:** Pandas, NumPy, EDA, feature engineering, missing values, data wrangling, data cleaning
+- **Visualization:** Matplotlib, Seaborn, Plotly, Streamlit dashboards, data representation, charting
+- **SQL:** Complex queries, JOINs, aggregations, window functions, SQLite, database design
+- **Statistics:** Descriptive stats, hypothesis testing (t-test, chi-square), correlation analysis, A/B testing
+- **Probability:** Distributions (Normal, Poisson, Binomial), CLT, bootstrapping
 
 ### 🤖 Machine Learning
-- **Core:** Regression, classification, clustering, dimensionality reduction
-- **Models:** CatBoost, XGBoost, LightGBM, scikit-learn
-- **Techniques:** Cross-validation, hyperparameter tuning, class imbalance, incremental learning
+- **Core:** Regression, classification, clustering, dimensionality reduction, unsupervised learning
+- **Models:** CatBoost, XGBoost, LightGBM, scikit-learn, MLXtend
+- **Techniques:** Cross-validation, hyperparameter tuning, class imbalance, incremental learning, feature engineering
+- **Model Evaluation:** Confusion matrix, ROC-AUC, precision/recall, F1-score, MSE/MAE, R²
+- **Interpretability:** SHAP, feature importance, model validation
 
 ### 🖼 Computer Vision & Deep Learning
-- **Object detection:** YOLOv7, SSD, bounding boxes, IoU, NMS, mAP
-- **Deep learning:** CNNs, transfer learning, PyTorch
+- **Object Detection:** YOLOv7, SSD, bounding boxes, IoU, NMS, mAP
+- **Deep Learning:** CNNs, transfer learning, PyTorch, model fine-tuning
+- **Image Processing:** OpenCV, image augmentation, preprocessing
 
-### ✅ RAG & LLM
-- **RAG pipeline:** FAISS vector search, BGE embeddings, semantic chunking
-- **LLM:** Ollama, tinyllama, phi3:mini (100% local, no cloud)
-- **Parsing:** AST extraction, multi-format (`.md`, `.ipynb`, `.py`, `.pdf`)
+### 🔍 RAG & LLM (Generative AI)
+- **RAG Pipeline:** FAISS vector search, BGE embeddings, semantic chunking, retrieval-augmented generation
+- **LLM:** Ollama, tinyllama, phi3:mini (100% local, no cloud), Hugging Face Transformers
+- **Parsing:** AST extraction, multi-format (`.md`, `.ipynb`, `.py`, `.pdf`), unstructured data extraction
+- **Prompt Engineering:** In-context learning, few-shot prompting, system prompts
+- **LLM Engineering:** Fine-tuning, PEFT (LoRA), embeddings, semantic search
+- **Vector Databases:** FAISS, Chroma, Pinecone, Sentence-Transformers
+- **Frameworks:** LangChain, Hugging Face ecosystem
+
+### 🌐 Frontend Development
+- **Markup & Styling:** HTML5, CSS3, Sass, Flexbox, Grid, responsive design, accessibility (a11y)
+- **JavaScript:** ES6+, DOM manipulation, asynchronous programming, modern syntax
+- **Frameworks:** React.js, React Router, component-based architecture, hooks, state management
+- **State Management:** Context API, Redux
+- **Testing:** Jest, React Testing Library, unit testing, integration testing
+- **Build & Package:** Webpack, Vite, npm, Yarn
+- **Design & Prototyping:** Figma, UI/UX principles
 
 ### 🚀 Backend & DevOps
-- **API:** FastAPI, authentication (API keys + RBAC), rate limiting (sliding window)
+- **API Development:** FastAPI, Uvicorn, REST API, authentication (API keys + RBAC), rate limiting (sliding window)
 - **Containerization:** Docker, Docker Compose, multi-container orchestration
-- **Deployment:** Ubuntu VPS, reverse proxy, zero-downtime updates
+- **Deployment:** Ubuntu VPS, reverse proxy, zero-downtime updates, Netlify, Vercel, GitHub Pages
+- **Web Scraping:** BeautifulSoup4, Requests
+- **Model Serialization:** cloudpickle, pickle
 
 ### 📊 Monitoring & Testing
-- **Logging:** Python logging, JSON format, rotating files
-- **Testing:** pytest, unit tests, integration tests
-- **Dashboard:** Streamlit, real-time metrics, business KPIs
+- **Logging:** Python logging, JSON format, rotating files (RotatingFileHandler)
+- **Testing:** pytest, unit tests, integration tests, test coverage
+- **Dashboard:** Streamlit, real-time metrics, business KPIs, monitoring dashboards
+- **Dev Tools:** Chrome DevTools, ESLint, Prettier
 
 ### 📐 Statistics & Probability
-- **Statistics:** Descriptive stats, hypothesis testing (t-test, chi-square), correlation analysis
+- **Statistics:** Descriptive stats, hypothesis testing (t-test, chi-square), correlation analysis, regression assumptions
 - **Probability:** Distributions (Normal, Poisson, Binomial), CLT, bootstrapping
-- **Modeling:** Linear regression assumptions, bias-variance tradeoff, A/B testing
+- **Modeling:** Linear regression assumptions, bias-variance tradeoff, A/B testing, statistical inference
 
-### 💼 Business Skills
-- ROI calculation, economic impact (MRR), technical documentation, stakeholder communication
+### 💼 Business & Soft Skills
+- **Business:** ROI calculation, economic impact (MRR), technical documentation, stakeholder communication
+- **Project Management:** Agile workflows, project planning, milestone tracking
+- **Communication:** Data-driven insights, presenting to non-technical audiences, report writing
+- **Collaboration:** Cross-functional teamwork, code review, pair programming
+
+### 🛠 Workflow & Tools
+- **Experimentation:** Google Colab, Jupyter Notebook
+- **Version Control:** Git, GitHub, branching strategies, collaborative workflows
+- **Containerization & Orchestration:** Docker, Docker Compose
 
 ---
 
 ## 🛠 Tools & Technologies
 
-<details>
-<summary>📊 Click to expand: Core Skills (40+ items)</summary>
-
 | Category | Tools |
 |----------|-------|
-| Programming | Python |
-| Data Libraries | NumPy, Pandas, SciPy |
-| Visualization | Matplotlib, Seaborn, Plotly |
-| Machine Learning | Scikit-learn, MLXtend, CatBoost, XGBoost |
-| Deep Learning | PyTorch |
-| Computer Vision | OpenCV, YOLOv7, SSD |
-| NLP | NLTK, re (regular expressions) |
-| **RAG & Vector Search** | **FAISS, Sentence-Transformers, BGE** |
-| **LLM** | **Ollama, tinyllama, phi3:mini** |
-| Graph Analysis | NetworkX |
-| Web Scraping | BeautifulSoup4, Requests |
-| API Development | FastAPI, Uvicorn, REST API |
-| Dashboard & UI | Streamlit |
-| Databases | SQL, SQLite |
-| Model Serialization | cloudpickle, pickle |
-| Authentication | API Keys, SHA-256 hashing, RBAC |
-| Rate Limiting | Sliding window algorithm |
-| Containerization | Docker, Docker Compose |
-| Workflow | Jupyter Notebook, Git, GitHub |
-| Testing | pytest, unit testing, integration testing |
-| Logging | Python logging, RotatingFileHandler |
-| Deployment | Ubuntu VPS, Docker Compose |
-| Experimentation | Google Colab |
+| **Programming Languages** | Python, JavaScript (ES6+), TypeScript |
+| **Data Science & Analysis** | NumPy, Pandas, SciPy |
+| **Data Visualization** | Matplotlib, Seaborn, Plotly |
+| **Machine Learning** | Scikit-learn, MLXtend, CatBoost, XGBoost |
+| **Deep Learning** | PyTorch |
+| **Computer Vision** | OpenCV, YOLOv7, SSD |
+| **Natural Language Processing (NLP)** | NLTK, re (regular expressions) |
+| **Generative AI & LLMs** | Hugging Face Transformers, LangChain, Prompt Engineering, RAG, Ollama, tinyllama, phi3:mini |
+| **RAG & Vector Search** | FAISS, Chroma, Pinecone, Sentence-Transformers, BGE |
+| **LLM Engineering** | Fine-tuning, PEFT (LoRA), Embeddings |
+| **Graph Analysis** | NetworkX |
+| **Web Scraping** | BeautifulSoup4, Requests |
+| **API Development** | FastAPI, Uvicorn, REST API |
+| **Dashboard & UI** | Streamlit |
+| **Frontend: Markup & Styling** | HTML5, CSS3, Sass, Flexbox, Grid |
+| **Frontend: Frameworks** | React.js, React Router |
+| **Frontend: State Management** | Context API, Redux |
+| **Frontend: Testing** | Jest, React Testing Library |
+| **Frontend: Build Tools** | Webpack, Vite |
+| **Frontend: Package Management** | npm, Yarn |
+| **Frontend: Design & Prototyping** | Figma |
+| **Frontend: Deployment** | Netlify, Vercel, GitHub Pages |
+| **Frontend: Dev Tools** | Chrome DevTools, ESLint, Prettier |
+| **Databases** | SQL, SQLite |
+| **Model Serialization** | cloudpickle, pickle |
+| **Authentication** | API Keys, SHA-256 hashing, RBAC |
+| **Rate Limiting** | Sliding window algorithm |
+| **Containerization** | Docker, Docker Compose |
+| **Testing** | pytest, unit testing, integration testing |
+| **Logging** | Python logging, RotatingFileHandler |
+| **Deployment** | Ubuntu VPS, Docker Compose |
+| **Experimentation** | Google Colab |
+| **Workflow & Version Control** | Jupyter Notebook, Git, GitHub |
 
-
-</details>
 
 ---
 
