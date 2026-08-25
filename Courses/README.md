@@ -89,6 +89,37 @@ Projects in this section focus on practical implementation of generative AI syst
 - Text generation and summarization systems
 
 
+---
+
+### 🔹 Meta Front-End Developer Professional Certificate
+
+Professional certificate from **Meta** on Coursera, providing comprehensive training in modern front-end web development. This program covers the full spectrum of front-end engineering, from foundational HTML and CSS to advanced JavaScript frameworks and developer tools.
+
+**Key topics covered in this program include:**
+
+- **HTML5 and CSS3** – Semantic markup, responsive design, and modern styling techniques  
+- **JavaScript and ES6+** – Core language features, DOM manipulation, asynchronous programming, and modern syntax  
+- **Version Control** – Git and GitHub for collaborative development workflows  
+- **React Framework** – Component-based architecture, state management, hooks, and routing  
+- **Front-End Development Tools** – Package managers (npm), build tools, and development environments  
+- **Web Design Principles** – User experience (UX), accessibility (a11y), and responsive layouts  
+- **Testing and Debugging** – Unit testing, integration testing, and browser developer tools  
+- **Deployment and Hosting** – Publishing web applications to production environments  
+
+**Capstone Project:**  
+A comprehensive front-end application built with React, integrating all concepts learned throughout the program — from initial design and development to testing and deployment.
+
+**Projects in this section focus on practical front-end development, such as:**
+
+- Responsive landing pages and websites  
+- Interactive single-page applications (SPAs)  
+- React-based component libraries  
+- E-commerce interfaces and dynamic user dashboards  
+- Accessible and performant web solutions  
+- Full-stack integration with REST APIs
+
+---
+
 
 ### 📜 Certificates
 The **Certificates** directory contains official credentials and statements of accomplishment for completed courses and specializations, verifying the skills acquired throughout this learning journey.
@@ -97,23 +128,35 @@ The **Certificates** directory contains official credentials and statements of a
 
 ## 🛠 Tools & Technologies
 
-Category | Tools  
--------- | -----  
-Programming | Python  
-Data Libraries | NumPy, Pandas, SciPy  
-Visualization | Matplotlib, Seaborn  
-Machine Learning | Scikit-learn, MLXtend  
-Deep Learning | PyTorch  
-Computer Vision | OpenCV  
-NLP | NLTK, re(regular expressions) 
-Graph Analysis | NetworkX  
-Web Scraping | BeautifulSoup4, Requests  
-Experimentation | Google Colab  
-Workflow | Jupyter Notebook, Git, GitHub  
-Databases | SQL
-Generative AI | Hugging Face Transformers, LangChain, Prompt Engineering, RAG
-Vector Databases | FAISS / Chroma / Pinecone
-LLM Engineering | Fine-tuning, PEFT (LoRA), embeddings
+## 🛠 Tools & Technologies
+
+| Category | Tools |
+|----------|-------|
+| **Programming Languages** | Python, JavaScript (ES6+), TypeScript |
+| **Data Science & Analysis** | NumPy, Pandas, SciPy |
+| **Data Visualization** | Matplotlib, Seaborn |
+| **Machine Learning** | Scikit-learn, MLXtend |
+| **Deep Learning** | PyTorch |
+| **Computer Vision** | OpenCV |
+| **Natural Language Processing (NLP)** | NLTK, re (regular expressions) |
+| **Generative AI & LLMs** | Hugging Face Transformers, LangChain, Prompt Engineering, RAG |
+| **Vector Databases** | FAISS, Chroma, Pinecone |
+| **LLM Engineering** | Fine-tuning, PEFT (LoRA), Embeddings |
+| **Graph Analysis** | NetworkX |
+| **Web Scraping** | BeautifulSoup4, Requests |
+| **Frontend: Markup & Styling** | HTML5, CSS3, Sass, Flexbox, Grid |
+| **Frontend: Frameworks** | React.js, React Router |
+| **Frontend: State Management** | Context API, Redux |
+| **Frontend: Testing** | Jest, React Testing Library |
+| **Frontend: Build Tools** | Webpack, Vite |
+| **Frontend: Package Management** | npm, Yarn |
+| **Frontend: Design & Prototyping** | Figma |
+| **Frontend: Deployment** | Netlify, Vercel, GitHub Pages |
+| **Frontend: Dev Tools** | Chrome DevTools, ESLint, Prettier |
+| **Databases** | SQL |
+| **Experimentation** | Google Colab |
+| **Workflow & Version Control** | Jupyter Notebook, Git, GitHub |
+
 
 
 ---
