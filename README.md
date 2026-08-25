@@ -21,7 +21,8 @@ Portfolio/
 │   ├── More Applied Data Science with Python/  
 │   ├── Data Science Foundations/
 │   ├── Data Science Fundamentals with Python and SQL Specialization/
-│   ├── IBM Generative AI Engineering Professional Certificate/  
+│   ├── IBM Generative AI Engineering Professional Certificate/
+│   ├── Meta Front-End Developer Professional Certificate/ 
 │   └── Certificates/  
 │  
 ├── Projects/ # Hands-on ML projects
