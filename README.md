@@ -269,7 +269,7 @@ The **Certificates** folder contains official certificates and statements of acc
 
 - Demonstrate practical data science and machine learning skills  
 - Showcase growth from fundamentals to advanced applied analytics  
-- Serve as a professional portfolio for **junior data-related roles**, internships, and collaborations  
+
 
 ---
 
