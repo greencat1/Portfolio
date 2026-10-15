@@ -1,0 +1,173 @@
+body {
+    background-color: #EDEFEE;
+    font-family: 'Markazi Text', serif;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+header > img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    height: 100px;
+}
+
+nav {
+    font-family: Arial, sans-serif;
+    font-size: 40px;
+    padding: 10px;
+    
+}
+
+nav ul {
+    list-style: none;
+    text-align: center;
+    background-color: #2E7D32;
+    border-radius: 10px;
+    
+
+}
+
+nav li {
+    display: inline-block;
+    color: white;
+}
+
+nav a {
+    color: white;              
+    text-decoration: none;
+}
+
+
+section{
+    display: flex;
+}
+
+article {
+    flex:1;
+}
+
+
+
+footer img {
+    
+    width: 75px;
+    height: 75px;
+
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+  
+    color: #B0B0B0;
+    margin-top: 60px;
+    border-radius: 15px 15px 0 0;
+}
+
+
+footer p {
+    border-top: 1px solid #555;
+    padding-top: 15px;
+    font-size: 0.9rem;
+    margin: 0;
+    font-family: 'Poppins', Arial, sans-serif;
+}
+
+.promo {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('pics/pizza.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    
+
+    padding: 10px 40px;
+    min-height: 50px;
+    margin: 5px 0;
+    border-radius: 15px;
+
+
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
+
+    font-style: normal;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.promo p {
+
+    font-size: 30px;
+    color: #F9A825; 
+    font-family: 'Poppins', Arial, sans-serif;
+    
+}
+
+.cards {
+    display: flex;
+    gap :25px;
+    flex-wrap: wrap;   
+    
+    
+
+}
+
+.card {
+    background-color:antiquewhite;
+    border-radius: 20px;
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.05),      
+        0 8px 20px rgba(0, 0, 0, 0.1);    
+        
+    
+}
+
+.card:hover {
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.08),
+        0 16px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+}
+
+.card h2 {
+
+    font-size: 1.8rem;
+    color: #2E7D32;
+    margin: 0 0 15px 0;
+    font-family: 'Markazi Text', serif;
+    font-weight: 700;
+    border-bottom: 3px solid #F9A825;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.card p {
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.7;
+    color: #555;
+}
+
+.card img {
+    width: 100%;
+    max-width: 400px;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+    margin: 0;
+    display: block;
+}
