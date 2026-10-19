@@ -11,3 +11,295 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#header_and_vav {
+
+    display: flex;                   
+    justify-content: center;   
+    align-items: center;                
+    padding: 20px 40px;
+    gap: 50px; 
+}
+
+nav ul {
+    display: flex;      /* ← ссылки в строку */
+    gap: 30px;          /* ← расстояние между */
+    list-style: none;   /* ← убрать точки */
+    margin: 0;
+    padding: 0;
+    
+}
+
+
+nav a {
+  color: #333333;                 
+  text-decoration: none;          
+  font-family: Arial, sans-serif;
+  font-weight: 600;               
+  font-size: 16px;
+}
+
+/* 1. Container: places text and image in a row */
+#main_section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #495E57; /* Dark green background */
+    padding: 40px 10%;         /* Side padding */
+    gap: 40px;                 /* Spacing between text and image */
+    color: white;
+}
+
+/* 2. Left column (Text) */
+.hero-text {
+    flex: 1;                   /* Takes up half the width */
+    max-width: 500px;          /* Prevents text from stretching too wide */
+}
+
+.hero-text h1 {
+    color: #F4CE14;            /* Yellow color */
+    font-size: 3.5rem;
+    margin: 0 0 10px 0;
+    font-family: 'Markazi Text', serif; /* If you load the font */
+}
+
+.hero-text h2 {
+    font-size: 2rem;
+    margin: 0 0 20px 0;
+    color: #EDEFEE;
+    font-weight: normal;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* 3. Button */
+.reserve-btn {
+    background-color: #F4CE14;
+    color: #333;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;       /* Rounded corners */
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.reserve-btn:hover {
+    background-color: #e0b912;
+}
+
+/* 4. Right column (Image) */
+.hero-image-container {
+    flex: 1;                   /* Takes up the second half */
+    display: flex;
+    justify-content: flex-end; /* Pushes the image to the right */
+}
+
+.hero-image-container img {
+    width: 100%;               /* Image fits the container width */
+    max-width: 400px;          /* Maximum image width */
+    height: auto;              /* Keeps aspect ratio */
+    border-radius: 16px;       /* Rounded image corners */
+    object-fit: cover;
+}
+
+
+
+.Menu {
+    background-color: #F4CE14;
+    color: #333;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;       /* Rounded corners */
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#head_and_button{
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  padding: 40px 10%;
+  
+}
+
+
+.specials-section {
+    padding: 40px 10%;
+    background-color: #ffffff;
+}
+
+
+.specials-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.specials-header h2 {
+    font-size: 2.5rem;
+    color: #000;
+}
+
+
+.reserve-btn {
+    background-color: #F4CE14;
+    color: #333;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.specials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 30px;
+}
+
+.special-card {
+    background-color: #EDEFEE;
+    border-radius: 16px;
+    overflow: hidden; 
+    display: flex;
+    flex-direction: column;
+}
+
+.card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; 
+}
+
+.card-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; 
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.card-header h3 {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.price {
+    color: #EE9972;
+    font-weight: bold;
+}
+
+.card-content p {
+    color: #495E57;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    flex-grow: 1; /* Отталкивает ссылку вниз */
+    margin-bottom: 20px;
+}
+
+.delivery-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.delivery-link img {
+    width: 20px;
+    height: 20px;
+}
+
+
+/* Main footer container */
+.footer {
+    background-color: #495E57; /* Little Lemon dark green */
+    color: #EDEFEE;
+    padding: 40px 10%;
+    margin-top: 50px; /* Spacing from main content */
+}
+
+/* Grid layout for 4 columns */
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
+    gap: 30px;
+    align-items: start;
+}
+
+/* Footer headings */
+.footer-col h3 {
+    color: #F4CE14; /* Yellow accent */
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-family: 'Markazi Text', serif;
+}
+
+/* Lists (remove bullets) */
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* List items */
+.footer-col li {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Links */
+.footer-col a {
+    color: #EDEFEE;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+/* Hover effect on links */
+.footer-col a:hover {
+    color: #F4CE14;
+}
+
+/* Logo styles */
+.footer-logo {
+    width: 150px;
+    height: auto;
+    /* If the logo is black and the background is dark, you can make it white: */
+    /* filter: brightness(0) invert(1); */
+}
+
+/* Tablet responsive (2 columns) */
+@media (max-width: 992px) {
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile responsive (1 column, centered) */
+@media (max-width: 768px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .footer-logo {
+        margin: 0 auto 20px auto;
+    }
+}

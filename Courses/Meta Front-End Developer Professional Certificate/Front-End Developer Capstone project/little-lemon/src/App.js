@@ -6,9 +6,10 @@ import './App.css';
 
 function App() {
     return (
-        <>
+        <>  <div id='header_and_vav'>
             <Header />
             <Nav />
+            </div>
             <Main />
             <Footer />
         </>
