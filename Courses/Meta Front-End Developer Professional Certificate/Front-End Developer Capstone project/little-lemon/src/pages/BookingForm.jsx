@@ -6,6 +6,16 @@ function BookingForm({ availableTimes, dispatch, submitForm }) {
     const [guests, setGuests] = useState(1);
     const [occasion, setOccasion] = useState('Birthday');
 
+    const isFormValid = () => {
+        return (
+            date !== '' && 
+            time !== '' && 
+            guests >= 1 && 
+            guests <= 10 && 
+            occasion !== ''
+        );
+    };
+
     const handleDateChange = (e) => {
         const selectedDate = e.target.value;
         setDate(selectedDate);
@@ -63,12 +73,15 @@ function BookingForm({ availableTimes, dispatch, submitForm }) {
                 id="occasion" 
                 value={occasion}
                 onChange={(e) => setOccasion(e.target.value)}
+                required
             >
                 <option value="Birthday">Birthday</option>
                 <option value="Anniversary">Anniversary</option>
             </select>
 
-            <button type="submit">Make Your reservation</button>
+            <button type="submit" disabled={!isFormValid()}>
+                Make Your reservation
+            </button>
         </form>
     );
 }
