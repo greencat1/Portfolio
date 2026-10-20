@@ -1,8 +1,11 @@
 /* global fetchAPI, submitAPI */   
 
 import { useReducer } from 'react'; // Import useReducer
-import { Routes, Route, Link } from 'react-router';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import BookingPage from './pages/BookingPage'; 
+
+import ConfirmedBooking from './pages/ConfirmedBooking';
+
 
 // Image imports
 import restaurantFood from './assets/restauranfood.jpg';
@@ -28,8 +31,8 @@ export const initializeTimes = () => {
 export const updateTimes = (state, action) => {
     switch (action.type) {
         case 'UPDATE_TIMES':
-            // action.payload contains the selected date from the form
-            return fetchAPI(action.payload);
+            const dateObject = new Date(action.payload);
+            return fetchAPI(dateObject);
         default:
             return state;
     }
@@ -44,7 +47,7 @@ function Specials() {
             </div>
 
             <div className="specials-grid">
-   
+                
                 <article className="special-card">
                     <img src={greekSaladImg} alt="Greek Salad" className="card-image" />
                     <div className="card-content">
@@ -53,6 +56,34 @@ function Specials() {
                             <span className="price">$12.99</span>
                         </div>
                         <p>The famous greek salad of crispy lettuce, peppers, olives and our Chicago style feta cheese...</p>
+                        <Link to="/order" className="delivery-link">
+                            Order a delivery <img src={basketIcon} alt="basket" />
+                        </Link>
+                    </div>
+                </article>
+
+                <article className="special-card">
+                    <img src={bruschettaImg} alt="Bruschetta" className="card-image" />
+                    <div className="card-content">
+                        <div className="card-header">
+                            <h3>Bruchetta</h3>
+                            <span className="price">$5.99</span>
+                        </div>
+                        <p>Our Bruschetta is made from grilled bread that has been smeared with garlic and seasoned with salt and olive oil.</p>
+                        <Link to="/order" className="delivery-link">
+                            Order a delivery <img src={basketIcon} alt="basket" />
+                        </Link>
+                    </div>
+                </article>
+
+                <article className="special-card">
+                    <img src={lemonDessertImg} alt="Lemon Dessert" className="card-image" />
+                    <div className="card-content">
+                        <div className="card-header">
+                            <h3>Lemon Dessert</h3>
+                            <span className="price">$5.00</span>
+                        </div>
+                        <p>This comes straight from grandma's recipe book, every last ingredient has been sourced and is as authentic as can be imagined.</p>
                         <Link to="/order" className="delivery-link">
                             Order a delivery <img src={basketIcon} alt="basket" />
                         </Link>
@@ -120,7 +151,7 @@ function Main() {
     return (
         <main>
             <Routes>
-                <Route path="/" element={<div>Home Page</div>} />
+                <Route path="/" element={<HomePage />} />
                 
                 <Route 
                     path="/booking" 
