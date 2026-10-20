@@ -43,7 +43,7 @@ function Specials() {
         <section className="specials-section">
             <div className="specials-header">
                 <h2>This week specials!</h2>
-                <Link to="/order" className="reserve-btn">Online Menu</Link>
+                <Link to="/order" className="reserve-btn" aria-label="On Click">Online Menu</Link>
             </div>
 
             <div className="specials-grid">
@@ -107,7 +107,7 @@ function HomePage() {
                         From crispy falafel to creamy hummus, every dish is made with the freshest ingredients, love, and respect for tradition. 
                         Join us for lunch, dinner, or a family gathering — and enjoy a warm, welcoming taste of the Mediterranean.
                     </p>
-                    <Link to="/booking" className="reserve-btn">Reserve a table</Link>
+                    <Link to="/booking" className="reserve-btn" aria-label="On Click">Reserve a table</Link>
                 </div>
                 <div className="hero-image-container">
                     <img src={restaurantFood} alt="Little Lemon Restaurant" />
