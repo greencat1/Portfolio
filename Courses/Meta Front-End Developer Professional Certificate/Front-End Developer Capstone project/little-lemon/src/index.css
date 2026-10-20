@@ -303,3 +303,83 @@ nav a {
         margin: 0 auto 20px auto;
     }
 }
+
+/* ==========================================
+   BOOKING PAGE & FORM STYLES
+   ========================================== */
+
+/* Centering the page content */
+.booking-page {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.booking-page h1 {
+    font-family: 'Markazi Text', serif;
+    color: #495E57;
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.booking-page p {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* The Form Container */
+.booking-form {
+    display: grid;
+    max-width: 400px;
+    gap: 15px;
+    background-color: #EDEFEE;
+    padding: 30px;
+    border-radius: 16px;
+    margin: 0 auto; /* Centers the form horizontally */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: left; /* Keeps text inside the form aligned left */
+}
+
+/* Labels */
+.booking-form label {
+    font-family: 'Markazi Text', serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: -5px;
+}
+
+/* Inputs and Selects */
+.booking-form input,
+.booking-form select {
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    font-family: Arial, sans-serif;
+}
+
+/* Inputs highlight on focus */
+.booking-form input:focus,
+.booking-form select:focus {
+    border-color: #495E57;
+    border-width: 2px;
+}
+
+/* The Submit Button */
+.booking-form button {
+    background-color: #F4CE14;
+    color: #333;
+    padding: 14px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+}
+
+.booking-form button:hover {
+    background-color: #e0b912;
+}
