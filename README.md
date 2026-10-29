@@ -1,6 +1,9 @@
 # 📊 ML Engineer Portfolio — End-to-End AI Systems
+**Computer Vision · RAG/LLM · Production Deployment**
 
-Welcome to my **DML Engineer Portfolio — End-to-End AI Systems**.
+ML Engineer building end-to-end AI products: model → API → UI → deploy.
+
+Welcome to my **ML Engineer Portfolio — End-to-End AI Systems**.
 
 This repository contains my coursework, applied projects, and independent pet projects, demonstrating my progression from data science fundamentals to advanced, real-world analytical and machine learning solutions.
 
