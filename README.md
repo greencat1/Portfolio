@@ -1,6 +1,6 @@
-# 📊 Data Science & Machine Learning Portfolio
+# 📊 ML Engineer Portfolio — End-to-End AI Systems
 
-Welcome to my **Data Science & Machine Learning portfolio**.
+Welcome to my **DML Engineer Portfolio — End-to-End AI Systems**.
 
 This repository contains my coursework, applied projects, and independent pet projects, demonstrating my progression from data science fundamentals to advanced, real-world analytical and machine learning solutions.
 
